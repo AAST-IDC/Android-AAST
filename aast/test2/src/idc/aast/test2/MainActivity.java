@@ -129,10 +129,12 @@ public class MainActivity extends Activity {
 
 			// Execute insert
 			//getContentResolver().insert(Uri.parse("content://com.sec.badge/apps"), cv);
-	        LongOperation lo= new LongOperation();
-	        lo.con=this;
-	        lo.execute(new String[]{name,type});
-
+			 if(helper.isInternetAvailable())
+			 {
+				 LongOperation lo= new LongOperation();
+				 lo.con=this;
+				 lo.execute(new String[]{name,type});
+			 }
 			finish();
 			// open the list activity activity
 		
