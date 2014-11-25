@@ -100,7 +100,7 @@ public class helper {
             if (ipAddr.equals("")) {
                 return false;
             } else {
-                return true;
+                return true; 
             }
 
         } catch (Exception e) {

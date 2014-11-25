@@ -15,7 +15,9 @@ import com.bugsense.trace.BugSenseHandler;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -129,19 +131,12 @@ public class MainActivity extends Activity {
 
 			// Execute insert
 			//getContentResolver().insert(Uri.parse("content://com.sec.badge/apps"), cv);
-			 if(helper.isInternetAvailable())
-			 {
+		
 				 LongOperation lo= new LongOperation();
 				 lo.con=this;
 				 lo.execute(new String[]{name,type});
 				 
-			 }
-			 else
-			 {
-				 
-				 Toast.makeText(getApplicationContext(), "No Internet Connection Application may be out of date",
-						   Toast.LENGTH_LONG).show();
-			 }
+		
 			finish();
 			// open the list activity activity
 		
@@ -180,13 +175,17 @@ public class MainActivity extends Activity {
 		// add listener to the login button
 		b1.setOnClickListener(new OnClickListener() {
 
-			@Override
+			@SuppressLint("NewApi") @Override
 			// on login button click
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				
 				if(!helper.isInternetAvailable())
 				{
+					if (android.os.Build.VERSION.SDK_INT > 9) {
+					    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+					    StrictMode.setThreadPolicy(policy);
+					}
 					Toast.makeText(getApplicationContext(), "No Internet Connection cannot login",
 							   Toast.LENGTH_LONG).show();
 					
@@ -383,9 +382,29 @@ public class MainActivity extends Activity {
 		private Context con;
         @Override
         protected String doInBackground(String... params) {
-
-        	helper.getall(con, params[0], params[1], getSharedPreferences("AAST", 0));
+        	
+       	 if(helper.isInternetAvailable())
+		 {
+          	helper.getall(con, params[0], params[1], getSharedPreferences("AAST", 0));
             return "Executed";
+		 }
+		 else
+		 {
+			   return "none";
+		
+			// setResult(RESULT_CANCELED);
+		 }
+        }
+        @Override
+        
+        protected void onPostExecute(String result) {
+        	if(result.equals( "none"))
+            {
+         		 Toast.makeText(getApplicationContext(), "No Internet Connection Application may be out of date",
+   					   Toast.LENGTH_LONG).show();
+         	   
+            }
+        	super.onPostExecute(result);
         }
 
      
