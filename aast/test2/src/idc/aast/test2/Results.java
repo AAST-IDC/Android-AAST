@@ -80,40 +80,25 @@ public class Results extends Activity implements OnItemSelectedListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		bb = false;
-		// used for fading in and out
-		
+	
 		setContentView(R.layout.activity_results);
 
-        // Set the list's click listener
-
- 
-	
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
 		 student = new Student(name,this);
-	//	MySQLiteHelper db = new MySQLiteHelper(this);
-	
 		ListView myList = (ListView) findViewById(R.id.results1);
-	
 
 		 spinner = (Spinner)findViewById(R.id.spinner1);
 	        ArrayAdapter<String>adapter = new ArrayAdapter<String>(Results.this,
 	                android.R.layout.simple_spinner_item,student.get_terms());
-
 	        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	        spinner.setAdapter(adapter);
 	        spinner.setOnItemSelectedListener(this);
 
-		 
-		
 		 res = student.get_results();
-				
 		 adap = new adapter_results(this, res, res);
-	
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
-	
-	
 	}
 
 	/* (non-Javadoc)
