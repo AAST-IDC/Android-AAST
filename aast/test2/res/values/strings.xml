@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AAST</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="service_name">haha!</string>
+    <string name="viewusername">User Name</string>
+    <string name="viewpassword">Password</string>
+    <string name="viewsubmit">Add Account</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_list">AAST</string>
+    <string name="title_activity_list_detail">AAST</string>
+    <string name="title_options_menu">Refresh</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_slide">Slide</string>
+    <string name="update">Update</string>
+    <string name="number">1</string>
+    <string name="about">About</string>
+    <string name="item5">Settings</string>
+    <string name="title_activity_managertabs">MainActivity</string>
+    <string name="app_message">"Bonjour PAUG "</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_testt">MainActivity</string>
+    <string name="item6">Accounts</string>
+    <string name="title_activity_accounts">Accounts</string>
+    <string name="title_activity_test_tabs">TestTabs</string>
+    <string name="title_activity_morasalat">Morasalat</string>
+    <string name="title_activity_test_database">Test_database</string>
+    <string name="title_activity_results">Results</string>
+
+</resources>

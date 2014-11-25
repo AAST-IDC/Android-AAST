@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="fill_parent"
+    android:layout_gravity="right|center" 
+    android:orientation="horizontal">
+
+    <!-- Menu Item Image -->
+
+
+	<EditText  
+	     android:id="@+id/edittext1" 
+	     android:layout_width="170dp"
+	       android:layout_height="wrap_content"
+	       android:hint="Search"
+	     
+	     />
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+   
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_refresh" />
+
+ 
+
+    <TextView
+        android:id="@+id/actionbar_notifcation_textview"
+        android:layout_width="20dp"
+        android:layout_marginTop="5dp"
+         android:layout_marginLeft="10dp"
+        android:layout_height="20dp"
+         android:gravity="center" 
+         
+         android:textColor="#ffffff"
+  
+		android:background="#E80000"
+        android:text="@string/number"
+         />
+
+   
+   
+</LinearLayout>

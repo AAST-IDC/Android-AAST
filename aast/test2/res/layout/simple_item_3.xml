@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/mor1"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+         android:textColor="#ffffff"
+  
+		android:background="#E80000"
+        android:text="TextView" />
+    
+<TextView
+ 
+android:id="@+id/mor2"
+ 
+android:layout_width="fill_parent"
+ 
+android:layout_height="wrap_content"
+ 
+android:textAppearance="?android:attr/textAppearanceLarge"
+ 
+android:gravity="center_vertical"
+ 
+android:paddingLeft="6dip"
+
+android:text="saas"
+ 
+android:minHeight="?android:attr/listPreferredItemHeight"
+ 
+/>
+</LinearLayout>
