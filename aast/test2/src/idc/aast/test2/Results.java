@@ -41,13 +41,13 @@ public class Results extends Activity implements OnItemSelectedListener{
 	static Boolean bb = false;
 	static String name;
 	static   	ArrayList<result_item> res;
-	static String[] paths;
+	static String[] all_terms;
 	/** The rslt. */
 	static String rslt;
 	static adapter_results adap;
 	/** The arr2. */
 	static ArrayList<String> arr2 ; // used to have the name of the links
-	
+	static Student student;
 	/** The arr3. */
 	static	ArrayList<String> arr3; // used to have the counts of the links
 	
@@ -90,40 +90,15 @@ public class Results extends Activity implements OnItemSelectedListener{
 	
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
-		Caller c = new Caller();
-		c.a = name;
-		// get the links of the inbox , outbox .....
-		c.c = "getresult";
-		c.con = this;
-		//rslt = "start";
-		try {
-			c.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		c.start();
-		
-		
-		
-		MySQLiteHelper db = new MySQLiteHelper(this);
-		rslt=db.getmorasalat(name);
+		 student = new Student(name,this);
+	//	MySQLiteHelper db = new MySQLiteHelper(this);
+	
 		ListView myList = (ListView) findViewById(R.id.results1);
-		if (arr2 == null)
-			arr2 = new ArrayList<String>();
-		if (arr3 == null)
-			arr3 = new ArrayList<String>();
-		arr2.clear();
-		arr3.clear();
-	//	final ArrayList<String> terms = db.get_terms();
-		//Collections.addAll(arr2, db.getresults(name).split("\\@"));
-		
-		ArrayList<String> terms = db.get_terms(name);
-	 paths = new String[terms.size()];
-		paths = terms.toArray(paths);
+	
+
 		 spinner = (Spinner)findViewById(R.id.spinner1);
 	        ArrayAdapter<String>adapter = new ArrayAdapter<String>(Results.this,
-	                android.R.layout.simple_spinner_item,paths);
+	                android.R.layout.simple_spinner_item,student.get_terms());
 
 	        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	        spinner.setAdapter(adapter);
@@ -131,28 +106,14 @@ public class Results extends Activity implements OnItemSelectedListener{
 
 		 
 		
-		 res = db.get_all_results(paths[0], name);
+		 res = student.get_results();
 				
 		 adap = new adapter_results(this, res, res);
 	
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
-		
-		// Bundle extras = getIntent().getExtras();
-		// String value;
-		//
-		// value = extras.getString("item");
-		//
-		// int n1=value.indexOf("^",0);
-		// int n2=value.indexOf("^",n1+1);
-		// int n3=value.indexOf("^",n2+1);
-		// int n4=value.indexOf("^",n3+1);
-		// TextView t1;
-		// t1=(TextView)findViewById(R.id.textviewtitle);
-		// t1.setText(value.substring(0, n1));
-
-		// TableLayout c = (TableLayout)findViewById(R.id.lay);
-
+	
+	
 	}
 
 	/* (non-Javadoc)
@@ -165,7 +126,7 @@ public class Results extends Activity implements OnItemSelectedListener{
     	
     	MySQLiteHelper db = new MySQLiteHelper(this);
     	res.clear();
-        	res.addAll(  db.get_all_results(paths[position], name));
+        	res.addAll(  student.get_results(position));
 		
 
 	
