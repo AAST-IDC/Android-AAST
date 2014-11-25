@@ -134,6 +134,13 @@ public class MainActivity extends Activity {
 				 LongOperation lo= new LongOperation();
 				 lo.con=this;
 				 lo.execute(new String[]{name,type});
+				 
+			 }
+			 else
+			 {
+				 
+				 Toast.makeText(getApplicationContext(), "No Internet Connection Application may be out of date",
+						   Toast.LENGTH_LONG).show();
 			 }
 			finish();
 			// open the list activity activity
@@ -177,7 +184,17 @@ public class MainActivity extends Activity {
 			// on login button click
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-
+				
+				if(!helper.isInternetAvailable())
+				{
+					Toast.makeText(getApplicationContext(), "No Internet Connection cannot login",
+							   Toast.LENGTH_LONG).show();
+					
+				}
+				
+				else
+					
+				{
 				try {
 					EditText ed1 = (EditText) findViewById(R.id.editText1); // get
 																			// the
@@ -347,6 +364,7 @@ public class MainActivity extends Activity {
 				} catch (Exception ex) {
 					ad.setTitle("Error!");
 					ad.setMessage(ex.toString());
+				}
 				}
 				// ad.show();
 
