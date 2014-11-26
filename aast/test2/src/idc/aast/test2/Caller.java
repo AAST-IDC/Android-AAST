@@ -179,6 +179,31 @@ public class Caller extends Thread {
 
 				}
 			}
+		
+			else if (c.equals("get_scheduele"))
+			{
+				// not used
+				try {
+					cs = new CallSoap();
+					String resp = cs.get_scheduele(a, b);
+					if(!resp.equals("error"))
+					{
+						
+					MySQLiteHelper db=new MySQLiteHelper(con);
+					JSONObject reader = new JSONObject(resp);
+					JSONArray arr = reader.getJSONArray("scheduele");
+					for (int i=0 ; i<arr.length();i++) {
+						scheduele_slot sch = new scheduele_slot(arr.getJSONObject(i),a);
+						db.insert_scheduele(sch);
+					}
+					db.setresults(resp, a);
+					}
+				
+				} catch (Exception ex) {
+					Morasalat.rslt = "error";
+
+				}
+			}
 		else if (c.equals("getlinks"))
 		{
 			String rslt;

@@ -57,6 +57,24 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    	
 	    };
 	    
+
+		  private static final String[] sch_columns = {
+			   
+		    	"user_id",
+		    	"serial_key",
+		    	"course_code",
+		    	"course",
+		    	"day_code",
+		    	"from_code",
+		    	"to_code",
+		    	"kind",
+		    	"lec_name",
+		    	"fac_code",
+		    	"room_symbol",
+		    	"room_num" ,
+		    	"room_desc",
+		    	
+		    };	    
   public MySQLiteHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
   }
@@ -97,6 +115,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 	  String create_scheduele_table = "CREATE TABLE scheduele ( " +
               "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+              "user_id TEXT, "+
               "serial_key TEXT, "+
               "course_code TEXT, "+
               "course TEXT, "+
@@ -189,6 +208,59 @@ if(count  == 0)
 
       
       int j=  (int) db.insert("results", // table
+              null, //nullColumnHack
+              values); // key/value -> keys = column names/ values = column values
+
+      // 4. close
+      db.close(); 
+      return j;
+}
+	  
+   return 0;
+  }
+  public int insert_scheduele(scheduele_slot sch)
+  {	 
+	  SQLiteDatabase db = this.getReadableDatabase();
+  Cursor cursor =
+          db.query("scheduele", // a. table
+          new String[]{"count(user_id)"}, // b. column names
+          "user_id = ? and day_code = ? and to_code = ? and from_code  = ?", // selections
+            new String[] { String.valueOf(sch.user_id),String.valueOf(sch.day),String.valueOf(sch.from),String.valueOf(sch.from)}, // d. selections args
+          null, // e. group by
+          null, // f. having
+          null, // g. order by
+          null); // h. limit
+// 3. go over each row, build book and add it to list
+  int count = 0;
+if (cursor.moveToFirst()) 
+{
+//	    db.close();
+	count =cursor.getInt(0);
+	
+	
+}
+if(count  == 0)
+{
+
+	  ContentValues values = new ContentValues();
+      values.put("user_id", sch.user_id); // get title
+      values.put("serial_key",sch.serial);
+      values.put("course_code",sch.course_code); // get title
+      values.put("course",sch.course);
+      values.put("day_code",sch.day); // get title
+      values.put("from_code",sch.from); // get title
+      values.put("to_code",sch.to); 
+      values.put("kind", sch.type); // get title
+      values.put("lec_name",sch.name);
+      values.put("room_num",sch.room_num); // get title
+      values.put("fac_code",sch.room_desc); // get title
+      values.put("room_symbol",sch.room_symbol); // get title
+      values.put("room_desc",sch.room_desc); // get title
+
+      
+
+      
+      int j=  (int) db.insert("scheduele", // table
               null, //nullColumnHack
               values); // key/value -> keys = column names/ values = column values
 
@@ -700,6 +772,35 @@ public void deleteAllMessage(String username) {
 
               // Add book to books
         	  list_res.add(res);
+          } while (cursor.moveToNext());
+      }
+      db.close();
+      return list_res;
+  
+  }
+  public ArrayList<scheduele_slot>get_Shcedueleday(String user_id,String day_code)
+  {
+	  ArrayList<scheduele_slot> list_res = new ArrayList<scheduele_slot>();
+	  Cursor cursor ;
+      SQLiteDatabase db = this.getReadableDatabase();
+      cursor =
+	            db.query("scheduele", // a. table
+	            sch_columns, // b. column names
+	            " user_id = ? and day_code = ?", // c. selections
+	            new String[] { String.valueOf(user_id), String.valueOf(day_code) }, // d. selections args
+	            null, // e. group by
+	            null, // f. having
+	            null, // g. order by
+	            null); // h. limit
+      
+      scheduele_slot sch = null;
+      if (cursor.moveToFirst()) {
+          do {
+        	  sch= new scheduele_slot(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9),cursor.getString(10),cursor.getString(11),cursor.getString(12));
+        	  ;
+
+              // Add book to books
+        	  list_res.add(sch);
           } while (cursor.moveToNext());
       }
       db.close();

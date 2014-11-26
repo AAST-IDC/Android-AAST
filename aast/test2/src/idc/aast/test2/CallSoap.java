@@ -103,6 +103,12 @@ public class CallSoap {
 	/** The OPERATIO n_ nam e11. */
 	public final String OPERATION_NAME92 = "getres2";
 	
+	
+	public final String SOAP_ACTION94 = "http://tempuri.org/recieveNotification";
+
+	/** The OPERATIO n_ nam e11. */
+	public final String OPERATION_NAME94 = "recieveNotification";
+	
 	/**
 	 * Instantiates a new call soap.
 	 */
@@ -115,6 +121,7 @@ public class CallSoap {
 	 * @param a the a
 	 * @return the string
 	 */
+	
 	
 	public String getlinks_morasalast(String a, String b) {
 		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
@@ -143,7 +150,35 @@ public class CallSoap {
 		}
 		return response.toString();
 	}
+	public String get_scheduele(String a, String b) {
+		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
+				OPERATION_NAME94);
+		PropertyInfo pi = new PropertyInfo();
+	//	PropertyInfo p2 = new PropertyInfo();
+		pi.setName("UserName");
+		pi.setValue(a);
+		pi.setType(Integer.class);
+		request.addProperty(pi);
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+				SoapEnvelope.VER11);
+		envelope.dotNet = true;
+
+		envelope.setOutputSoapObject(request);
+		HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
+		Object response = null;
+		try {
+			httpTransport.call(SOAP_ACTION94, envelope);
+			response = envelope.getResponse();
+
+		} catch (Exception exception) {
+			response = exception.toString();
+			response = "error";
+		}
+		return response.toString();
+	}
 	
+
 	
 	public String getresults(String a, String b) {
 		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
