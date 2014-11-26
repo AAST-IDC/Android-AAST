@@ -11,7 +11,7 @@ import android.util.Pair;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-	 private static final int DATABASE_VERSION = 5;
+	 private static final int DATABASE_VERSION = 6;
 	    // Database Name
 	    private static final String DATABASE_NAME = "AAST_Notifications";
 	    
@@ -94,10 +94,27 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
               "semi_degree TEXT, "+
               "grade_text TEXT, "+
               "hours TEXT )";
+	  
+	  String create_scheduele_table = "CREATE TABLE scheduele ( " +
+              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+              "serial_key TEXT, "+
+              "course_code TEXT, "+
+              "course TEXT, "+
+              "day_code TEXT, "+
+              "from_code TEXT, "+
+              "to_code TEXT, "+
+              "kind TEXT, "+
+              "lec_name TEXT, "+
+              "room_num TEXT, "+
+              "fac_code TEXT, "+
+              "room_symbol TEXT, "+
+              "room_desc TEXT )";
+	  
       // create books table
 	  database.execSQL(Create_message_table);
 	  database.execSQL(Create_result_table);
 	 database.execSQL(Create_account_table);
+	 database.execSQL(create_scheduele_table);
 	 database.execSQL("ALTER TABLE accounts ADD COLUMN links TEXT");
 	 database.execSQL("ALTER TABLE accounts ADD COLUMN counts TEXT");
 	 database.execSQL("ALTER TABLE accounts ADD COLUMN morasalat TEXT");
@@ -855,21 +872,97 @@ public void deleteAllMessage(String username) {
 	  
 //  onCreate(db);
 	//  db.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
-	  String Create_result_table = "CREATE TABLE results ( " +
-              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-              "user_id TEXT, "+
-              "term_id TEXT, "+
-              "term_desc TEXT, "+
-              "course_code TEXT, "+
-              "course_name TEXT, "+
-              "seventh_degree TEXT, "+
-              "twelves TEXT, "+
-              "semi_degree TEXT, "+
-              "grade_text TEXT, "+
-              "hours TEXT )";
-      // create books table
-	 // database.execSQL(Create_message_table);
-	  db.execSQL(Create_result_table);
-  }
+	  
+	  if(oldVersion ==  5)
+	  {
+		  String create_scheduele_table = "CREATE TABLE scheduele ( " +
+	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "serial_key TEXT, "+
+	              "course_code TEXT, "+
+	              "course TEXT, "+
+	              "day_code TEXT, "+
+	              "from_code TEXT, "+
+	              "to_code TEXT, "+
+	              "kind TEXT, "+
+	              "lec_name TEXT, "+
+	              "room_num TEXT, "+
+	              "fac_code TEXT, "+
+	              "room_symbol TEXT, "+
+	              "room_desc TEXT )";
+			 db.execSQL(create_scheduele_table);
+	  
+	  }
+	  else if(oldVersion==4)
+	  {
+		  
+		  String Create_result_table = "CREATE TABLE results ( " +
+	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +	
+	              "user_id TEXT, "+
+	              "term_id TEXT, "+
+	              "term_desc TEXT, "+
+	              "course_code TEXT, "+
+	              "course_name TEXT, "+
+	              "seventh_degree TEXT, "+
+	              "twelves TEXT, "+
+	              "semi_degree TEXT, "+
+	              "grade_text TEXT, "+
+	              "hours TEXT )";
+	      // create books table
+		 // database.execSQL(Create_message_table);
+		  db.execSQL(Create_result_table);
+		  String create_scheduele_table = "CREATE TABLE scheduele ( " +
+	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "serial_key TEXT, "+
+	              "course_code TEXT, "+
+	              "course TEXT, "+
+	              "day_code TEXT, "+
+	              "from_code TEXT, "+
+	              "to_code TEXT, "+
+	              "kind TEXT, "+
+	              "lec_name TEXT, "+
+	              "room_num TEXT, "+
+	              "fac_code TEXT, "+
+	              "room_symbol TEXT, "+
+	              "room_desc TEXT )";
+			 db.execSQL(create_scheduele_table);
+	  }
+	  else
+	  {
+		  db.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
+		  
+		  String Create_result_table = "CREATE TABLE results ( " +
+	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "user_id TEXT, "+
+	              "term_id TEXT, "+
+	              "term_desc TEXT, "+
+	              "course_code TEXT, "+
+	              "course_name TEXT, "+
+	              "seventh_degree TEXT, "+
+	              "twelves TEXT, "+
+	              "semi_degree TEXT, "+
+	              "grade_text TEXT, "+
+	              "hours TEXT )";
+	      // create books table
+		 // database.execSQL(Create_message_table);
+		  db.execSQL(Create_result_table);
+		  String create_scheduele_table = "CREATE TABLE scheduele ( " +
+	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "serial_key TEXT, "+
+	              "course_code TEXT, "+
+	              "course TEXT, "+
+	              "day_code TEXT, "+
+	              "from_code TEXT, "+
+	              "to_code TEXT, "+
+	              "kind TEXT, "+
+	              "lec_name TEXT, "+
+	              "room_num TEXT, "+
+	              "fac_code TEXT, "+
+	              "room_symbol TEXT, "+
+	              "room_desc TEXT )";
+			 db.execSQL(create_scheduele_table);
+	  }
+		  
+	  }
+
 
 } 
