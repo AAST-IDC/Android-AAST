@@ -52,12 +52,18 @@ public class Student extends User {
 		for(int i=0;i<temp.size();i++)
 		{
 			int t = Integer.parseInt(temp.get(i));
-			all_days.set(t, "ok");
+			all_days.set(t-1, "ok");
 		
 		}
 		return all_days;
 
 	 
+		
+	}
+	public ArrayList<scheduele_slot> get_day_sch(String day)
+	{
+		return db.get_Shcedueleday(user_id, day);
+		
 		
 	}
 	public ArrayList<result_item> get_results() {

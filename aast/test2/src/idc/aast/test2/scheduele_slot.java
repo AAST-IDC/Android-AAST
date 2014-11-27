@@ -21,18 +21,18 @@ public class scheduele_slot {
 	public scheduele_slot(JSONObject j,String user_id)
 	{
 		try {
-			serial = j.getString("l_serial_key");
-			course_code = j.getString("l_crsnum_e");
-			course = j.getString("l_crs_name");
-			day = j.getString("l_day");
-			from = j.getString("l_from");
-			to = j.getString("l_to");
-			type = j.getString("l_kind");
-			name = j.getString("l_name");
-			room_num = j.getString("l_room_no");
-			fac_code = j.getString("l_fac_code");
-			room_symbol = j.getString("l_room_symbol");
-			room_desc = j.getString("l_room_desc");
+			serial = j.getString("l_serial_key").trim();
+			course_code = j.getString("l_crsnum_e").trim();
+			course = j.getString("l_crs_name").trim();
+			day = j.getString("l_day").trim();
+			from = j.getString("l_from").trim();
+			to = j.getString("l_to").trim();
+			type = j.getString("l_kind").trim();
+			name = j.getString("l_name").trim();
+			room_num = j.getString("l_room_no").trim();
+			fac_code = j.getString("l_fac_code").trim();
+			room_symbol = j.getString("l_room_symbol").trim();
+			room_desc = j.getString("l_room_desc").trim();
 			this.user_id = user_id;
 			
 		} catch (JSONException e) {

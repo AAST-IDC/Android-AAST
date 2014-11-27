@@ -343,7 +343,8 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 		DisplayMetrics metrics = new DisplayMetrics();
 		display.getMetrics(metrics); // get the display metrics
 		//ListViewAdapter.dpi = (int) metrics.heightPixels; // pass the screen
-															// height to the
+										
+		// height to the
 															// list adapter
 
 		setTitle("ãÊÇÈÚÇÊ");

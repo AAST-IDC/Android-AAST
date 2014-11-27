@@ -814,7 +814,7 @@ public void deleteAllMessage(String username) {
 	  Cursor cursor ;
       SQLiteDatabase db = this.getReadableDatabase();
       cursor =
-	            db.query("scheduele", // a. table
+	            db.query(true,"scheduele", // a. table
 	            sch_columns, // b. column names
 	            " user_id = ? and day_code = ?", // c. selections
 	            new String[] { String.valueOf(user_id), String.valueOf(day_code) }, // d. selections args

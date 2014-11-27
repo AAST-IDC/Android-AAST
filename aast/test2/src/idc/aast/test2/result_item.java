@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class result_item {
-	
+	 
 
 	  
 	  String user_id;

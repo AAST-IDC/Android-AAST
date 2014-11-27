@@ -6,15 +6,15 @@ android:orientation="vertical" >
       <ListView
     
     	android:id="@+id/scheduele_main_list"
-    		android:drawSelectorOnTop="true"
+    	android:drawSelectorOnTop="true"
     	android:layout_width="fill_parent"
-    
-        	
+    	android:minHeight="200dp" 
+    	
 	    android:layout_height="0px"
 	    android:layout_weight="1"
 	    android:background="#E9E9E9"
-	     android:divider="#FFFFFF"
-    android:dividerHeight="5dp"
+	    android:divider="#ffffff"
+	    android:dividerHeight="2dp"
 	   android:listSelector="@drawable/list_selector" 
 	 />
 

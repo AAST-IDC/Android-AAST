@@ -7,12 +7,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class SchDays extends Activity {
+public class SchedueleDetails extends Activity {
 
 	static Boolean bb = false;
 	static String name;
@@ -20,7 +17,7 @@ public class SchDays extends Activity {
 	static String[] alldays;
 	/** The rslt. */
 	
-	static adapter_scheduele adap;
+	static adapter_scheduele_detail adap;
 	/** The arr2. */
 	static ArrayList<String> arr2 ; // used to have the name of the links
 	static Student student;
@@ -32,35 +29,26 @@ public class SchDays extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_sch_days);
+		setContentView(R.layout.activity_scheduele_details);
 		bb = false;
-
-
+		Bundle extras = getIntent().getExtras();
+		String day =""; 
+		if (extras != null) {
+		     day = extras.getString("day_code");
+		}
+		
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
 		
 		 student = new Student(name, this)	;	
-		 ArrayList<String> sch= student.get_days();
+		 sch= student.get_day_sch(day);
 		 
 		 
 		 
-		ListView myList = (ListView) findViewById(R.id.scheduele_main_list);
-		myList.setOnItemClickListener( new OnItemClickListener(
-				
-				) {
-
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1,
-							int postition, long arg3) {
-						Intent i=new Intent(SchDays.this,SchedueleDetails.class);
-						postition+=1;
-						i.putExtra("day_code",postition  + "");
-						 startActivity(i);
-						// TODO Auto-generated method stub
-						
-					}
-		});
-		 adap = new  adapter_scheduele(this, sch);
+		 
+		ListView myList = (ListView) findViewById(R.id.scheduele_sub_list);
+		
+		 adap = new  adapter_scheduele_detail(this, sch);
 			myList.setAdapter(adap);
 			adap.notifyDataSetChanged();
 
@@ -69,7 +57,7 @@ public class SchDays extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.sch_days, menu);
+		getMenuInflater().inflate(R.menu.scheduele_details, menu);
 		return true;
 	}
 

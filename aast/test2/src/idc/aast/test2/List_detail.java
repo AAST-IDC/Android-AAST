@@ -142,7 +142,7 @@ public class List_detail extends ActionBarActivity implements TabListener {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));
 		}
-	
+		
 	
 		ListView myList = (ListView) findViewById(R.id.listView3);
 		if (arr2 == null)

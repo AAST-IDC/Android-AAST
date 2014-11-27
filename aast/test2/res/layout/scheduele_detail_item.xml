@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal" >
+
+    
+
+        <LinearLayout
+            android:id="@+id/sch_det_right_lev_1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.08"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/sch_det_right_top_lev_2"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5" 
+                
+                android:gravity="center">
+            </TextView>
+
+            <TextView
+                android:id="@+id/sch_det_right_bot_lev_2"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5" 
+                android:gravity="center">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sch_det_mid_lev_1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.645"
+            android:orientation="vertical"
+            android:layout_gravity="center" >
+
+            <TextView
+                android:id="@+id/course_name"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/lect_name"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sch_det_mid_lev_11"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.215"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/course_code"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5" 
+                android:gravity="center">
+            </TextView>
+
+            <TextView
+                android:id="@+id/slot_type"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/room"
+                           android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sch_det_left_lev_1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.08"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lect_no"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+              />
+        </LinearLayout>
+
+
+</LinearLayout>
