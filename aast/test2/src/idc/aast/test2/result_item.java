@@ -22,16 +22,16 @@ public class result_item {
 		  try {
 			this.user_id = user_id;
 		
-		  term_id = jresult.getString("term_id");
-		  term_desc = jresult.getString("term");
-		  course_code = jresult.getString("course code");
-		  course = jresult.getString("course");
-		  seventh_degree = jresult.getString("7th");
-		  twelves_degree = jresult.getString("12th");
-		  semi_degree = jresult.getString("semi");
-		  grade_degree = jresult.getString("grade");
-		  hours = jresult.getString("hours");
-		  } catch (JSONException e) {
+		  term_id = jresult.getString("term_id").trim();
+		  term_desc = jresult.getString("term").trim();
+		  course_code = jresult.getString("course code").trim();
+		  course = jresult.getString("course").trim();
+		  seventh_degree = jresult.getString("7th").trim();
+		  twelves_degree = jresult.getString("12th").trim();
+		  semi_degree = jresult.getString("semi").trim();
+		  grade_degree = jresult.getString("grade").trim();
+		  hours = jresult.getString("hours").trim();
+		  } catch (JSONException e) { 
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

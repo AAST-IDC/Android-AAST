@@ -89,5 +89,8 @@ public class Student extends User {
 		
 		return all_terms[all_terms.length-1];
 	}
+	public result_item get_course_result(String course_code) {
+		return db.get_course_result(course_code,user_id);
+	}
 
 }

@@ -225,7 +225,7 @@ if(count  == 0)
           db.query("scheduele", // a. table
           new String[]{"count(user_id)"}, // b. column names
           "user_id = ? and day_code = ? and to_code = ? and from_code  = ?", // selections
-            new String[] { String.valueOf(sch.user_id),String.valueOf(sch.day),String.valueOf(sch.from),String.valueOf(sch.from)}, // d. selections args
+            new String[] { String.valueOf(sch.user_id),String.valueOf(sch.day),String.valueOf(sch.from),String.valueOf(sch.to)}, // d. selections args
           null, // e. group by
           null, // f. having
           null, // g. order by
@@ -808,6 +808,29 @@ public void deleteAllMessage(String username) {
       return list_res;
   
   }
+  public result_item get_course_result(String course_code , String user_id) {
+	  
+	  Cursor cursor ;
+      SQLiteDatabase db = this.getReadableDatabase();
+      cursor =
+	            db.query("results", // a. table
+	            res_columns, // b. column names
+	            " user_id = ? and course_code = ?", // c. selections
+	            new String[] { String.valueOf(user_id), String.valueOf(course_code) }, // d. selections args
+	            null, // e. group by
+	            null, // f. having
+	            null, // g. order by
+	            null); // h. limit
+      
+      result_item res = null;
+      if (cursor != null)
+      {     cursor.moveToFirst();
+      res= new result_item(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
+      
+      }
+      return res;
+	
+}
   public ArrayList<scheduele_slot>get_Shcedueleday(String user_id,String day_code)
   {
 	  ArrayList<scheduele_slot> list_res = new ArrayList<scheduele_slot>();

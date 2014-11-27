@@ -96,7 +96,7 @@ public void notifyDataSetChanged() {
 	
 		if (convertView == null)  
 		{
-			convertView = inflater.inflate(R.layout.simple_item_4, null);
+			convertView = inflater.inflate(R.layout.results_item, null);
 			holder = new ViewHolder();
 			holder.cname = (TextView) convertView.findViewById(R.id.cname);
 			holder.seven = (TextView) convertView.findViewById(R.id.seven);

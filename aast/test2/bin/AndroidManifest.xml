@@ -22,7 +22,7 @@
 
     <!--
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="idc.aast.test2.permission.C2D_MESSAGE"
@@ -134,6 +134,10 @@
         <activity
             android:name="idc.aast.test2.SchedueleDetails"
             android:label="@string/title_activity_scheduele_details" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.CourseDetails"
+            android:label="@string/title_activity_course_details" >
         </activity>
     </application>
 

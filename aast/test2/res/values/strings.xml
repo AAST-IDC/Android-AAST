@@ -52,5 +52,6 @@
     <string name="title_activity_results">Results</string>
     <string name="title_activity_sch_days">SchDays</string>
     <string name="title_activity_scheduele_details">SchedueleDetails</string>
+    <string name="title_activity_course_details">CourseDetails</string>
 
 </resources>
