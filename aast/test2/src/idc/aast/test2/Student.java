@@ -18,6 +18,7 @@ public class Student extends User {
 	 * 
 	 */
 	public String [] all_terms;
+	public ArrayList<String>  all_days;
 	public 	MySQLiteHelper db;
 	public Student(String user_id , Context con ) {
 		db = new MySQLiteHelper(con);
@@ -34,6 +35,28 @@ public class Student extends User {
  all_terms = new String[terms.size()];
 	 all_terms = terms.toArray(all_terms);
 	 return all_terms;
+	 
+		
+	}
+	public ArrayList<String>  get_days()
+	{
+	 
+		ArrayList<String> temp =  db.get_days(user_id);
+		
+		all_days = new ArrayList<String>();
+		for( int i =0 ;i <6 ;i++)
+		{
+			all_days.add("none");
+		
+		}
+		for(int i=0;i<temp.size();i++)
+		{
+			int t = Integer.parseInt(temp.get(i));
+			all_days.set(t, "ok");
+		
+		}
+		return all_days;
+
 	 
 		
 	}

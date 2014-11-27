@@ -77,6 +77,22 @@ public class helper {
 		c.b=type;
 		c.con=context;
 		// get the links of the inbox , outbox .....
+		c.c = "get_scheduele";
+
+		try {
+			c.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		c.start();
+		
+		
+		c= new Caller();
+		c.a = name;
+		c.b=type;
+		c.con=context;
+		// get the links of the inbox , outbox .....
 		c.c = "getlinks_morasalat";
 
 		try {

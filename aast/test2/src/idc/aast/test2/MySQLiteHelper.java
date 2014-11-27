@@ -439,6 +439,36 @@ if(count  == 0)
      
 	  
   }
+  public ArrayList<String> get_days(String name)
+  {
+	  //ArrayList< String> msgs = new ArrayList< String>();
+	  SQLiteDatabase db = this.getReadableDatabase();
+      Cursor cursor =
+	            db.query( true,"scheduele", // a. table
+	            new String[]{"day_code"}, // b. column names
+	            "user_id = ? ", // selections
+	            new String[] { String.valueOf(name)}, // d. selections args
+	            null, // e. group by
+	            null, // f. having
+	            null, // g. order by
+	            null); // h. limit
+      // 3. go over each row, build book and add it to list
+    ArrayList<String> terms = new ArrayList<String>();
+      if (cursor.moveToFirst()) {
+          do {
+        	
+
+              // Add book to books
+        	  terms.add(cursor.getString(0));
+          } while (cursor.moveToNext());
+      }
+      
+      db.close();
+      return terms;
+      
+     
+	  
+  }
   public String getmorasalat(String name)
   {
 	  //ArrayList< String> msgs = new ArrayList< String>();
@@ -978,6 +1008,7 @@ public void deleteAllMessage(String username) {
 	  {
 		  String create_scheduele_table = "CREATE TABLE scheduele ( " +
 	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "user_id TEXT, "+
 	              "serial_key TEXT, "+
 	              "course_code TEXT, "+
 	              "course TEXT, "+
@@ -1013,6 +1044,7 @@ public void deleteAllMessage(String username) {
 		  db.execSQL(Create_result_table);
 		  String create_scheduele_table = "CREATE TABLE scheduele ( " +
 	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "user_id TEXT, "+
 	              "serial_key TEXT, "+
 	              "course_code TEXT, "+
 	              "course TEXT, "+
@@ -1048,6 +1080,7 @@ public void deleteAllMessage(String username) {
 		  db.execSQL(Create_result_table);
 		  String create_scheduele_table = "CREATE TABLE scheduele ( " +
 	              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+	              "user_id TEXT, "+
 	              "serial_key TEXT, "+
 	              "course_code TEXT, "+
 	              "course TEXT, "+

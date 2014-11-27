@@ -8,10 +8,8 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
 
-   
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
     <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,7 +22,7 @@
 
     <!--
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="idc.aast.test2.permission.C2D_MESSAGE"
@@ -60,8 +58,6 @@
             </intent-filter>
         </receiver>
 
-    
-
         <activity
             android:name="idc.aast.test2.ListActivity"
             android:label="@string/title_activity_list"
@@ -83,7 +79,6 @@
             android:name="idc.aast.test2.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
-
         <activity
             android:name="idc.aast.test2.TesttActivity"
             android:label="@string/title_activity_testt" >
@@ -92,7 +87,6 @@
             android:name="idc.aast.test2.Accounts"
             android:label="@string/title_activity_accounts" >
         </activity>
-      
         <activity
             android:name="idc.aast.test2.Morasalat"
             android:label="@string/title_activity_morasalat" >
@@ -104,7 +98,7 @@
         <activity
             android:name="idc.aast.test2.Results"
             android:label="@string/title_activity_results" >
-        </activity>	
+        </activity>
 
         <service android:name="com.parse.PushService" />
 
@@ -121,7 +115,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-<!--       IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
+                <!-- IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
                 <category android:name="idc.aast.test2" />
             </intent-filter>
         </receiver>
@@ -132,6 +126,11 @@
                 <action android:name="idc.aast.test2.UPDATE_STATUS" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="idc.aast.test2.SchDays"
+            android:label="@string/title_activity_sch_days" >
+        </activity>
     </application>
 
 </manifest>
