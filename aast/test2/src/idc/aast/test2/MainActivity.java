@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
 			finish();
 			// open the list activity activity
 		
-			Intent i = new Intent(getApplicationContext(), ListActivity.class);
+			Intent i = new Intent(getApplicationContext(), TabMain.class);
  
 			startActivity(i);
 			

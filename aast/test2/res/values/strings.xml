@@ -55,5 +55,7 @@
     <string name="title_activity_course_details">CourseDetails</string>
     <string name="title_activity_news">News</string>
     <string name="title_activity_news_details">NewsDetails</string>
+    <string name="title_activity_tab_main">TabMain</string>
+    <string name="title_activity_notification_fragment">NotificationFragment</string>
 
 </resources>
