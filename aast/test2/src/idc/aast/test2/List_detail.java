@@ -199,11 +199,22 @@ public class List_detail extends ActionBarActivity implements TabListener {
 				 url =arr3.get(arg2);
 				 if(url.equals("results"))
 				 {
+						Intent i = new Intent(getApplicationContext(), Results.class);
+						startActivity(i);
+						return;
+				 }
+				 if(url.equals("scheduele"))
+				 {
 						Intent i = new Intent(getApplicationContext(), SchDays.class);
 						startActivity(i);
 						return;
 				 }
-				 
+				 if(url.equals("news"))
+				 {
+						Intent i = new Intent(getApplicationContext(), News.class);
+						startActivity(i);
+						return;
+				 }
 				String emp =name;
 				try {
 					

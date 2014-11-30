@@ -33,6 +33,7 @@ public class Caller extends Thread {
 	/** The con. */
 	public Context con;
 
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -155,6 +156,32 @@ public class Caller extends Thread {
 				}   
 			}
 		
+			else if (c.equals("get_news"))
+			{
+				// not used
+				try {
+					cs = new CallSoap();
+					if(a==null)
+						a="0";
+					String resp = cs.get_news(a, b);
+					if(!resp.equals("error"))
+					{
+						
+					MySQLiteHelper db=new MySQLiteHelper(con);
+					JSONObject reader = new JSONObject(resp);
+					JSONArray arr = reader.getJSONArray("news");
+					for (int i=0 ; i<arr.length();i++) {
+						news_item news = new news_item(arr.getJSONObject(i));
+						db.insert_news(news);
+					}
+					db.setresults(resp, a);
+					}
+				
+				} catch (Exception ex) {
+					Morasalat.rslt = "error";
+
+				}
+			}
 			else if (c.equals("getresult"))
 			{
 				// not used

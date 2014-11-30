@@ -109,6 +109,11 @@ public class CallSoap {
 	/** The OPERATIO n_ nam e11. */
 	public final String OPERATION_NAME94 = "recieveNotification";
 	
+	public final String SOAP_ACTION95 = "http://tempuri.org/get_news";
+
+	/** The OPERATIO n_ nam e11. */
+	public final String OPERATION_NAME95 = "get_news";
+	
 	/**
 	 * Instantiates a new call soap.
 	 */
@@ -178,7 +183,34 @@ public class CallSoap {
 		return response.toString();
 	}
 	
+	public String get_news(String a, String b) {
+		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
+				OPERATION_NAME95);
+		PropertyInfo pi = new PropertyInfo();
+	//	PropertyInfo p2 = new PropertyInfo();
+		pi.setName("last_date");
+		pi.setValue(a);
+		pi.setType(Integer.class);
+		request.addProperty(pi);
 
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+				SoapEnvelope.VER11);
+		envelope.dotNet = true;
+
+		envelope.setOutputSoapObject(request);
+		HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
+		Object response = null;
+		try {
+			httpTransport.call(SOAP_ACTION95, envelope);
+			response = envelope.getResponse();
+
+		} catch (Exception exception) {
+			response = exception.toString();
+			response = "error";
+		}
+		return response.toString();
+	}
+	
 	
 	public String getresults(String a, String b) {
 		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,

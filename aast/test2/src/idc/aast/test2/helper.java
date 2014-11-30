@@ -103,7 +103,22 @@ public class helper {
 		}
 		c.start();
 		
+		c= new Caller();
+		MySQLiteHelper db = new MySQLiteHelper(context);
 		
+		c.a =db.get_last_news_date();
+		c.b=type;
+		c.con=context;
+		// get the links of the inbox , outbox .....
+		c.c = "get_news";
+
+		try {
+			c.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		c.start();
 		
 		
 		

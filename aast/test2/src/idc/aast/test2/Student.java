@@ -66,6 +66,12 @@ public class Student extends User {
 		
 		
 	}
+	public ArrayList<news_item> get_news() {
+		
+		
+		return db.get_all_news();
+		
+	}
 	public ArrayList<result_item> get_results() {
 	
 			
