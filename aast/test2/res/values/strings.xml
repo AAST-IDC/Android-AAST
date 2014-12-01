@@ -57,5 +57,10 @@
     <string name="title_activity_news_details">NewsDetails</string>
     <string name="title_activity_tab_main">TabMain</string>
     <string name="title_activity_notification_fragment">NotificationFragment</string>
+    <string name="title_activity_games_fragment">GamesFragment</string>
+    <string name="title_activity_top_rated_fragment">TopRatedFragment</string>
+    <string name="title_activity_results_fragment">ResultsFragment</string>
+    <string name="title_activity_scheduele_fragment">SchedueleFragment</string>
+    <string name="title_activity_scheduele_details_fragment">SchedueleDetailsFragment</string>
 
 </resources>

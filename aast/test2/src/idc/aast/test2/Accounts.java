@@ -112,22 +112,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 
 	}
 
-	@Override
-	public void onBackPressed() {
-		SharedPreferences preferences2 = getSharedPreferences("AAST", 0);
-		MySQLiteHelper db = new MySQLiteHelper(getApplicationContext());
-		if(db.getAccountsCount()!=0 )
-		{
-			Editor edit3= preferences2.edit();
-			edit3.putString("login", "ok");
-			edit3.commit();
-			Intent i = new Intent(getApplicationContext(),
-					ListActivity.class);
-			finish();
-			startActivity(i);
-		
-		}
-	}
+
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,

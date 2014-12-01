@@ -22,7 +22,7 @@
 
     <!--
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="idc.aast.test2.permission.C2D_MESSAGE"
@@ -154,6 +154,26 @@
         <activity
             android:name="idc.aast.test2.NotificationFragment"
             android:label="@string/title_activity_notification_fragment" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.GamesFragment"
+            android:label="@string/title_activity_games_fragment" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.TopRatedFragment"
+            android:label="@string/title_activity_top_rated_fragment" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.ResultsFragment"
+            android:label="@string/title_activity_results_fragment" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.SchedueleFragment"
+            android:label="@string/title_activity_scheduele_fragment" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.SchedueleDetailsFragment"
+            android:label="@string/title_activity_scheduele_details_fragment" >
         </activity>
     </application>
 

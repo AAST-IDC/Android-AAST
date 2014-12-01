@@ -1,6 +1,8 @@
 package idc.aast.test2;
 
 
+import java.util.ArrayList;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,29 +12,27 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
    public TabsPagerAdapter(FragmentManager fm) {
        super(fm);
    }
-
+   static ArrayList<String> tabs = new ArrayList<String>();
    @Override
    public Fragment getItem(int index) {
 
-       switch (index) {
-       case 0:
-           // Top Rated fragment activity
-           return new NotificationFragment();
-       case 1:
-           // Games fragment activity
-           return new NotificationFragment();
-       case 2:
-           // Movies fragment activity
-           return new NotificationFragment();
-       }
+       String nw = tabs.get(index);
+       if(nw=="Results")
+    	   return new ResultsFragment();
+       else if(nw=="Notification")
+    	   return new NotificationFragment();
+       else if(nw=="Schedule")
+    	   return new NotificationFragment();
+       else 
+    	   return new GamesFragment();
 
-       return null;
+     
    }
 
    @Override
    public int getCount() {
        // get item count - equal to number of tabs
-       return 3;
+       return tabs.size();
    }
 
 }
