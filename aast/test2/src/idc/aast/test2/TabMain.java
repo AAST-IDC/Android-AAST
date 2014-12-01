@@ -2,6 +2,7 @@ package idc.aast.test2;
 
 import java.util.ArrayList;
 
+
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -27,28 +28,33 @@ public class TabMain extends FragmentActivity implements TabListener {
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	// Tab titles
-	private ArrayList<String> tabs = new ArrayList<String>();
+	private ArrayList<String> tabss = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_tab_main);
-		tabs.add("Notification");
-tabs.add("Results");
-tabs.add("Schedule");
-TabsPagerAdapter.tabs.addAll(tabs);
+		tabss.add("Notification");
+		tabss.add("Results");
+		tabss.add("Schedule");
+		tabss.add("News");
+TabsPagerAdapter.tabs.addAll(tabss);
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
  
         viewPager.setAdapter(mAdapter);
+    
+        // Bind the tabs to the ViewPager
+//     
+
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
  
         // Adding Tabs
-        for (String tab_name : tabs) {
+        for (String tab_name : tabss) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
@@ -73,6 +79,7 @@ TabsPagerAdapter.tabs.addAll(tabs);
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+        
 	}
 
 	@Override

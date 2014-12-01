@@ -1327,39 +1327,40 @@ containing a value of this type.
         public static final int activity_morasalat=0x7f03001f;
         public static final int activity_news=0x7f030020;
         public static final int activity_news_details=0x7f030021;
-        public static final int activity_notification_fragment=0x7f030022;
-        public static final int activity_results=0x7f030023;
-        public static final int activity_results_fragment=0x7f030024;
-        public static final int activity_sch_days=0x7f030025;
-        public static final int activity_scheduele_details=0x7f030026;
-        public static final int activity_scheduele_details_fragment=0x7f030027;
-        public static final int activity_scheduele_fragment=0x7f030028;
-        public static final int activity_slide=0x7f030029;
-        public static final int activity_tab_main=0x7f03002a;
-        public static final int activity_test_database=0x7f03002b;
-        public static final int activity_test_tabs=0x7f03002c;
-        public static final int activity_top_rated_fragment=0x7f03002d;
-        public static final int badge=0x7f03002e;
-        public static final int drawer_layout=0x7f03002f;
-        public static final int drawer_list_item=0x7f030030;
-        public static final int fragment_planet=0x7f030031;
-        public static final int list1=0x7f030032;
-        public static final int list2=0x7f030033;
-        public static final int list3=0x7f030034;
-        public static final int listitem=0x7f030035;
-        public static final int managertabs=0x7f030036;
-        public static final int news_item=0x7f030037;
-        public static final int results_item=0x7f030038;
-        public static final int scheduele_day_item=0x7f030039;
-        public static final int scheduele_detail_item=0x7f03003a;
-        public static final int settings=0x7f03003b;
-        public static final int simple_item_3=0x7f03003c;
-        public static final int simple_list_item_1=0x7f03003d;
-        public static final int simple_list_item_2=0x7f03003e;
-        public static final int slide=0x7f03003f;
-        public static final int support_simple_spinner_dropdown_item=0x7f030040;
-        public static final int test=0x7f030041;
-        public static final int testt=0x7f030042;
+        public static final int activity_news_fragment=0x7f030022;
+        public static final int activity_notification_fragment=0x7f030023;
+        public static final int activity_results=0x7f030024;
+        public static final int activity_results_fragment=0x7f030025;
+        public static final int activity_sch_days=0x7f030026;
+        public static final int activity_scheduele_details=0x7f030027;
+        public static final int activity_scheduele_details_fragment=0x7f030028;
+        public static final int activity_scheduele_fragment=0x7f030029;
+        public static final int activity_slide=0x7f03002a;
+        public static final int activity_tab_main=0x7f03002b;
+        public static final int activity_test_database=0x7f03002c;
+        public static final int activity_test_tabs=0x7f03002d;
+        public static final int activity_top_rated_fragment=0x7f03002e;
+        public static final int badge=0x7f03002f;
+        public static final int drawer_layout=0x7f030030;
+        public static final int drawer_list_item=0x7f030031;
+        public static final int fragment_planet=0x7f030032;
+        public static final int list1=0x7f030033;
+        public static final int list2=0x7f030034;
+        public static final int list3=0x7f030035;
+        public static final int listitem=0x7f030036;
+        public static final int managertabs=0x7f030037;
+        public static final int news_item=0x7f030038;
+        public static final int results_item=0x7f030039;
+        public static final int scheduele_day_item=0x7f03003a;
+        public static final int scheduele_detail_item=0x7f03003b;
+        public static final int settings=0x7f03003c;
+        public static final int simple_item_3=0x7f03003d;
+        public static final int simple_list_item_1=0x7f03003e;
+        public static final int simple_list_item_2=0x7f03003f;
+        public static final int slide=0x7f030040;
+        public static final int support_simple_spinner_dropdown_item=0x7f030041;
+        public static final int test=0x7f030042;
+        public static final int testt=0x7f030043;
     }
     public static final class menu {
         public static final int accounts=0x7f0e0000;
@@ -1441,27 +1442,27 @@ containing a value of this type.
         public static final int item6=0x7f0b0026;
         public static final int logout=0x7f0b001b;
         public static final int number=0x7f0b001e;
-        public static final int pref_default_display_name=0x7f0b003d;
-        public static final int pref_description_social_recommendations=0x7f0b003b;
+        public static final int pref_default_display_name=0x7f0b003e;
+        public static final int pref_description_social_recommendations=0x7f0b003c;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f0b003f;
+        public static final int pref_header_data_sync=0x7f0b0040;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f0b0039;
+        public static final int pref_header_general=0x7f0b003a;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f0b0042;
-        public static final int pref_ringtone_silent=0x7f0b0045;
-        public static final int pref_title_add_friends_to_messages=0x7f0b003e;
-        public static final int pref_title_display_name=0x7f0b003c;
-        public static final int pref_title_new_message_notifications=0x7f0b0043;
-        public static final int pref_title_ringtone=0x7f0b0044;
-        public static final int pref_title_social_recommendations=0x7f0b003a;
-        public static final int pref_title_sync_frequency=0x7f0b0040;
-        public static final int pref_title_system_sync_settings=0x7f0b0041;
-        public static final int pref_title_vibrate=0x7f0b0046;
+        public static final int pref_header_notifications=0x7f0b0043;
+        public static final int pref_ringtone_silent=0x7f0b0046;
+        public static final int pref_title_add_friends_to_messages=0x7f0b003f;
+        public static final int pref_title_display_name=0x7f0b003d;
+        public static final int pref_title_new_message_notifications=0x7f0b0044;
+        public static final int pref_title_ringtone=0x7f0b0045;
+        public static final int pref_title_social_recommendations=0x7f0b003b;
+        public static final int pref_title_sync_frequency=0x7f0b0041;
+        public static final int pref_title_system_sync_settings=0x7f0b0042;
+        public static final int pref_title_vibrate=0x7f0b0047;
         public static final int service_name=0x7f0b0012;
         public static final int title_activity_accounts=0x7f0b0027;
         public static final int title_activity_course_details=0x7f0b002e;
@@ -1472,6 +1473,7 @@ containing a value of this type.
         public static final int title_activity_morasalat=0x7f0b0029;
         public static final int title_activity_news=0x7f0b002f;
         public static final int title_activity_news_details=0x7f0b0030;
+        public static final int title_activity_news_fragment=0x7f0b0038;
         public static final int title_activity_notification_fragment=0x7f0b0032;
         public static final int title_activity_results=0x7f0b002b;
         public static final int title_activity_results_fragment=0x7f0b0035;
@@ -1479,7 +1481,7 @@ containing a value of this type.
         public static final int title_activity_scheduele_details=0x7f0b002d;
         public static final int title_activity_scheduele_details_fragment=0x7f0b0037;
         public static final int title_activity_scheduele_fragment=0x7f0b0036;
-        public static final int title_activity_settings=0x7f0b0038;
+        public static final int title_activity_settings=0x7f0b0039;
         public static final int title_activity_slide=0x7f0b001c;
         public static final int title_activity_tab_main=0x7f0b0031;
         public static final int title_activity_test_database=0x7f0b002a;

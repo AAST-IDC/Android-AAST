@@ -62,5 +62,6 @@
     <string name="title_activity_results_fragment">ResultsFragment</string>
     <string name="title_activity_scheduele_fragment">SchedueleFragment</string>
     <string name="title_activity_scheduele_details_fragment">SchedueleDetailsFragment</string>
+    <string name="title_activity_news_fragment">NewsFragment</string>
 
 </resources>

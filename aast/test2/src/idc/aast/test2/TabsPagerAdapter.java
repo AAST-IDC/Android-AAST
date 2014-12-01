@@ -22,7 +22,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
        else if(nw=="Notification")
     	   return new NotificationFragment();
        else if(nw=="Schedule")
-    	   return new NotificationFragment();
+    	   return new SchedueleFragment();
+       else if(nw=="News")
+    	   return new NewsFragment();
        else 
     	   return new GamesFragment();
 
@@ -34,5 +36,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
        // get item count - equal to number of tabs
        return tabs.size();
    }
+   @Override
+	public CharSequence getPageTitle(int position) {
+		return tabs.get(position);
+	}
 
 }

@@ -522,6 +522,7 @@ public class NotificationFragment extends Fragment {
 	            Bundle savedInstanceState) {
 	 
 		   View rootView = inflater.inflate(R.layout.activity_list, container, false);
+		   
 		   setHasOptionsMenu(true);
 	        return rootView;
 	    }

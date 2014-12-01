@@ -55,7 +55,7 @@ public class SchDays extends Activity {
 						Intent i=new Intent(SchDays.this,SchedueleDetails.class);
 						postition+=1;
 						i.putExtra("day_code",postition  + "");
-						 startActivity(i);
+						 startActivity(i); 
 						// TODO Auto-generated method stub
 						
 					}
