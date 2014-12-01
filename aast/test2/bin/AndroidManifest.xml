@@ -22,7 +22,7 @@
 
     <!--
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="idc.aast.test2.permission.C2D_MESSAGE"
@@ -37,7 +37,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
         <activity
-            android:name="idc.aast.Other.MainActivity"
+            android:name="idc.aast.edu.activities.Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,44 +59,27 @@
         </receiver>
 
         <activity
-            android:name="idc.aast.Other.ListActivity"
+            android:name="idc.aast.edu.activities.ListActivity"
             android:label="@string/title_activity_list"
             android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
+         
+     
+    
         <activity
-            android:name="idc.aast.Other.List_detail"
-            android:label="@string/title_activity_list_detail"
-            android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.Slide"
-            android:label="@string/title_activity_slide" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.SettingsActivity"
-            android:label="@string/title_activity_settings" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.TesttActivity"
-            android:label="@string/title_activity_testt" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.Accounts"
+            android:name="idc.aast.edu.activities.Accounts"
             android:label="@string/title_activity_accounts" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Morasalat"
             android:label="@string/title_activity_morasalat" >
         </activity>
+     
         <activity
-            android:name="idc.aast.Other.Test_database"
-            android:label="@string/title_activity_test_database" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.Results"
+            android:name="idc.aast.edu.activities.Results"
             android:label="@string/title_activity_results" >
         </activity>
 
@@ -127,28 +110,22 @@
             </intent-filter>
         </receiver>
 
+      
         <activity
-            android:name="idc.aast.Other.SchDays"
-            android:label="@string/title_activity_sch_days" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.SchedueleDetails"
+            android:name="idc.aast.edu.activities.SchedueleDetails"
             android:label="@string/title_activity_scheduele_details" >
         </activity>
         <activity
-            android:name="idc.aast.Other.CourseDetails"
+            android:name="idc.aast.edu.activities.CourseDetails"
             android:label="@string/title_activity_course_details" >
         </activity>
+ 
         <activity
-            android:name="idc.aast.Other.News"
-            android:label="@string/title_activity_news" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.NewsDetails"
+            android:name="idc.aast.edu.activities.NewsDetails"
             android:label="@string/title_activity_news_details" >
         </activity>
         <activity
-            android:name="idc.aast.Other.TabMain"
+            android:name="idc.aast.edu.activities.TabMain"
             android:label="@string/title_activity_tab_main" >
         </activity>
         <activity
@@ -159,23 +136,14 @@
             android:name="idc.aast.edu.fragments.GamesFragment"
             android:label="@string/title_activity_games_fragment" >
         </activity>
+     
+     
+  
+        <activity
+            android:name="idc.aast.edu.activities.Community"
+            android:label="@string/title_activity_community" >
+        </activity>
       
-        <activity
-            android:name="idc.aast.Other.ResultsFragment"
-            android:label="@string/title_activity_results_fragment" >
-        </activity>
-        <activity
-            android:name="idc.aast.edu.fragments.SchedueleFragment"
-            android:label="@string/title_activity_scheduele_fragment" >
-        </activity>
-        <activity
-            android:name="idc.aast.edu.fragments.SchedueleDetailsFragment"
-            android:label="@string/title_activity_scheduele_details_fragment" >
-        </activity>
-        <activity
-            android:name="idc.aast.Other.NewsFragment"
-            android:label="@string/title_activity_news_fragment" >
-        </activity>
     </application>
 
 </manifest>

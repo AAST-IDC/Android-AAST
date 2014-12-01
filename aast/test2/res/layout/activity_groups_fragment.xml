@@ -1,0 +1,23 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+
+ >
+      <ListView
+    
+    	android:id="@+id/Community_Groups_List22"
+   android:drawSelectorOnTop="true"
+    	android:layout_width="fill_parent"
+    	android:minHeight="200dp" 
+    	
+	    android:layout_height="0px"
+	    android:layout_weight="1"
+	    android:background="#E9E9E9"
+	    android:divider="#ffffff"
+	    android:dividerHeight="2dp"
+	   android:listSelector="@drawable/list_selector" 
+	 />
+
+</LinearLayout>

@@ -109,6 +109,9 @@ public class Login extends Activity {
 		else
 		{
 		
+//			edit.putString("username", "8101423");
+//			edit.putString("type", "1");
+			edit.commit();
 			String name = preferences1.getString("username", "noone");
 			String type = preferences1.getString("type", "noone");
 			

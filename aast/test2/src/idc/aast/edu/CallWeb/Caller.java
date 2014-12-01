@@ -51,6 +51,7 @@ public class Caller extends Thread {
 	public SharedPreferences preferences1;
 
 	public void run() {
+		
 		if (c.equals("main"))
 			// login webservice
 			try {

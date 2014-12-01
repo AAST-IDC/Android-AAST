@@ -72,7 +72,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				+ "Serial TEXT, " + "DateTime TEXT, " + "Read TEXT, "
 				+ "link TEXT, " + "sys_code TEXT, " + "sys_name TEXT, "
 				+ "user_name TEXT, " +
-
 				"user_type TEXT )";
 		String Create_account_table = "CREATE TABLE accounts ( "
 				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "account TEXT, "
