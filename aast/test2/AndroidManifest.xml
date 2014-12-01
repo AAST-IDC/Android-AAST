@@ -31,13 +31,13 @@
     <uses-permission android:name="idc.aast.test2.permission.C2D_MESSAGE" />
 
     <application
-        android:name="idc.aast.test2.application"
+        android:name="idc.aast.Other.application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher3"
         android:label="@string/app_name"
         android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
         <activity
-            android:name="idc.aast.test2.MainActivity"
+            android:name="idc.aast.Other.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +47,7 @@
         </activity>
 
         <receiver
-            android:name="idc.aast.test2.MyReceiver"
+            android:name="idc.aast.Other.IntentReciever"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
@@ -59,7 +59,7 @@
         </receiver>
 
         <activity
-            android:name="idc.aast.test2.ListActivity"
+            android:name="idc.aast.Other.ListActivity"
             android:label="@string/title_activity_list"
             android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
             <meta-data
@@ -67,36 +67,36 @@
                 android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
-            android:name="idc.aast.test2.List_detail"
+            android:name="idc.aast.Other.List_detail"
             android:label="@string/title_activity_list_detail"
             android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
         </activity>
         <activity
-            android:name="idc.aast.test2.Slide"
+            android:name="idc.aast.Other.Slide"
             android:label="@string/title_activity_slide" >
         </activity>
         <activity
-            android:name="idc.aast.test2.SettingsActivity"
+            android:name="idc.aast.Other.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name="idc.aast.test2.TesttActivity"
+            android:name="idc.aast.Other.TesttActivity"
             android:label="@string/title_activity_testt" >
         </activity>
         <activity
-            android:name="idc.aast.test2.Accounts"
+            android:name="idc.aast.Other.Accounts"
             android:label="@string/title_activity_accounts" >
         </activity>
         <activity
-            android:name="idc.aast.test2.Morasalat"
+            android:name="idc.aast.edu.activities.Morasalat"
             android:label="@string/title_activity_morasalat" >
         </activity>
         <activity
-            android:name="idc.aast.test2.Test_database"
+            android:name="idc.aast.Other.Test_database"
             android:label="@string/title_activity_test_database" >
         </activity>
         <activity
-            android:name="idc.aast.test2.Results"
+            android:name="idc.aast.Other.Results"
             android:label="@string/title_activity_results" >
         </activity>
 
@@ -120,7 +120,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="idc.aast.test2.MyCustomReceiver"
+            android:name="idc.aast.Other.ParseCustomReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="idc.aast.test2.UPDATE_STATUS" />
@@ -128,55 +128,52 @@
         </receiver>
 
         <activity
-            android:name="idc.aast.test2.SchDays"
+            android:name="idc.aast.Other.SchDays"
             android:label="@string/title_activity_sch_days" >
         </activity>
         <activity
-            android:name="idc.aast.test2.SchedueleDetails"
+            android:name="idc.aast.Other.SchedueleDetails"
             android:label="@string/title_activity_scheduele_details" >
         </activity>
         <activity
-            android:name="idc.aast.test2.CourseDetails"
+            android:name="idc.aast.Other.CourseDetails"
             android:label="@string/title_activity_course_details" >
         </activity>
         <activity
-            android:name="idc.aast.test2.News"
+            android:name="idc.aast.Other.News"
             android:label="@string/title_activity_news" >
         </activity>
         <activity
-            android:name="idc.aast.test2.NewsDetails"
+            android:name="idc.aast.Other.NewsDetails"
             android:label="@string/title_activity_news_details" >
         </activity>
         <activity
-            android:name="idc.aast.test2.TabMain"
+            android:name="idc.aast.Other.TabMain"
             android:label="@string/title_activity_tab_main" >
         </activity>
         <activity
-            android:name="idc.aast.test2.NotificationFragment"
+            android:name="idc.aast.edu.fragments.NotificationFragment"
             android:label="@string/title_activity_notification_fragment" >
         </activity>
         <activity
-            android:name="idc.aast.test2.GamesFragment"
+            android:name="idc.aast.edu.fragments.GamesFragment"
             android:label="@string/title_activity_games_fragment" >
         </activity>
+      
         <activity
-            android:name="idc.aast.test2.TopRatedFragment"
-            android:label="@string/title_activity_top_rated_fragment" >
-        </activity>
-        <activity
-            android:name="idc.aast.test2.ResultsFragment"
+            android:name="idc.aast.Other.ResultsFragment"
             android:label="@string/title_activity_results_fragment" >
         </activity>
         <activity
-            android:name="idc.aast.test2.SchedueleFragment"
+            android:name="idc.aast.edu.fragments.SchedueleFragment"
             android:label="@string/title_activity_scheduele_fragment" >
         </activity>
         <activity
-            android:name="idc.aast.test2.SchedueleDetailsFragment"
+            android:name="idc.aast.edu.fragments.SchedueleDetailsFragment"
             android:label="@string/title_activity_scheduele_details_fragment" >
         </activity>
         <activity
-            android:name="idc.aast.test2.NewsFragment"
+            android:name="idc.aast.Other.NewsFragment"
             android:label="@string/title_activity_news_fragment" >
         </activity>
     </application>

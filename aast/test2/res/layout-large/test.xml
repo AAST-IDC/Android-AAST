@@ -92,7 +92,7 @@
     </LinearLayout>
 
  
-        <idc.aast.test2.VerticalTextView
+        <idc.aast.Other.VerticalTextView
         android:id="@+id/cat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
