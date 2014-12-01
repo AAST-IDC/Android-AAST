@@ -6,7 +6,7 @@ package idc.aast.edu.activities;
 
 import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.CallWeb.Caller;
-import idc.aast.edu.adapters.adapter_morasalat;
+import idc.aast.edu.adapters.MorasalatAdapter;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -147,7 +147,7 @@ public class Morasalat extends Activity implements TabListener {
 		arr3.add(count.substring(n1 + 1, n2));
 		arr3.add(count.substring(n2 + 1, n33));
 		arr3.add(count.substring(n33 + 1));
-		adapter_morasalat adap = new adapter_morasalat(this, arr2, arr3);
+		MorasalatAdapter adap = new MorasalatAdapter(this, arr2, arr3);
 	
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
@@ -245,7 +245,7 @@ public class Morasalat extends Activity implements TabListener {
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					Morasalat.this);
 			builder.setTitle("About")
-					.setMessage("Build number is" + MainActivity.version)
+					.setMessage("Build number is" + Login.version)
 					.setNegativeButton("Ok", null);
 			AlertDialog alert = builder.create();
 			alert.show();

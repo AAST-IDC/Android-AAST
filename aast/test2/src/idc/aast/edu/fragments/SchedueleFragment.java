@@ -1,7 +1,7 @@
 package idc.aast.edu.fragments;
 
 import idc.aast.edu.activities.SchedueleDetails;
-import idc.aast.edu.adapters.adapter_scheduele;
+import idc.aast.edu.adapters.SchedueleAdapters;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.scheduele_slot;
 import idc.aast.test2.R;
@@ -32,7 +32,7 @@ public class SchedueleFragment extends Fragment {
 	static String[] alldays;
 	/** The rslt. */
 	
-	static adapter_scheduele adap;
+	static SchedueleAdapters adap;
 	/** The arr2. */
 	static ArrayList<String> arr2 ; // used to have the name of the links
 	static Student student;
@@ -75,7 +75,7 @@ public class SchedueleFragment extends Fragment {
 						
 					}
 		});
-		 adap = new  adapter_scheduele(getActivity(), sch);
+		 adap = new  SchedueleAdapters(getActivity(), sch);
 			myList.setAdapter(adap);
 			adap.notifyDataSetChanged();
 		super.onStart();

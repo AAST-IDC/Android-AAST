@@ -3,7 +3,7 @@
  */
 package idc.aast.edu.CallWeb;
 
-import idc.aast.edu.activities.MainActivity;
+import idc.aast.edu.activities.Login;
 
 import org.ksoap2.SoapEnvelope;
 
@@ -283,7 +283,7 @@ public class CallSoap {
 		PropertyInfo pi = new PropertyInfo();
 
 		pi.setName("versionNum");
-		pi.setValue(MainActivity.version);
+		pi.setValue(Login.version);
 		pi.setType(Integer.class);
 		request.addProperty(pi);
 

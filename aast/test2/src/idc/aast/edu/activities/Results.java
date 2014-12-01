@@ -1,7 +1,7 @@
 package idc.aast.edu.activities;
 
 import idc.aast.Other.MySQLiteHelper;
-import idc.aast.edu.adapters.adapter_results;
+import idc.aast.edu.adapters.ResultsAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.result_item;
 import idc.aast.test2.R;
@@ -52,7 +52,7 @@ public class Results extends Activity implements OnItemSelectedListener{
 	static String[] all_terms;
 	/** The rslt. */
 	static String rslt;
-	static adapter_results adap;
+	static ResultsAdapter adap;
 	/** The arr2. */
 	static ArrayList<String> arr2 ; // used to have the name of the links
 	static Student student;
@@ -104,7 +104,7 @@ public class Results extends Activity implements OnItemSelectedListener{
 	        spinner.setOnItemSelectedListener(this);
 
 		 res = student.get_results();
-		 adap = new adapter_results(this, res, res);
+		 adap = new ResultsAdapter(this, res, res);
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
 	}
@@ -180,7 +180,7 @@ public class Results extends Activity implements OnItemSelectedListener{
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					Results.this);
 			builder.setTitle("About")
-					.setMessage("Build number is" + MainActivity.version)
+					.setMessage("Build number is" + Login.version)
 					.setNegativeButton("Ok", null);
 			AlertDialog alert = builder.create();
 			alert.show();

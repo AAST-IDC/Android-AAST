@@ -1,7 +1,7 @@
 package idc.aast.edu.fragments;
 
 import idc.aast.edu.activities.NewsDetails;
-import idc.aast.edu.adapters.adapter_news;
+import idc.aast.edu.adapters.NewsAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.news_item;
 import idc.aast.test2.R;
@@ -30,7 +30,7 @@ public class NewsFragment extends Fragment {
 	static String[] alldays;
 	/** The rslt. */
 	
-	static adapter_news adap;
+	static NewsAdapter adap;
 	/** The arr2. */
 	static ArrayList<String> arr2 ; // used to have the name of the links
 	static Student student;
@@ -67,7 +67,7 @@ public class NewsFragment extends Fragment {
 //						
 					}
 		});
-		 adap = new  adapter_news(getActivity(), news);
+		 adap = new  NewsAdapter(getActivity(), news);
 			myList.setAdapter(adap);
 			adap.notifyDataSetChanged();
 		super.onStart();

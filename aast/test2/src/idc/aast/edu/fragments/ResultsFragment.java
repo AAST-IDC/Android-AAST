@@ -1,6 +1,6 @@
 package idc.aast.edu.fragments;
 
-import idc.aast.edu.adapters.adapter_results;
+import idc.aast.edu.adapters.ResultsAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.result_item;
 import idc.aast.test2.R;
@@ -40,7 +40,7 @@ public class ResultsFragment extends Fragment implements OnItemSelectedListener 
 	static String[] all_terms;
 	/** The rslt. */
 	static String rslt;
-	static adapter_results adap;
+	static ResultsAdapter adap;
 	/** The arr2. */
 	static ArrayList<String> arr2; // used to have the name of the links
 	static Student student;
@@ -70,7 +70,7 @@ public class ResultsFragment extends Fragment implements OnItemSelectedListener 
 	        spinner.setOnItemSelectedListener(this);
 
 		 res = student.get_results();
-		 adap = new adapter_results(getActivity(), res, res);
+		 adap = new ResultsAdapter(getActivity(), res, res);
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
 		super.onStart();

@@ -6,9 +6,9 @@ import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.CallWeb.Caller;
 import idc.aast.edu.activities.Accounts;
 import idc.aast.edu.activities.ListActivity;
-import idc.aast.edu.activities.MainActivity;
-import idc.aast.edu.adapters.ListViewAdapter2;
-import idc.aast.edu.adapters.MyAdapter;
+import idc.aast.edu.activities.Login;
+import idc.aast.edu.adapters.NotificationAdapter;
+import idc.aast.edu.adapters.DrawerAdapter;
 import idc.aast.edu.classes.Message;
 import idc.aast.test2.R;
 
@@ -69,12 +69,12 @@ public class NotificationFragment extends Fragment {
 
 	/** The lis2t. */
 	static ArrayList<String> lis2t;
-	static MyAdapter s;
+	static DrawerAdapter s;
 	/** The list. */
 	static ListView list; // Current list
 
 	/** The lview adapter. */
-	static ListViewAdapter2 lviewAdapter; // List Custom adapter
+	static NotificationAdapter lviewAdapter; // List Custom adapter
 
 	/** The arr. */
 	static ArrayList<String> arr; // contains list items
@@ -155,7 +155,7 @@ public class NotificationFragment extends Fragment {
 			name = preferences1.getString("username", "noone");
 			type = preferences1.getString("type", "noone");
 
-			PushService.subscribe(context.getApplicationContext(), "a"+name, MainActivity.class);
+			PushService.subscribe(context.getApplicationContext(), "a"+name, Login.class);
 		
 			mDrawerList = (ListView) context.findViewById(R.id.left_drawer);
 		
@@ -165,7 +165,7 @@ public class NotificationFragment extends Fragment {
 			arr5=db.getSysNamesCounts(name, type);
 			//mPlanetTitles = arr4.toArray(new String[0]);
 			// Set the adapter for the list view
-			 s = new MyAdapter(context, arr4, arr5);
+			 s = new DrawerAdapter(context, arr4, arr5);
 		
 			mDrawerList.setAdapter(s);
 			// Set the list's	 click listener
@@ -235,7 +235,7 @@ public class NotificationFragment extends Fragment {
 			list.requestFocus();
 			 db = new MySQLiteHelper(context.getApplicationContext());
 			msgs=db.getall(name, type,filter);
-			lviewAdapter = new ListViewAdapter2(context, msgs); // initialize the
+			lviewAdapter = new NotificationAdapter(context, msgs); // initialize the
 																	// list adater
 			//TextView v=(TextView) context.findViewById(R.id.actionbar_notifcation_textview);
 			//v.setText(""+db.getmessagecount(name, type, filter));
@@ -592,7 +592,7 @@ public class NotificationFragment extends Fragment {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());
 				builder.setTitle("About")
-						.setMessage("Build number is" + MainActivity.version)
+						.setMessage("Build number is" + Login.version)
 						.setNegativeButton("Ok", null);
 				AlertDialog alert = builder.create();
 				alert.show();

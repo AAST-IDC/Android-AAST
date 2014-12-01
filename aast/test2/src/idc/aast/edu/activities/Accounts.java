@@ -7,7 +7,7 @@ import com.parse.PushService;
 
 import idc.aast.Other.MySQLiteHelper;
 import idc.aast.Other.helper;
-import idc.aast.edu.adapters.adapter_accounts;
+import idc.aast.edu.adapters.AccountsAdapter;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -184,7 +184,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 		ListView listView = (ListView) findViewById(R.id.listacc);
 		MySQLiteHelper db = new MySQLiteHelper(this);
 		arr2=db.getAccountscon();
-		adapter_accounts adapter = new adapter_accounts(this, arr2, name);
+		AccountsAdapter adapter = new AccountsAdapter(this, arr2, name);
 	//	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 		//		android.R.layout.simple_list_item_2, android.R.id.text1, arr);
 		listView.setAdapter(adapter);
@@ -200,7 +200,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 				e.putBoolean("ig", true);
 				e.commit();
 				Intent i = new Intent(getApplicationContext(),
-						MainActivity.class);
+						Login.class);
 				i.putExtra("only", "ok");
 				startActivity(i);
 
@@ -269,7 +269,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 				if (arg0.getPosition() == 0) {
 
 					Intent i = new Intent(getApplicationContext(),
-							List_detail.class);
+							LinksList.class);
 					finish();
 					startActivity(i);
 					

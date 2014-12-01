@@ -13,8 +13,8 @@ import com.parse.PushService;
 
 import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.CallWeb.Caller;
-import idc.aast.edu.adapters.ListViewAdapter2;
-import idc.aast.edu.adapters.MyAdapter;
+import idc.aast.edu.adapters.NotificationAdapter;
+import idc.aast.edu.adapters.DrawerAdapter;
 import idc.aast.edu.classes.Message;
 import idc.aast.test2.R;
 
@@ -102,12 +102,12 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 
 	/** The lis2t. */
 	static ArrayList<String> lis2t;
-	static MyAdapter s;
+	static DrawerAdapter s;
 	/** The list. */
 	static ListView list; // Current list
 
 	/** The lview adapter. */
-	public static ListViewAdapter2 lviewAdapter; // List Custom adapter
+	public static NotificationAdapter lviewAdapter; // List Custom adapter
 
 	/** The arr. */
 	public static ArrayList<String> arr; // contains list items
@@ -291,7 +291,7 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 		name = preferences1.getString("username", "noone");
 		type = preferences1.getString("type", "noone");
 
-		PushService.subscribe(getApplicationContext(), "a"+name, MainActivity.class);
+		PushService.subscribe(getApplicationContext(), "a"+name, Login.class);
 	
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 	
@@ -301,7 +301,7 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 		arr5=db.getSysNamesCounts(name, type);
 		//mPlanetTitles = arr4.toArray(new String[0]);
 		// Set the adapter for the list view
-		 s = new MyAdapter(this, arr4, arr5);
+		 s = new DrawerAdapter(this, arr4, arr5);
 	
 		mDrawerList.setAdapter(s);
 		// Set the list's	 click listener
@@ -377,7 +377,7 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 		list.requestFocus();
 		 db = new MySQLiteHelper(getApplicationContext());
 		msgs=db.getall(name, type,getFilter());
-		lviewAdapter = new ListViewAdapter2(this, msgs); // initialize the
+		lviewAdapter = new NotificationAdapter(this, msgs); // initialize the
 																// list adater
 		TextView v=(TextView) context.findViewById(R.id.actionbar_notifcation_textview);
 		v.setText(""+db.getmessagecount(name, type, getFilter()));
@@ -774,7 +774,7 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					ListActivity.this);
 			builder.setTitle("About")
-					.setMessage("Build number is" + MainActivity.version)
+					.setMessage("Build number is" + Login.version)
 					.setNegativeButton("Ok", null);
 			AlertDialog alert = builder.create();
 			alert.show();
@@ -1012,7 +1012,7 @@ public class ListActivity extends ActionBarActivity implements TabListener {
 			if (arg0.getPosition() == 0) {
 
 				Intent i = new Intent(getApplicationContext(),
-						List_detail.class);
+						LinksList.class);
 				finish();
 				startActivity(i);
 				

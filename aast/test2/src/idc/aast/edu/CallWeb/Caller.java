@@ -5,8 +5,8 @@ package idc.aast.edu.CallWeb;
 
 import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.activities.ListActivity;
-import idc.aast.edu.activities.List_detail;
-import idc.aast.edu.activities.MainActivity;
+import idc.aast.edu.activities.LinksList;
+import idc.aast.edu.activities.Login;
 import idc.aast.edu.activities.Morasalat;
 import idc.aast.edu.classes.news_item;
 import idc.aast.edu.classes.result_item;
@@ -56,9 +56,9 @@ public class Caller extends Thread {
 			try {
 				cs = new CallSoap();
 				String resp = cs.Call(a, b);
-				MainActivity.rslt = resp;
+				Login.rslt = resp;
 			} catch (Exception ex) {
-				MainActivity.rslt = ex.toString();
+				Login.rslt = ex.toString();
 
 			}
 		else if (c.equals("amr"))
@@ -88,7 +88,7 @@ public class Caller extends Thread {
 
 				}
 			} catch (Exception ex2) {
-				MainActivity.rslt = ex2.toString();
+				Login.rslt = ex2.toString();
 			}
 		else if (c.equals("read"))
 			// mark as read webservice
@@ -97,7 +97,7 @@ public class Caller extends Thread {
 				cs.read(a, b, d);
 
 			} catch (Exception ex) {
-				MainActivity.rslt = ex.toString();
+				Login.rslt = ex.toString();
 
 			}
 		else if (c.equals("unread"))
@@ -107,7 +107,7 @@ public class Caller extends Thread {
 			 cs.unread(a, b,d);
 
 			} catch (Exception ex) {
-				MainActivity.rslt = ex.toString();
+				Login.rslt = ex.toString();
 
 			}
 		else if (c.equals("remove"))
@@ -117,7 +117,7 @@ public class Caller extends Thread {
 			 cs.remove(a, b,d);
 
 			} catch (Exception ex) {
-				MainActivity.rslt = ex.toString();
+				Login.rslt = ex.toString();
 
 			}
 		else if (c.equals("getall"))
@@ -125,9 +125,9 @@ public class Caller extends Thread {
 			try {
 				cs = new CallSoap();
 		cs.getall(a, b);
-				MainActivity.rslt = "ssa";
+				Login.rslt = "ssa";
 			} catch (Exception ex) {
-				MainActivity.rslt = "ssa";
+				Login.rslt = "ssa";
 
 			}
 		else if (c.equals("gettype"))
@@ -135,9 +135,9 @@ public class Caller extends Thread {
 			try {
 				cs = new CallSoap();
 			 cs.GetType(a);
-				MainActivity.rslt = "ssa";
+				Login.rslt = "ssa";
 			} catch (Exception ex) {
-				MainActivity.rslt = "ssa";
+				Login.rslt = "ssa";
 
 			}
 		else if (c.equals("calls"))
@@ -145,9 +145,9 @@ public class Caller extends Thread {
 			try {
 				cs = new CallSoap();
 				 cs.Calls(a, b);
-				MainActivity.rslt = "ssa";
+				Login.rslt = "ssa";
 			} catch (Exception ex) {
-				MainActivity.rslt = "ssa";
+				Login.rslt = "ssa";
 
 			}
 			else if (c.equals("getlinks_morasalat"))
@@ -298,7 +298,7 @@ public class Caller extends Thread {
 				cs = new CallSoap();
 				rslt = cs.getsettings(a, b);
 
-				List_detail.count = "0^0^0^0"; // initialize the count
+				LinksList.count = "0^0^0^0"; // initialize the count
 
 				// wait for the webservice to return the result
 				while (rslt == "START") {
@@ -318,7 +318,7 @@ public class Caller extends Thread {
 					// in case of connection it will save the settings data for
 					// further use
 					Editor edit3 = preferences1.edit();
-					MainActivity.rslt = rslt;
+					Login.rslt = rslt;
 					edit3.putString("settpref", rslt);
 					edit3.commit();
 				}

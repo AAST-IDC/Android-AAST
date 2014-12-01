@@ -1,6 +1,6 @@
 package idc.aast.edu.activities;
 
-import idc.aast.edu.adapters.adapter_scheduele_detail;
+import idc.aast.edu.adapters.SchedueleDetailAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.scheduele_slot;
 import idc.aast.test2.R;
@@ -29,7 +29,7 @@ public class SchedueleDetails extends Activity {
 	static String[] alldays;
 	/** The rslt. */
 
-	static adapter_scheduele_detail adap;
+	static SchedueleDetailAdapter adap;
 	/** The arr2. */
 	static ArrayList<String> arr2; // used to have the name of the links
 	static Student student;
@@ -82,7 +82,7 @@ public class SchedueleDetails extends Activity {
 			}
 		});
 
-		adap = new adapter_scheduele_detail(this, sch);
+		adap = new SchedueleDetailAdapter(this, sch);
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
 
