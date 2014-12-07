@@ -2,6 +2,7 @@ package idc.aast.edu.fragments;
 
 import idc.aast.edu.activities.SchedueleDetails;
 import idc.aast.edu.adapters.SchedueleAdapters;
+import idc.aast.edu.adapters.TabsPagerAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.scheduele_slot;
 import idc.aast.test2.R;
@@ -16,6 +17,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -69,8 +73,7 @@ public class SchedueleFragment extends Fragment {
 						i.putExtra("day_code",postition  + "");
 						 startActivity(i);
 						 
-						 
-						 
+						 // getFragmentManager().beginTransaction().replace(R.id.fragment_mainLayout, new GamesFragment()).commit();
 						// TODO Auto-generated method stub
 						
 					}
@@ -80,6 +83,7 @@ public class SchedueleFragment extends Fragment {
 			adap.notifyDataSetChanged();
 		super.onStart();
 	}
+	
 	  @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) {

@@ -3,7 +3,6 @@
  */
 package idc.aast.edu.CallWeb;
 
-import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.activities.ListActivity;
 import idc.aast.edu.activities.LinksList;
 import idc.aast.edu.activities.Login;
@@ -11,6 +10,7 @@ import idc.aast.edu.activities.Morasalat;
 import idc.aast.edu.classes.news_item;
 import idc.aast.edu.classes.result_item;
 import idc.aast.edu.classes.scheduele_slot;
+import idc.aast.edu.database.MySQLiteHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

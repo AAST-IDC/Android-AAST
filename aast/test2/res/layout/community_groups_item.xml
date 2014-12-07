@@ -7,26 +7,15 @@
     <TextView
         android:id="@+id/Community_group_item_text"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:paddingLeft="6dip"
         android:text="saas"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <TextView
-        android:id="@+id/news_des2c"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-          android:layout_weight="0.6"
-          android:lines="2"
-        android:gravity="center_vertical"
-        android:minHeight="?android:attr/listPreferredItemHeight"
-        android:paddingLeft="6dip"
-         android:ellipsize="end"
-        android:text="saas"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     
 
 </LinearLayout>

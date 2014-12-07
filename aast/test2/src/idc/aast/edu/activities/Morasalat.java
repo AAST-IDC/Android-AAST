@@ -4,9 +4,9 @@
 package idc.aast.edu.activities;
 
 
-import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.CallWeb.Caller;
 import idc.aast.edu.adapters.MorasalatAdapter;
+import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;

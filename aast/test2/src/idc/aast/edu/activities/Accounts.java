@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.parse.PushService;
 
-import idc.aast.Other.MySQLiteHelper;
-import idc.aast.Other.helper;
 import idc.aast.edu.adapters.AccountsAdapter;
+import idc.aast.edu.database.MySQLiteHelper;
+import idc.aast.edu.database.helper;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -87,7 +87,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 				edit.commit();
 				finish();
 				overridePendingTransition(0, 0);
-				startActivity(intent);
+				//startActivity(intent);
 			}
 			else
 			{
@@ -110,7 +110,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 			
 			finish();
 			overridePendingTransition(0, 0);
-			startActivity(intent);
+			//startActivity(intent);
 			}
 			
 		}
@@ -233,7 +233,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 				Intent i = new Intent(getApplicationContext(),
 						ListActivity.class);
 				finish();
-				startActivity(i);
+				//startActivity(i);
 				
 				// ListView Clicked item value
 
@@ -271,12 +271,12 @@ public class Accounts extends ActionBarActivity implements TabListener {
 					Intent i = new Intent(getApplicationContext(),
 							LinksList.class);
 					finish();
-					startActivity(i);
+				//	startActivity(i);
 					
 				} else if (arg0.getPosition() == 1) {
 					Intent i = new Intent(getApplicationContext(),
 							ListActivity.class);
-					startActivity(i);
+					//startActivity(i);
 					finish();
 				} else if (arg0.getPosition() == 2) {
 

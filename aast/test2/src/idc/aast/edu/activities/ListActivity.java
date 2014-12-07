@@ -11,11 +11,11 @@ import com.parse.ParseInstallation;
 import com.parse.PushService;
 
 
-import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.CallWeb.Caller;
 import idc.aast.edu.adapters.NotificationAdapter;
 import idc.aast.edu.adapters.DrawerAdapter;
 import idc.aast.edu.classes.Message;
+import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.test2.R;
 
 import idc.aast.test2.R.id;

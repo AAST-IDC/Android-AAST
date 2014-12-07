@@ -15,17 +15,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class CommunityTabAdapter extends FragmentPagerAdapter {
 
+	
 	  public CommunityTabAdapter(FragmentManager fm) {
 		  
 		super(fm);
 		// TODO Auto-generated constructor stub
 	}
 
-	public static ArrayList<String> tabs = new ArrayList<String>();
+		private String[] tabss = {"Groups"};
 
 	@Override
 	public Fragment getItem(int index) {
-		 String nw = tabs.get(index);
+		 String nw = tabss[index];
 	       if(nw=="Groups")
 	    	   return new GroupsFragment();
 	       else if(nw=="Notifications")
@@ -43,11 +44,11 @@ public class CommunityTabAdapter extends FragmentPagerAdapter {
 	  @Override
 	   public int getCount() {
 	       // get item count - equal to number of tabs
-	       return tabs.size();
+	       return tabss.length;
 	   }
 	   @Override
 		public CharSequence getPageTitle(int position) {
-			return tabs.get(position);
+			return tabss[position];
 		}
 
 }

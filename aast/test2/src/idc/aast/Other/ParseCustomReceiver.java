@@ -1,6 +1,7 @@
 package idc.aast.Other;
 
 import idc.aast.edu.classes.Message;
+import idc.aast.edu.database.MySQLiteHelper;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;

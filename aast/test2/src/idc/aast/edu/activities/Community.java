@@ -2,8 +2,9 @@ package idc.aast.edu.activities;
 
 import java.util.ArrayList;
 
-import idc.aast.Other.TabsPagerAdapter;
 import idc.aast.edu.adapters.CommunityTabAdapter;
+import idc.aast.edu.adapters.TabsPagerAdapter;
+
 import idc.aast.test2.R;
 import idc.aast.test2.R.layout;
 import idc.aast.test2.R.menu;
@@ -25,17 +26,15 @@ import android.view.Menu;
 	private CommunityTabAdapter mAdapter;
 	private ActionBar actionBar;
 	// Tab titles
-	private ArrayList<String> tabss = new ArrayList<String>();
+	private String[] tabss = {"Groups"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_community);
 		
 	
-		tabss.add("Groups");
 
-		tabss.add("Notifications");
-		CommunityTabAdapter.tabs.addAll(tabss);
+
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.page22r);
         actionBar = getActionBar();
@@ -102,5 +101,6 @@ import android.view.Menu;
 		getMenuInflater().inflate(R.menu.list, menu);
 		return true;
 	}
+	
 
 }

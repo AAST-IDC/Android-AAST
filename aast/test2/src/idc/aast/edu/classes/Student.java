@@ -3,7 +3,7 @@
  */
 package idc.aast.edu.classes;
 
-import idc.aast.Other.MySQLiteHelper;
+import idc.aast.edu.database.MySQLiteHelper;
 
 import java.util.ArrayList;
 import java.util.List;

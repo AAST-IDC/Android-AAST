@@ -39,6 +39,36 @@ public class CommunityGroupAdapter extends BaseAdapter {
 	 }
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
+		
+		if(position == 3)
+		{
+			ViewHolder holder;
+			LayoutInflater inflater =  context.getLayoutInflater();
+		
+			if (convertView == null)
+			{
+				convertView = inflater.inflate(R.layout.news_item, null);
+				holder = new ViewHolder();
+				holder.title = (TextView) convertView.findViewById(R.id.news_title);
+			//	holder.desc = (TextView) convertView.findViewById(R.id.news_desc);
+				convertView.setTag(holder);
+
+			}
+			else
+			{
+				holder = (ViewHolder) convertView.getTag();
+			}
+			
+			Group n = us.get(position);
+			holder.title.setText(n.group_name);
+			//holder.desc.setText(n.desc);
+			
+			// TODO Auto-generated method stub
+			return convertView;
+		
+		}
+		else
+		{
 		ViewHolder holder;
 		LayoutInflater inflater =  context.getLayoutInflater();
 	
@@ -62,6 +92,7 @@ public class CommunityGroupAdapter extends BaseAdapter {
 		
 		// TODO Auto-generated method stub
 		return convertView;
+		}
 	}
 	@Override
 	public int getCount() {

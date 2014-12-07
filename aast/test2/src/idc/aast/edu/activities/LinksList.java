@@ -3,8 +3,8 @@
  */
 package idc.aast.edu.activities;
 
-import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.adapters.LinksAdapter;
+import idc.aast.edu.database.MySQLiteHelper;
 
 import idc.aast.test2.R;
 

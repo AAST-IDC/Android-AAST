@@ -1,9 +1,9 @@
 package idc.aast.edu.activities;
 
-import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.adapters.ResultsAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.result_item;
+import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;

@@ -3,9 +3,12 @@
  */
 package idc.aast.edu.activities;
 
-import idc.aast.Other.MySQLiteHelper;
-import idc.aast.Other.helper;
 import idc.aast.edu.CallWeb.Caller;
+import idc.aast.edu.database.MySQLiteHelper;
+import idc.aast.edu.database.helper;
+import idc.aast.edu.webservice.STDWEBIServiceEvents;
+import idc.aast.edu.webservice.STDWEBOperationResult;
+import idc.aast.edu.webservice.STDWEBService1Soap;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -13,10 +16,7 @@ import idc.aast.test2.R.menu;
 
 import java.util.ArrayList;
 
-
 import com.bugsense.trace.BugSenseHandler;
-
-
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -46,15 +46,13 @@ import com.google.analytics.tracking.android.GoogleAnalytics;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * This is the class for that have the login activity and also retrieve the
  * basic preference from the web service
  */
 @TargetApi(8)
-public class Login extends Activity { 
+public class Login extends Activity {
 
 	/** The clos. */
 	static Boolean clos = false;
@@ -71,18 +69,18 @@ public class Login extends Activity {
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	  public void onStart() {
-	    super.onStart();
+	public void onStart() {
+		super.onStart();
 
-	
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
 	@Override
-	  public void onStop() {
-	    super.onStop();
+	public void onStop() {
+		super.onStop();
 
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,71 +90,82 @@ public class Login extends Activity {
 
 		MySQLiteHelper db = new MySQLiteHelper(this);
 
-		int nacc= db.getAccountsCount();
+		int nacc = db.getAccountsCount();
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
-		
+
 		Editor edit = preferences1.edit();
-		if(nacc==0)
-		{
-			
-			
-		}
-		else if(preferences1.getString("nine", "yes").equals("no"))
-		{
-			edit.putString("nine","yes");
+		if (nacc == 0) {
+
+		} else if (preferences1.getString("nine", "yes").equals("no")) {
+			edit.putString("nine", "yes");
 			edit.commit();
-		}
-		else
-		{
-		
-//			edit.putString("username", "8101423");
-//			edit.putString("type", "1");
+		} else {
+
+			// edit.putString("username", "8101423");
+			// edit.putString("type", "1");
 			edit.commit();
 			String name = preferences1.getString("username", "noone");
 			String type = preferences1.getString("type", "noone");
-			
-			edit.putString("login", "ok");
-			ArrayList<String> accarr =db.getAccountscon();
-			if(!accarr.contains(type+name))
-			{
-				name=accarr.get(0).substring(1);
-				type=accarr.get(0).substring(0,1);
-			}
-			Tracker t = GoogleAnalytics.getInstance(getApplicationContext()).getTracker("UA-51484481-1");
-			 t.set("&uid", name);
-			 t.send(MapBuilder
-				      .createEvent("UX",       // Event category (required)
-				                   "Sign In",  // Event action (required)
-				                   null,       // Event label
-				                   null)       // Event value
-				      .build());
 
-	//		ContentValues cv = new ContentValues();
-		//	cv.put("package", getPackageName());
-			// Name of your activity declared in the manifest as android.intent.action.MAIN.
+			edit.putString("login", "ok");
+			ArrayList<String> accarr = db.getAccountscon();
+			if (!accarr.contains(type + name)) {
+				name = accarr.get(0).substring(1);
+				type = accarr.get(0).substring(0, 1);
+			}
+			Tracker t = GoogleAnalytics.getInstance(getApplicationContext())
+					.getTracker("UA-51484481-1");
+			t.set("&uid", name);
+			t.send(MapBuilder.createEvent("UX", // Event category (required)
+					"Sign In", // Event action (required)
+					null, // Event label
+					null) // Event value
+					.build());
+
+			// ContentValues cv = new ContentValues();
+			// cv.put("package", getPackageName());
+			// Name of your activity declared in the manifest as
+			// android.intent.action.MAIN.
 			// Must be fully qualified name as shown below
-		//	cv.put("class", "com.example.test2.MainActivity");
-		//	cv.put("badgecount", db.getmessagecount(name, type, "")); // integer count you want to display
+			// cv.put("class", "com.example.test2.MainActivity");
+			// cv.put("badgecount", db.getmessagecount(name, type, "")); //
+			// integer count you want to display
 
 			// Execute insert
-			//getContentResolver().insert(Uri.parse("content://com.sec.badge/apps"), cv);
-		
-				 LongOperation lo= new LongOperation();
-				 lo.con=this;
-				 lo.execute(new String[]{name,type});
-				 
-		
+			// getContentResolver().insert(Uri.parse("content://com.sec.badge/apps"),
+			// cv);
+
+			LongOperation lo = new LongOperation();
+			lo.con = this;
+			lo.execute(new String[] { name, type });
+
 			finish();
 			// open the list activity activity
-		
-			Intent i = new Intent(getApplicationContext(), TabMain.class);
- 
-			startActivity(i);
+
+			Intent i = new Intent(getApplicationContext(), Community.class);
+			STDWEBService1Soap ws = new STDWEBService1Soap(
+					new STDWEBIServiceEvents() {
+
+						@Override
+						public void Starting() {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void Completed(STDWEBOperationResult result) {
+							// TODO Auto-generated method stub
+							String res = (String) result.Result;
+							res = res + "";
+						}
+					});
 			
-		}  
-		
+			AsyncTask task = ws.check_launchAsync();
 		
 
+			startActivity(i);
+
+		}
 
 		setContentView(R.layout.activity_main);
 
@@ -165,214 +174,236 @@ public class Login extends Activity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		
+
 		super.onResume();
 		// get the user preference
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 
 		Editor edit1 = preferences1.edit();
- 
+
 		edit1.commit();
 
 		// get the login buttom view
 		Button b1 = (Button) findViewById(R.id.button1);
 		final AlertDialog ad = new AlertDialog.Builder(this).create();
 		// use this to start and trigger a service
-// Start the back
-															// ground service
+		// Start the back
+		// ground service
 
 		// add listener to the login button
 		b1.setOnClickListener(new OnClickListener() {
 
-			@SuppressLint("NewApi") @Override
+			@SuppressLint("NewApi")
+			@Override
 			// on login button click
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				
-				if(!helper.isInternetAvailable())
-				{
+
+				if (!helper.isInternetAvailable()) {
 					if (android.os.Build.VERSION.SDK_INT > 9) {
-					    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-					    StrictMode.setThreadPolicy(policy);
+						StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+								.permitAll().build();
+						StrictMode.setThreadPolicy(policy);
 					}
-					Toast.makeText(getApplicationContext(), "No Internet Connection cannot login",
-							   Toast.LENGTH_LONG).show();
-					
+					Toast.makeText(getApplicationContext(),
+							"No Internet Connection cannot login",
+							Toast.LENGTH_LONG).show();
+
 				}
-				
+
 				else
-					
+
 				{
-				try {
-					EditText ed1 = (EditText) findViewById(R.id.editText1); // get
-																			// the
-																			// username
-																			// view
-					EditText ed2 = (EditText) findViewById(R.id.editText2); // get
-																			// the
-																			// password
-																			// view
-					// int a=Integer.parseInt(ed1.getText().toString());
-					// int b=Integer.parseInt(ed2.getText().toString());
-					final String name = Integer.toString(Integer.parseInt(ed1.getText().toString()));// get the
-																	// username
-					String pass = ed2.getText().toString(); // get the password
-					rslt = "START";
-					Caller c = new Caller();
-					c.a = name;
-					c.b = pass;
-					// call the webservice login action
-					c.c = "main";
-					c.join();
-					c.start();
-					while (rslt == "START")// wait for the webservice response
-					{
-						try {
-							Thread.sleep(10);
-						} catch (Exception ex) {
-						}
-					}
-					SharedPreferences preferences = getSharedPreferences(
-							"AAST", 0);
-
-					Editor edit = preferences.edit();
-					// if the user lgged in
-					if (!rslt.equals("0")) {
-						
-					
-						
-						edit.putString("login", "ok"); // set the login to true
-						edit.putString("username", rslt.substring(1));
-						edit.putString("type", rslt.substring(0, 1)); 
-						
-						Tracker t = GoogleAnalytics.getInstance(getApplicationContext()).getTracker("UA-51484481-1");
-						 t.set("&uid", rslt.substring(1));
-						 t.send(MapBuilder
-							      .createEvent("UX",       // Event category (required)
-							                   "Sign In"	,  // Event action (required)
-							                   null,       // Event label
-							                   null)       // Event value
-							      .build());
-						 
-
-						LongOperation lo= new LongOperation();
-				        lo.con=getApplicationContext();
-				        lo.execute(new String[]{rslt.substring(1),rslt.substring(0,1)});
-						MySQLiteHelper db = new MySQLiteHelper(
-								getApplicationContext());
-					
-					;
-						db.addAccount(rslt.substring(1), rslt.substring(0, 1));
-						edit.commit(); // save the changes
-						
-					
-						AlertDialog.Builder builder = new AlertDialog.Builder(
-								Login.this);
-						builder.setTitle("Retrieve")
-								.setMessage("Do You want to retrieve all data")
-								.setNegativeButton("No",
-										new DialogInterface.OnClickListener()// no
-																				// retrieve
-																				// data
-																				// listener
-										{
-											public void onClick(
-													DialogInterface dialog,
-													int which) {
-												Intent i = new Intent(
-														getApplicationContext(),
-														ListActivity.class);
-
-												finish();
-												startActivity(i);
-												//
-											}
-										}
-
-								)
-
-								.setIcon(android.R.drawable.ic_dialog_alert)
-								.setPositiveButton("Yes",
-										new DialogInterface.OnClickListener() // retrieved
-																				// data
-																				// approved
-																				// listiner
-										{
-											public void onClick(
-													DialogInterface dialog,
-													int which) {
-												SharedPreferences pref = getSharedPreferences(
-														"AAST", 0);
-												Caller c = new Caller();
-												c.a = pref.getString(
-														"username", "noone");
-												c.b = pref.getString("type",
-														"noone");
-												// call the webservice tht will
-												// get all the previeous data
-												c.c = "getall";
-
-												Editor edit1 = pref.edit();
-												//String name = pref.getString(
-													//	"username", "noone");// get
+					try {
+						EditText ed1 = (EditText) findViewById(R.id.editText1); // get
 																				// the
 																				// username
-												// the
-												MySQLiteHelper db = new MySQLiteHelper(getApplicationContext());
-												db.deleteAllMessage(pref.getString(
-														"username", "noone"));							// size
-												edit1.commit(); // save the
-																// data;
-												c.con = getApplicationContext(); // pass
-																					// the
-																					// current
-																					// contect
-												try {
-													c.join();
-												} catch (InterruptedException e) {
-													// TODO Auto-generated catch
-													// block
-													e.printStackTrace();
+																				// view
+						EditText ed2 = (EditText) findViewById(R.id.editText2); // get
+																				// the
+																				// password
+																				// view
+						// int a=Integer.parseInt(ed1.getText().toString());
+						// int b=Integer.parseInt(ed2.getText().toString());
+						final String name = Integer.toString(Integer
+								.parseInt(ed1.getText().toString()));// get the
+						// username
+						String pass = ed2.getText().toString(); // get the
+																// password
+
+						rslt = "START";
+						Caller c = new Caller();
+						c.a = name;
+						c.b = pass;
+						// call the webservice login action
+						c.c = "main";
+						c.join();
+						c.start();
+						while (rslt == "START")// wait for the webservice
+												// response
+						{
+							try {
+								Thread.sleep(10);
+							} catch (Exception ex) {
+							}
+						}
+						SharedPreferences preferences = getSharedPreferences(
+								"AAST", 0);
+
+						Editor edit = preferences.edit();
+						// if the user lgged in
+						if (!rslt.equals("0")) {
+
+							edit.putString("login", "ok"); // set the login to
+															// true
+							edit.putString("username", rslt.substring(1));
+							edit.putString("type", rslt.substring(0, 1));
+
+							Tracker t = GoogleAnalytics.getInstance(
+									getApplicationContext()).getTracker(
+									"UA-51484481-1");
+							t.set("&uid", rslt.substring(1));
+							t.send(MapBuilder.createEvent("UX", // Event
+																// category
+																// (required)
+									"Sign In", // Event action (required)
+									null, // Event label
+									null) // Event value
+									.build());
+
+							LongOperation lo = new LongOperation();
+							lo.con = getApplicationContext();
+							lo.execute(new String[] { rslt.substring(1),
+									rslt.substring(0, 1) });
+							MySQLiteHelper db = new MySQLiteHelper(
+									getApplicationContext());
+
+							;
+							db.addAccount(rslt.substring(1),
+									rslt.substring(0, 1));
+							edit.commit(); // save the changes
+
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									Login.this);
+							builder.setTitle("Retrieve")
+									.setMessage(
+											"Do You want to retrieve all data")
+									.setNegativeButton(
+											"No",
+											new DialogInterface.OnClickListener()// no
+																					// retrieve
+																					// data
+																					// listener
+											{
+												public void onClick(
+														DialogInterface dialog,
+														int which) {
+													Intent i = new Intent(
+															getApplicationContext(),
+															ListActivity.class);
+
+													finish();
+													startActivity(i);
+													//
 												}
-												c.start();
-												while (!rslt.equals("ssa")) {
-													try {
-														Thread.sleep(10);
-													} catch (Exception ex) {
-													}
-												}
-												Intent i = new Intent(
-														getApplicationContext(),
-														ListActivity.class);
-												finish();
-												startActivity(i);
-												// do some thing here which you
-												// need
 											}
-										}
 
-								);
-						AlertDialog alert = builder.create();
-						alert.show();
+									)
 
-					} else// in case not logged in
-					{
-						edit.putString("login", "no");
-						;
-						Toast.makeText(getApplicationContext(), "Login Failed",
-								Toast.LENGTH_LONG).show();
-						ed2.setText("");
-						ad.setMessage("Login Failed");
-						;
-						// ad.show();
+									.setIcon(android.R.drawable.ic_dialog_alert)
+									.setPositiveButton(
+											"Yes",
+											new DialogInterface.OnClickListener() // retrieved
+																					// data
+																					// approved
+																					// listiner
+											{
+												public void onClick(
+														DialogInterface dialog,
+														int which) {
+													SharedPreferences pref = getSharedPreferences(
+															"AAST", 0);
+													Caller c = new Caller();
+													c.a = pref
+															.getString(
+																	"username",
+																	"noone");
+													c.b = pref.getString(
+															"type", "noone");
+													// call the webservice tht
+													// will
+													// get all the previeous
+													// data
+													c.c = "getall";
+
+													Editor edit1 = pref.edit();
+													// String name =
+													// pref.getString(
+													// "username", "noone");//
+													// get
+													// the
+													// username
+													// the
+													MySQLiteHelper db = new MySQLiteHelper(
+															getApplicationContext());
+													db.deleteAllMessage(pref
+															.getString(
+																	"username",
+																	"noone")); // size
+													edit1.commit(); // save the
+																	// data;
+													c.con = getApplicationContext(); // pass
+																						// the
+																						// current
+																						// contect
+													try {
+														c.join();
+													} catch (InterruptedException e) {
+														// TODO Auto-generated
+														// catch
+														// block
+														e.printStackTrace();
+													}
+													c.start();
+													while (!rslt.equals("ssa")) {
+														try {
+															Thread.sleep(10);
+														} catch (Exception ex) {
+														}
+													}
+													Intent i = new Intent(
+															getApplicationContext(),
+															ListActivity.class);
+													finish();
+													startActivity(i);
+													// do some thing here which
+													// you
+													// need
+												}
+											}
+
+									);
+							AlertDialog alert = builder.create();
+							alert.show();
+
+						} else// in case not logged in
+						{
+							edit.putString("login", "no");
+							;
+							Toast.makeText(getApplicationContext(),
+									"Login Failed", Toast.LENGTH_LONG).show();
+							ed2.setText("");
+							ad.setMessage("Login Failed");
+							;
+							// ad.show();
+						}
+
+						// finish();
+
+					} catch (Exception ex) {
+						ad.setTitle("Error!");
+						ad.setMessage(ex.toString());
 					}
-
-					// finish();
-
-				} catch (Exception ex) {
-					ad.setTitle("Error!");
-					ad.setMessage(ex.toString());
-				}
 				}
 				// ad.show();
 
@@ -386,38 +417,37 @@ public class Login extends Activity {
 	 * @see android.app.Activity#onStart()
 	 */
 
-
 	private class LongOperation extends AsyncTask<String, Void, String> {
 		private Context con;
-        @Override
-        protected String doInBackground(String... params) {
-        	
-       	 if(helper.isInternetAvailable())
-		 {
-          	helper.getall(con, params[0], params[1], getSharedPreferences("AAST", 0));
-            return "Executed";
-		 }
-		 else
-		 {
-			   return "none";
-		
-			// setResult(RESULT_CANCELED);
-		 }
-        }
-        @Override
-        
-        protected void onPostExecute(String result) {
-        	if(result.equals( "none"))
-            {
-         		 Toast.makeText(getApplicationContext(), "No Internet Connection Application may be out of date",
-   					   Toast.LENGTH_LONG).show();
-         	   
-            }
-        	super.onPostExecute(result);
-        }
 
-     
-    }
+		@Override
+		protected String doInBackground(String... params) {
+
+			if (helper.isInternetAvailable()) {
+				helper.getall(con, params[0], params[1],
+						getSharedPreferences("AAST", 0));
+				return "Executed";
+			} else {
+				return "none";
+
+				// setResult(RESULT_CANCELED);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (result.equals("none")) {
+				Toast.makeText(
+						getApplicationContext(),
+						"No Internet Connection Application may be out of date",
+						Toast.LENGTH_LONG).show();
+
+			}
+			super.onPostExecute(result);
+		}
+
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

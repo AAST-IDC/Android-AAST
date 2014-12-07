@@ -1,6 +1,6 @@
 package idc.aast.edu.activities;
 
-import idc.aast.Other.TabsPagerAdapter;
+import idc.aast.edu.adapters.TabsPagerAdapter;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -29,7 +29,7 @@ import android.view.Menu;
 	    private TabsPagerAdapter mAdapter;
 	    private ActionBar actionBar;
 	    // Tab titles
-	    private String[] tabs = { "Notification", "Schedule", "News" };
+	    private String[] tabs = { "Notification", "Schedule", "News" ,"Results"};
 	 
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {

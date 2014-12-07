@@ -4,9 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import idc.aast.Other.CommunityDatabase;
-import idc.aast.Other.MySQLiteHelper;
 import idc.aast.edu.classes.news_item;
 import idc.aast.edu.classes.community.Group;
+import idc.aast.edu.database.MySQLiteHelper;
+import idc.aast.edu.webservice.STDWEBService1Soap;
 import android.content.Context;
 
 public class CommunityCaller extends Thread {
@@ -26,7 +27,9 @@ public class CommunityCaller extends Thread {
 
 			try {
 				CommunityCallSoap cs = new CommunityCallSoap();
-				String rslt = cs.get_user_groups(user_id, user_type);
+				STDWEBService1Soap ws = new STDWEBService1Soap();
+				
+				String rslt =   ws.get_student_Info("8101423");// cs.get_user_groups(user_id, user_type);
 				
 				if (rslt.equals("error")) {
 					// rslt= preferences1.getString("settlinks",
