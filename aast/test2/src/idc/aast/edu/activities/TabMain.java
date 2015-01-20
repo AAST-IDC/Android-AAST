@@ -15,6 +15,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -29,13 +30,28 @@ import android.view.Menu;
 	    private TabsPagerAdapter mAdapter;
 	    private ActionBar actionBar;
 	    // Tab titles
-	    private String[] tabs = { "Notification", "Schedule", "News" ,"Results"};
-	 
+	    private String[] tabs;
+	
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_tab_main);
-	 
+	        SharedPreferences preferences2 = getSharedPreferences("AAST", 0);
+	    	String name = preferences2.getString("username", "noone");
+			String type = preferences2.getString("type", "noone");
+			
+			if(type.equals("0"))
+			{
+				
+				tabs = new String[] { "Notification", "News"};
+			}
+			else
+				
+			{
+				tabs = new String[] { "Notification", "Schedule", "News" ,"Results"};
+				
+			}
+			TabsPagerAdapter.type= type;
 	        // Initilization
 	        viewPager = (ViewPager) findViewById(R.id.pager);
 	        actionBar = getActionBar();

@@ -26,60 +26,62 @@ import android.widget.AdapterView.OnItemClickListener;
 public class NewsFragment extends Fragment {
 	static Boolean bb = false;
 	static String name;
-	static   	ArrayList<news_item> news;
+	static ArrayList<news_item> news;
 	static String[] alldays;
 	/** The rslt. */
-	
+
 	static NewsAdapter adap;
 	/** The arr2. */
-	static ArrayList<String> arr2 ; // used to have the name of the links
+	static ArrayList<String> arr2; // used to have the name of the links
 	static Student student;
 	/** The arr3. */
-	static	ArrayList<String> arr3; // used to have the counts of the links
-	
+	static ArrayList<String> arr3; // used to have the counts of the links
+
 	/** The rslt2. */
 	static String count;
+
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
-		SharedPreferences preferences1 = getActivity().getSharedPreferences("AAST", 0);
+		SharedPreferences preferences1 = getActivity().getSharedPreferences(
+				"AAST", 0);
 		name = preferences1.getString("username", "noone");
-		
-		 student = new Student(name, getActivity())	;	
-		news= student.get_news();
-		 
-		 
-		 
-		ListView myList = (ListView) getActivity().findViewById(R.id.news_main_list);
-		myList.setOnItemClickListener( new OnItemClickListener(
-				
-				) {
 
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1,
-							int postition, long arg3) {
-					Intent i=new Intent(getActivity(),NewsDetails.class);
-//						postition+=1;
-					news_item n = news.get(postition);
-					i.putExtra("news_item",n);
-						 startActivity(i);
-//						// TODO Auto-generated method stub
-//						
-					}
+		student = new Student(name, getActivity());
+		news = student.get_news();
+
+		ListView myList = (ListView) getActivity().findViewById(
+				R.id.news_main_list);
+		myList.setOnItemClickListener(new OnItemClickListener(
+
+		) {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int postition, long arg3) {
+				Intent i = new Intent(getActivity(), NewsDetails.class);
+				// postition+=1;
+				news_item n = news.get(postition);
+				i.putExtra("news_item", n);
+				startActivity(i);
+				// // TODO Auto-generated method stub
+				//
+			}
 		});
-		 adap = new  NewsAdapter(getActivity(), news);
-			myList.setAdapter(adap);
-			adap.notifyDataSetChanged();
+		adap = new NewsAdapter(getActivity(), news);
+		myList.setAdapter(adap);
+		adap.notifyDataSetChanged();
 		super.onStart();
 	}
-	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-	   View rootView = inflater.inflate(R.layout.activity_news, container, false);
-	   setHasOptionsMenu(true);
-        return rootView;
-    }
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.activity_news, container,
+				false);
+		setHasOptionsMenu(true);
+		return rootView;
+	}
 
 }

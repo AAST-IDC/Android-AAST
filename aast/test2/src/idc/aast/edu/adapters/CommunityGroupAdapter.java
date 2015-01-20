@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,43 +33,11 @@ public class CommunityGroupAdapter extends BaseAdapter {
  		/** The link t. */
  		TextView title;
  		TextView desc;
-		 
- 		/** The Count t. */
- 	
-	 
 	 }
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		
-		if(position == 3)
-		{
-			ViewHolder holder;
-			LayoutInflater inflater =  context.getLayoutInflater();
 		
-			if (convertView == null)
-			{
-				convertView = inflater.inflate(R.layout.news_item, null);
-				holder = new ViewHolder();
-				holder.title = (TextView) convertView.findViewById(R.id.news_title);
-			//	holder.desc = (TextView) convertView.findViewById(R.id.news_desc);
-				convertView.setTag(holder);
-
-			}
-			else
-			{
-				holder = (ViewHolder) convertView.getTag();
-			}
-			
-			Group n = us.get(position);
-			holder.title.setText(n.group_name);
-			//holder.desc.setText(n.desc);
-			
-			// TODO Auto-generated method stub
-			return convertView;
-		
-		}
-		else
-		{
 		ViewHolder holder;
 		LayoutInflater inflater =  context.getLayoutInflater();
 	
@@ -87,12 +56,14 @@ public class CommunityGroupAdapter extends BaseAdapter {
 		}
 		
 		Group n = us.get(position);
-		holder.title.setText(n.group_name);
+		Typeface font = Typeface.createFromAsset(  context.getAssets(), "fontawesome-webfont.ttf" );
+		holder.title.setTypeface(font);
+		holder.title.setText(context.getResources().getString(R.string.icon_heart) +  n.group_name);
 		//holder.desc.setText(n.desc);
 		
 		// TODO Auto-generated method stub
 		return convertView;
-		}
+		
 	}
 	@Override
 	public int getCount() {

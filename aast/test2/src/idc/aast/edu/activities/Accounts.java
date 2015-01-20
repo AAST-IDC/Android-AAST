@@ -8,6 +8,7 @@ import com.parse.PushService;
 import idc.aast.edu.adapters.AccountsAdapter;
 import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.edu.database.helper;
+import idc.aast.test2.HomePage;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -24,6 +25,7 @@ import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
 
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 
@@ -50,7 +52,7 @@ import android.widget.ListView;
 
 
 
-public class Accounts extends ActionBarActivity implements TabListener {
+public class Accounts extends Activity implements TabListener {
 	static Boolean bb = false;
  
 	static ArrayList<String> arr2 = new ArrayList<String>();
@@ -167,10 +169,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 		//overridePendingTransition(R.anim.fadein, R.anim.fadeout); // fadein and
 																	// out
 																	// animation
-		ActionBar actionBar = getSupportActionBar(); // get the actionbar
-		// actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(true);
-
+	
 		// put the tabs in the action bar
 
 		// actionBar.setSelectedNavigationItem(1); // make the selected item the
@@ -231,7 +230,7 @@ public class Accounts extends ActionBarActivity implements TabListener {
 		        lo.con=getApplicationContext();
 		        lo.execute(new String[]{name,arr2.get(position).substring(0, 1)});
 				Intent i = new Intent(getApplicationContext(),
-						ListActivity.class);
+						HomePage.class);
 				finish();
 				//startActivity(i);
 				

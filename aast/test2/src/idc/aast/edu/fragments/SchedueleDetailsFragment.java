@@ -38,17 +38,12 @@ public class SchedueleDetailsFragment extends Fragment {
 	/** The arr3. */
 	static ArrayList<String> arr3; // used to have the counts of the links
 
-	
+	public static String day;
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
 		bb = false;
-		Bundle extras = getArguments();//.getExtras();
-		String day = "";
-		if (extras != null) {
-			day = extras.getString("day_code");
-		}
-		day="1";
+		
 		SharedPreferences preferences1 = getActivity(). getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
 
@@ -93,7 +88,7 @@ public class SchedueleDetailsFragment extends Fragment {
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) {
 	 
-		   View rootView = inflater.inflate(R.layout.scheduele_detail_item, container, false);
+		   View rootView = inflater.inflate(R.layout.activity_scheduele_details, container, false);
 		   setHasOptionsMenu(true);
 	        return rootView;
 	    }

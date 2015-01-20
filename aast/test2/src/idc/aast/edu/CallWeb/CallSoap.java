@@ -87,10 +87,8 @@ public class CallSoap {
 	/** The OPERATIO n_ nam e9. */
 	public final String OPERATION_NAME91 = "get_df_links";
 	/** The SOA p_ actio n10. */
-	public final String SOAP_ACTION10 = "http://tempuri.org/getsettings";
 
-	/** The OPERATIO n_ nam e10. */
-	public final String OPERATION_NAME10 = "getsettings";
+
 	
 
 	/** The SOA p_ actio n11. */
@@ -100,21 +98,26 @@ public class CallSoap {
 	public final String OPERATION_NAME11 = "getcounts";
 	
 	
-	public final String SOAP_ACTION92 = "http://tempuri.org/getres2";
+	public final String SOAP_ACTION92 = "http://tempuri.org/get_student_result";
 
 	/** The OPERATIO n_ nam e11. */
-	public final String OPERATION_NAME92 = "getres2";
+	public final String OPERATION_NAME92 = "get_student_result";
 	
 	
-	public final String SOAP_ACTION94 = "http://tempuri.org/recieveNotification";
+	public final String SOAP_ACTION94 = "http://tempuri.org/get_student_scheduele";
 
 	/** The OPERATIO n_ nam e11. */
-	public final String OPERATION_NAME94 = "recieveNotification";
+	public final String OPERATION_NAME94 = "get_student_scheduele";
 	
 	public final String SOAP_ACTION95 = "http://tempuri.org/get_news";
 
 	/** The OPERATIO n_ nam e11. */
 	public final String OPERATION_NAME95 = "get_news";
+	
+	public final String SOAP_ACTION96 = "http://tempuri.org/get_std_photo";
+
+	/** The OPERATIO n_ nam e11. */
+	public final String OPERATION_NAME96 = "get_std_photo";
 	
 	/**
 	 * Instantiates a new call soap.
@@ -162,7 +165,7 @@ public class CallSoap {
 				OPERATION_NAME94);
 		PropertyInfo pi = new PropertyInfo();
 	//	PropertyInfo p2 = new PropertyInfo();
-		pi.setName("UserName");
+		pi.setName("user_name");
 		pi.setValue(a);
 		pi.setType(Integer.class);
 		request.addProperty(pi);
@@ -198,7 +201,7 @@ public class CallSoap {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		envelope.dotNet = true;
-
+ 
 		envelope.setOutputSoapObject(request);
 		HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
 		Object response = null;
@@ -218,11 +221,15 @@ public class CallSoap {
 		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
 				OPERATION_NAME92);
 		PropertyInfo pi = new PropertyInfo();
-	//	PropertyInfo p2 = new PropertyInfo();
-		pi.setName("st_num");
+		PropertyInfo p2 = new PropertyInfo();
+		pi.setName("user_name");
 		pi.setValue(a);
-		pi.setType(Integer.class);
+		pi.setType(String.class);
 		request.addProperty(pi);
+		p2.setName("check");
+		p2.setValue(b);
+		p2.setType(String.class);
+		request.addProperty(p2);
 
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
@@ -233,6 +240,37 @@ public class CallSoap {
 		Object response = null;
 		try {
 			httpTransport.call(SOAP_ACTION92, envelope);
+			response = envelope.getResponse();
+
+		} catch (Exception exception) {
+			response = exception.toString();
+			response = "error";
+		}
+		return response.toString();
+	}
+	public String get_image(String a, String b) {
+		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
+				OPERATION_NAME96);
+		PropertyInfo pi = new PropertyInfo();
+		PropertyInfo p2 = new PropertyInfo();
+		pi.setName("user_name");
+		pi.setValue(a);
+		pi.setType(String.class);
+		request.addProperty(pi);
+		p2.setName("user_type");
+		p2.setValue(b);
+		p2.setType(Integer.class);
+		request.addProperty(p2);
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+				SoapEnvelope.VER11);
+		envelope.dotNet = true;
+
+		envelope.setOutputSoapObject(request);
+		HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
+		Object response = null;
+		try {
+			httpTransport.call(SOAP_ACTION96, envelope);
 			response = envelope.getResponse();
 
 		} catch (Exception exception) {
@@ -610,32 +648,7 @@ public class CallSoap {
 	 * @param b the b
 	 * @return the settings
 	 */
-	public String getsettings(String a, String b) {
-		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
-				OPERATION_NAME10);
-		//PropertyInfo pi = new PropertyInfo();
-		//PropertyInfo p2 = new PropertyInfo();
-		
-		
-		
 
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-				SoapEnvelope.VER11);
-		envelope.dotNet = true;
-
-		envelope.setOutputSoapObject(request);
-		HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-		Object response = null;
-		try {
-			httpTransport.call(SOAP_ACTION10, envelope);
-			response = envelope.getResponse();
-
-		} catch (Exception exception) {
-			response = exception.toString();
-			response = "error";
-		}
-		return response.toString();
-	}
 	
 	/**
 	 * Gets the counts.

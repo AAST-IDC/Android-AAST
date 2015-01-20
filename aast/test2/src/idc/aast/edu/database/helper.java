@@ -81,6 +81,27 @@ public class helper {
 		c.start();
 		
 		
+		
+		
+		 c = new Caller();
+			c.a = name;
+			c.b=type;
+		
+			c.con=context;
+			c.preferences1=preferences1;
+			// get the links of the inbox , outbox .....
+			c.c = "get_image";
+			c.con = context;
+
+			try {
+				c.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			c.start();
+			
+		
 	
 	
 		c= new Caller();
@@ -100,16 +121,16 @@ public class helper {
 		}
 		c.start();
 		
-		
-		
+		getScheduele(name,context);
+		getResults_all(name,context);
 		
 	}
-	static public void getResults(String name,Context context )
+	static public void getResults_all(String name,Context context )
 	{
 		
 		Caller c= new Caller();
 		c.a = name;
-		c.b="1";
+		c.b="all";
 		c.con=context;
 		// get the links of the inbox , outbox .....
 		c.c = "getresult";
@@ -121,7 +142,27 @@ public class helper {
 			e.printStackTrace();
 		}
 		c.start();
+	
+	
+	}
+	static public void getResults_last(String name,Context context )
+	{
 		
+		Caller c= new Caller();
+		c.a = name;
+		c.b="last";
+		c.con=context;
+		// get the links of the inbox , outbox .....
+		c.c = "getresult";
+
+		try {
+			c.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		c.start();
+	
 	
 	}
 	static public void getScheduele(String name,Context context )

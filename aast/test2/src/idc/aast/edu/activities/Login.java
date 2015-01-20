@@ -9,6 +9,7 @@ import idc.aast.edu.database.helper;
 import idc.aast.edu.webservice.STDWEBIServiceEvents;
 import idc.aast.edu.webservice.STDWEBOperationResult;
 import idc.aast.edu.webservice.STDWEBService1Soap;
+import idc.aast.test2.HomePage;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
@@ -93,7 +94,7 @@ public class Login extends Activity {
 		int nacc = db.getAccountsCount();
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 
-		Editor edit = preferences1.edit();
+		Editor edit = preferences1.edit(); 
 		if (nacc == 0) {
 
 		} else if (preferences1.getString("nine", "yes").equals("no")) {
@@ -106,7 +107,7 @@ public class Login extends Activity {
 			edit.commit();
 			String name = preferences1.getString("username", "noone");
 			String type = preferences1.getString("type", "noone");
-
+		
 			edit.putString("login", "ok");
 			ArrayList<String> accarr = db.getAccountscon();
 			if (!accarr.contains(type + name)) {
@@ -142,25 +143,7 @@ public class Login extends Activity {
 			finish();
 			// open the list activity activity
 
-			Intent i = new Intent(getApplicationContext(), Community.class);
-			STDWEBService1Soap ws = new STDWEBService1Soap(
-					new STDWEBIServiceEvents() {
-
-						@Override
-						public void Starting() {
-							// TODO Auto-generated method stub
-
-						}
-
-						@Override
-						public void Completed(STDWEBOperationResult result) {
-							// TODO Auto-generated method stub
-							String res = (String) result.Result;
-							res = res + "";
-						}
-					});
-			
-			AsyncTask task = ws.check_launchAsync();
+			Intent i = new Intent(getApplicationContext(), HomePage.class);
 		
 
 			startActivity(i);
@@ -300,7 +283,7 @@ public class Login extends Activity {
 														int which) {
 													Intent i = new Intent(
 															getApplicationContext(),
-															ListActivity.class);
+															HomePage.class);
 
 													finish();
 													startActivity(i);
@@ -373,7 +356,7 @@ public class Login extends Activity {
 													}
 													Intent i = new Intent(
 															getApplicationContext(),
-															ListActivity.class);
+															HomePage.class);
 													finish();
 													startActivity(i);
 													// do some thing here which

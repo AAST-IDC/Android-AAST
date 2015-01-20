@@ -6,6 +6,7 @@ import idc.aast.edu.fragments.GroupsFragment;
 import idc.aast.edu.fragments.NewsFragment;
 import idc.aast.edu.fragments.NotificationFragment;
 import idc.aast.edu.fragments.ResultsFragment;
+import idc.aast.edu.fragments.SchRootFragment;
 import idc.aast.edu.fragments.SchedueleFragment;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 	public int check =0;
+	public static String type;
+	   private String[] tabs = { "Notification", "Schedule", "News","Results" };
 	@Override
 	public int getItemPosition(Object object) {
 	  
@@ -25,9 +28,37 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	}
 	  private Fragment mFragmentAtPos0;
     public TabsPagerAdapter(FragmentManager fm) {
+    	
+    	
         super(fm);
+    	if(type.equals("0"))
+		{
+			
+			tabs = new String[] { "Notification", "News"};
+		}
+		else
+			
+		{
+			tabs = new String[] { "Notification", "Schedule", "News" ,"Results"};
+			
+		}
     }
-    private String[] tabs = { "Notification", "Schedule", "News","Results" };
+ 
+    public void load()
+    {
+    	if(type.equals("0"))
+		{
+			
+			tabs = new String[] { "Notification", "News"};
+		}
+		else
+			
+		{
+			tabs = new String[] { "Notification", "Schedule", "News" ,"Results"};
+			
+		}
+    
+    }
     @Override
     public Fragment getItem(int index) {
  
@@ -38,7 +69,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
       	   return new NotificationFragment();
          else if(nw=="Schedule")
    
-        	 return new SchedueleFragment();
+        	 return new SchRootFragment();
 
          else if(nw=="News")
       	   return new NewsFragment();

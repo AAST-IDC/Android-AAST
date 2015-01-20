@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         
         android:gravity="center_vertical"
-        android:minHeight="?android:attr/listPreferredItemHeight"
-        android:paddingLeft="6dip"
+android:padding="10dp"
+ 		android:textColor="#00538B"
+ 		android:textSize="14sp"
         android:text="saas"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     

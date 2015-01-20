@@ -22,13 +22,25 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.util.Base64;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class GroupsFragment extends Fragment {
 
@@ -50,10 +62,57 @@ public class GroupsFragment extends Fragment {
 		Helper.getGroups(name, getActivity());
 		User us = new User(getActivity(), name, type);
 		usergroups = us.UsGroups;
+		
+		TextView usname = (TextView)getActivity().findViewById(R.id.us_user_name);
+		usname.setText(us.getname());
+		TextView usdep = (TextView)getActivity().findViewById(R.id.us_dep);
+		usdep.setText(us.getdep());
+		TextView ustitle = (TextView)getActivity().findViewById(R.id.us_title);
+		ustitle.setText(us.gettitle());
+		ImageView image = (ImageView)getActivity().findViewById(R.id.us_image);
+		byte[] decodedString = Base64.decode(us.getimage(), Base64.DEFAULT);
+		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+		image.setImageBitmap(decodedByte);
+		Display  display = getActivity().getWindowManager().getDefaultDisplay();
+		//int swidth = display.();
+		
 		adap = new CommunityGroupAdapter(getActivity(), usergroups);
 		ListView myList = (ListView) getActivity().findViewById(R.id.Community_Groups_List22);
+		myList.setOnItemClickListener( new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				// TODO Auto-generated method stub
+				ViewPager vp=(ViewPager) getActivity().findViewById( R.id.page22r);
+				GroupPostFragment.group_id = usergroups.get(position).group_id;
+				GroupPostFragment.group_name = usergroups.get(position).group_name;
+				//vp.destroyDrawingCache();
+				//vp.setCurrentItem(1);
+				FragmentTransaction trans = getFragmentManager()
+						.beginTransaction();
+				/*
+				 * IMPORTANT: We use the "root frame" defined in
+				 * "root_fragment.xml" as the reference to replace fragment
+				 */
+				trans.replace(R.id.post_root_frame, new GroupPostFragment());
+
+				/*
+				 * IMPORTANT: The following lines allow us to add the fragment
+				 * to the stack and return to it later, by pressing back
+				 */
+				trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				trans.addToBackStack(null);
+
+				trans.commit();
+
+			
+			
+			}
+		});
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
+		
 		super.onStart();
 	}
 	@Override
@@ -64,7 +123,13 @@ public class GroupsFragment extends Fragment {
 	   setHasOptionsMenu(true);
         return rootView;
     }
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 
+		super.onPause();
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();

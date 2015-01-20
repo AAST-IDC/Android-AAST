@@ -19,17 +19,17 @@ import android.util.Pair;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 7;
+	private static final int DATABASE_VERSION = 12;
 	// Database Name
 	private static final String DATABASE_NAME = "AAST_Notifications";
 
 	private static final String KEY_message = "message";
-	private static final String KEY_message_title = "message_title";
+	private static final String KEY_message_title = "message_title"; 
 	private static final String KEY_message_desc = "message_desc";
 	private static final String KEY_Serial = "Serial";
-	private static final String KEY_Read = "Read";
+	private static final String KEY_Read = "Read"; 
 	private static final String KEY_DateTime = "DateTime";
-	private static final String KEY_link = "link";
+	private static final String KEY_link = "link"; 
 	private static final String KEY_sys_code = "sys_code";
 	private static final String KEY_sys_name = "sys_name";
 	private static final String KEY_user_name = "user_name";
@@ -71,11 +71,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				+ "message_title TEXT, " + "message_desc TEXT, "
 				+ "Serial TEXT, " + "DateTime TEXT, " + "Read TEXT, "
 				+ "link TEXT, " + "sys_code TEXT, " + "sys_name TEXT, "
-				+ "user_name TEXT, " +
-				"user_type TEXT )";
+				+ "user_name TEXT, " + "user_type TEXT )";
 		String Create_account_table = "CREATE TABLE accounts ( "
 				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "account TEXT, "
-				+ "type TEXT )";
+				+ "us_image TEXT, " + "type TEXT )";
 
 		String Create_result_table = "CREATE TABLE results ( "
 				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "user_id TEXT, "
@@ -106,6 +105,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		database.execSQL("ALTER TABLE accounts ADD COLUMN counts TEXT");
 		database.execSQL("ALTER TABLE accounts ADD COLUMN morasalat TEXT");
 		database.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
+		database.execSQL("ALTER TABLE accounts ADD COLUMN name TEXT");
+		database.execSQL("ALTER TABLE accounts ADD COLUMN depname TEXT");
+		database.execSQL("ALTER TABLE accounts ADD COLUMN title TEXT");
 	}
 
 	public ArrayList<Pair<String, String>> getAccounts() {
@@ -142,7 +144,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				"user_id = ? and term_id = ? and course_code = ?", // selections
 				new String[] { String.valueOf(res.getUser_id()),
 						String.valueOf(res.getTerm_id()),
-						String.valueOf(res.getCourse_code()) }, // d. selections args
+						String.valueOf(res.getCourse_code()) }, // d. selections
+																// args
 				null, // e. group by
 				null, // f. having
 				null, // g. order by
@@ -196,7 +199,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 					"user_id = ? and term_id = ? and course_code = ?", // selections
 					new String[] { String.valueOf(res.getUser_id()),
 							String.valueOf(res.getTerm_id()),
-							String.valueOf(res.getCourse_code()) } // selection args
+							String.valueOf(res.getCourse_code()) } // selection
+																	// args
 					);
 			// 4. close
 			db.close();
@@ -214,7 +218,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 						new String[] { String.valueOf(sch.getUser_id()),
 								String.valueOf(sch.getDay()),
 								String.valueOf(sch.getFrom()),
-								String.valueOf(sch.getTo()) }, // d. selections args
+								String.valueOf(sch.getTo()) }, // d. selections
+																// args
 						null, // e. group by
 						null, // f. having
 						null, // g. order by
@@ -283,6 +288,86 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		// 2. create ContentValues to add key "column"/value
 		ContentValues values = new ContentValues();
 		values.put("links", links); // get title
+		// get author
+
+		// 3. updating row
+		int i = db.update("accounts", // table
+				values, // column/value
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }); // selection args
+
+		// 4. close
+		db.close();
+
+		return i;
+	}
+	public int setname(String links, String name) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		// 2. create ContentValues to add key "column"/value
+		ContentValues values = new ContentValues();
+		values.put("name", links); // get title
+		// get author
+
+		// 3. updating row
+		int i = db.update("accounts", // table
+				values, // column/value
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }); // selection args
+
+		// 4. close
+		db.close();
+
+		return i;
+	}
+	public int setdepname(String links, String name) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		// 2. create ContentValues to add key "column"/value
+		ContentValues values = new ContentValues();
+		values.put("depname", links); // get title
+		// get author
+
+		// 3. updating row
+		int i = db.update("accounts", // table
+				values, // column/value
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }); // selection args
+
+		// 4. close
+		db.close();
+
+		return i;
+	}
+	public int settitle(String links, String name) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		// 2. create ContentValues to add key "column"/value
+		ContentValues values = new ContentValues();
+		values.put("title", links); // get title
+		// get author
+
+		// 3. updating row
+		int i = db.update("accounts", // table
+				values, // column/value
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }); // selection args
+
+		// 4. close
+		db.close();
+
+		return i;
+	}
+	public int setImage(String links, String name) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		// 2. create ContentValues to add key "column"/value
+		ContentValues values = new ContentValues();
+		values.put("us_image", links); // get title
 		// get author
 
 		// 3. updating row
@@ -524,11 +609,97 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "";
 
 	}
+	public String getname(String name) {
+		// ArrayList< String> msgs = new ArrayList< String>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query("accounts", // a. table
+				new String[] { "name" }, // b. column names
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+		// 3. go over each row, build book and add it to list
+
+		if (cursor.moveToFirst()) {
+			db.close();
+			return cursor.getString(0);
+		}
+		db.close();
+		return "";
+
+	}
+	public String gettitle(String name) {
+		// ArrayList< String> msgs = new ArrayList< String>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query("accounts", // a. table
+				new String[] { "title" }, // b. column names
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+		// 3. go over each row, build book and add it to list
+
+		if (cursor.moveToFirst()) {
+			db.close();
+			return cursor.getString(0);
+		}
+		db.close();
+		return "";
+
+	}
+	public String getdepname(String name) {
+		// ArrayList< String> msgs = new ArrayList< String>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query("accounts", // a. table
+				new String[] { "depname" }, // b. column names
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+		// 3. go over each row, build book and add it to list
+
+		if (cursor.moveToFirst()) {
+			db.close();
+			return cursor.getString(0);
+		}
+		db.close();
+		return "";
+
+	}
+	public String getImage(String name) {
+		// ArrayList< String> msgs = new ArrayList< String>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query("accounts", // a. table
+				new String[] { "us_image" }, // b. column names
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+		// 3. go over each row, build book and add it to list
+
+		if (cursor.moveToFirst()) {
+			db.close();
+			return cursor.getString(0);
+		}
+		db.close();
+		return "";
+
+	}
+
 	public String get_last_news_date() {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query("news", // a. table
-				new String[] { "max(pub_date)" }, // b. column names
+				new String[] { "max(  datetime ( pub_date )	)" }, // b. column
+																	// names
 				null, // selections
 				null, // d. selections args
 				null, // e. group by
@@ -546,6 +717,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "0";
 
 	}
+
 	public ArrayList<String> getAccountscon() {
 		ArrayList<String> msgs = new ArrayList<String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -580,7 +752,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		values.put("links", ""); // get title
 		values.put("counts", "");
 		values.put("morasalat", ""); // get title
-
+		values.put("us_image", ""); // get title
+		values.put("name", "");
+		values.put("depname", "");
+		values.put("title", "");
 		db.insert("accounts", // table
 				null, // nullColumnHack
 				values); // key/value -> keys = column names/ values = column
@@ -880,7 +1055,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				null, // d. selections args
 				null, // e. group by
 				null, // f. having
-				"pub_date DESC", // g. order by
+				"datetime(pub_date) DESC", // g. order by
 				null); // h. limit
 
 		news_item news = null;
@@ -1092,7 +1267,24 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		// onCreate(db);
 		// db.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
-		if (oldVersion == 6) {
+		if (oldVersion == 11) {
+			
+			db.execSQL("ALTER TABLE accounts ADD COLUMN title TEXT");
+		} else if (oldVersion == 9) {
+
+			String create_news_table = "DROP table news";
+			db.execSQL(create_news_table);
+			create_news_table = "CREATE TABLE news ( "
+					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+
+					+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
+					+ "link TEXT )";
+			db.execSQL(create_news_table);
+		} else if (oldVersion == 7) {
+
+			String create_news_table = "ALTER TABLE accounts ADD COLUMN us_image TEXT";
+			db.execSQL(create_news_table);
+		} else if (oldVersion == 6) {
 
 			String create_news_table = "CREATE TABLE news ( "
 					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
