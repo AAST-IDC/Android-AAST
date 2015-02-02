@@ -15,6 +15,7 @@ public class SchRootFragment  extends Fragment {
 	}
 	private static final String TAG = "RootFragment";
 
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

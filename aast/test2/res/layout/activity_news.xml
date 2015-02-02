@@ -9,11 +9,12 @@ android:orientation="vertical" >
     		android:drawSelectorOnTop="true"
     	android:layout_width="fill_parent"
     	android:minHeight="200dp" 
-    	android:divider="#000000"
-    	android:dividerHeight="2dp"
+    android:background="#4D6378"
+        android:divider="#4D6378"
+        android:dividerHeight="3dp"
 	    android:layout_height="0px"
 	    android:layout_weight="1"
-	    android:background="#E9E9E9"
+
 	   android:listSelector="@drawable/list_selector" 
 	 >
 	 	 

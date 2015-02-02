@@ -15,8 +15,6 @@ import java.util.Collections;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
-
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,105 +33,109 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Results extends Activity implements OnItemSelectedListener{ 
+public class Results extends Activity implements OnItemSelectedListener {
 
-    private Spinner spinner;
+	private Spinner spinner;
 
 	/** The double back to exit pressed once. */
-//	private boolean doubleBackToExitPressedOnce = false;
-	
+	// private boolean doubleBackToExitPressedOnce = false;
+
 	/** The tabs. */
-//	private String[] tabs = { "Links", "Notifications" };
-	
+	// private String[] tabs = { "Links", "Notifications" };
+
 	/** The bb. */
 	static Boolean bb = false;
 	static String name;
-	static   	ArrayList<result_item> res;
+	static ArrayList<result_item> res;
 	static String[] all_terms;
 	/** The rslt. */
 	static String rslt;
 	static ResultsAdapter adap;
 	/** The arr2. */
-	static ArrayList<String> arr2 ; // used to have the name of the links
+	static ArrayList<String> arr2; // used to have the name of the links
 	static Student student;
 	/** The arr3. */
-	static	ArrayList<String> arr3; // used to have the counts of the links
-	
+	static ArrayList<String> arr3; // used to have the counts of the links
+
 	/** The rslt2. */
 	static String count;
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v7.app.ActionBarActivity#onCreate(android.os.Bundle)
 	 */
-	
+
 	/**
 	 * 
 	 */
 	// private String[] mPlanetTitles;
-   // private DrawerLayout mDrawerLayout;
-   // private ListView mDrawerList;
+	// private DrawerLayout mDrawerLayout;
+	// private ListView mDrawerList;
 	@Override
-	  public void onStart() {
-	    super.onStart();
-	
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
-	@Override
-	  public void onStop() {
-	    super.onStop();
+	public void onStart() {
+		super.onStart();
 
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
-    @Override
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		bb = false;
-	
+
 		setContentView(R.layout.activity_results);
 
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
-		 student = new Student(name,this);
+		student = new Student(name, this);
 		ListView myList = (ListView) findViewById(R.id.results1);
 
-		 spinner = (Spinner)findViewById(R.id.spinner1);
-	        ArrayAdapter<String>adapter = new ArrayAdapter<String>(Results.this,
-	                android.R.layout.simple_spinner_item,student.get_terms());
-	        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	        spinner.setAdapter(adapter);
-	        spinner.setOnItemSelectedListener(this);
+		spinner = (Spinner) findViewById(R.id.spinner1);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(Results.this,
+				android.R.layout.simple_spinner_item, student.get_terms());
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(this);
 
-		 res = student.get_results();
-		 adap = new ResultsAdapter(this, res, res);
+		res = student.get_results();
+		adap = new ResultsAdapter(this, res, res);
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v7.app.ActionBarActivity#onBackPressed()
 	 */
- //   @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+	// @Override
+	public void onItemSelected(AdapterView<?> parent, View v, int position,
+			long id) {
 
-     
-    	
-    	MySQLiteHelper db = new MySQLiteHelper(this);
-    	res.clear();
-        	res.addAll(  student.get_results(position));
-		
+		MySQLiteHelper db = new MySQLiteHelper(this);
+		res.clear();
+		res.addAll(student.get_results(position));
 
-	
-	
 		adap.notifyDataSetChanged();
 
-        
-    }
-	public void onBackPressed() {
-		
-			super.onBackPressed();
 	}
 
-	/* (non-Javadoc)
+	public void onBackPressed() {
+
+		super.onBackPressed();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
@@ -143,7 +145,9 @@ public class Results extends Activity implements OnItemSelectedListener{
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
@@ -177,8 +181,7 @@ public class Results extends Activity implements OnItemSelectedListener{
 			return true;
 
 		case R.id.item4:
-			AlertDialog.Builder builder = new AlertDialog.Builder(
-					Results.this);
+			AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
 			builder.setTitle("About")
 					.setMessage("Build number is" + Login.version)
 					.setNegativeButton("Ok", null);
@@ -186,19 +189,23 @@ public class Results extends Activity implements OnItemSelectedListener{
 			alert.show();
 
 			return true;
-		
+
 		}
 		return true;
 	}
+
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see android.support.v7.app.ActionBar.TabListener#onTabReselected(android.support.v7.app.ActionBar.Tab, android.support.v4.app.FragmentTransaction)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.support.v7.app.ActionBar.TabListener#onTabReselected(android.
+	 * support.v7.app.ActionBar.Tab, android.support.v4.app.FragmentTransaction)
 	 */
-	
 
 }

@@ -11,6 +11,7 @@ import idc.aast.edu.classes.news_item;
 import idc.aast.edu.classes.result_item;
 import idc.aast.edu.classes.scheduele_slot;
 import idc.aast.edu.database.MySQLiteHelper;
+import idc.aast.edu.fragments.ResultsFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -181,7 +182,7 @@ public class Caller extends Thread {
 						news_item news = new news_item(arr.getJSONObject(i));
 						db.insert_news(news);
 					}
-					db.setresults(resp, a);
+					//db.setresults(resp, a);
 				}
 
 			} catch (Exception ex) {
@@ -203,11 +204,19 @@ public class Caller extends Thread {
 								a);
 						db.insert_result(res);
 					}
-					db.setresults(resp, a);
+					if(ResultsFragment.progress!= null)
+					{
+						ResultsFragment.progress.dismiss();	
+					}
+			//		db.setresults(resp, a);
 				}
 
 			} catch (Exception ex) {
 				Morasalat.rslt = "error";
+				if(ResultsFragment.progress!= null)
+				{
+					ResultsFragment.progress.dismiss();	
+				}
 
 			}
 		}

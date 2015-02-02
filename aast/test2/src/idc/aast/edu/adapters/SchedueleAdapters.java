@@ -51,15 +51,23 @@ public class SchedueleAdapters extends BaseAdapter {
 		}
 		else
 		{
-			holder = (ViewHolder) convertView.getTag();
+			holder = (ViewHolder)convertView.getTag();
+		
+			
 		}
 		
 		if(days.get(position) == "none")
 		{
 				convertView.setBackgroundColor(Color.GRAY);
+				holder.Day.setTextColor(Color.parseColor("#DDDDDD"));
 			
+		} 
+		else
+		{
+			
+			convertView.setBackgroundColor(Color.parseColor("#364C62"));
+			holder.Day.setTextColor(Color.parseColor("#FFFFFF"));
 		}
-		
 			holder.Day.setText(days_n.values()[position].toString());
 		
 		// TODO Auto-generated method stub

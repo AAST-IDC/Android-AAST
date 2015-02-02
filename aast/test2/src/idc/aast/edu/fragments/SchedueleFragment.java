@@ -41,7 +41,7 @@ public class SchedueleFragment extends Fragment {
 	static Student student;
 	/** The arr3. */
 	static ArrayList<String> arr3; // used to have the counts of the links
-
+static ListView myList;
 	/** The rslt2. */
 	static String count;
 
@@ -56,8 +56,9 @@ public class SchedueleFragment extends Fragment {
 
 		student = new Student(name, getActivity());
 		ArrayList<String> sch = student.get_days();
-
-		ListView myList = (ListView) getActivity().findViewById(
+	
+			
+		 myList = (ListView) getView().findViewById(
 				R.id.scheduele_main_list);
 		myList.setOnItemClickListener(new OnItemClickListener(
 

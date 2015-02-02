@@ -2,16 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    android:layout_gravity="center"
+    android:gravity="center">
 
     <TextView
+        android:layout_gravity="center"
         android:id="@+id/day_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:paddingLeft="6dip"
         android:text="saas"
+        
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>
