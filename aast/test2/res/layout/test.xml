@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/textView45"
             android:layout_width="fill_parent"
-            android:layout_height="10dp"
+            android:layout_height="10dp" 
             android:background="#D5D5D5"
             android:text="" />
         

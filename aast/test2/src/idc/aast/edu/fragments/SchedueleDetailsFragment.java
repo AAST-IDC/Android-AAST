@@ -59,17 +59,17 @@ public class SchedueleDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int postition, long arg3) {
-				Intent in = new Intent(getActivity(),
-						CourseDetails.class);
-				postition+=1;
-				for (int i = 0; i < sch.size(); i++) {
-					scheduele_slot curr = sch.get(i);
-					int start = Integer.parseInt(curr.getFrom());
-					if (start == (postition * 2) || start == (postition*2 - 1)) {
-						in.putExtra("course_code", curr.getCourse_code());
-						startActivity(in);
-					}
-				}
+//				Intent in = new Intent(getActivity(),
+//						CourseDetails.class);
+//				postition+=1;
+//				for (int i = 0; i < sch.size(); i++) {
+//					scheduele_slot curr = sch.get(i);
+//					int start = Integer.parseInt(curr.getFrom());
+//					if (start == (postition * 2) || start == (postition*2 - 1)) {
+//						in.putExtra("course_code", curr.getCourse_code());
+//						startActivity(in);
+//					}
+//				}
 
 				// TODO Auto-generated method stub
 

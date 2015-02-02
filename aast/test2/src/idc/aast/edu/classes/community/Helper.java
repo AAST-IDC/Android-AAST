@@ -11,7 +11,7 @@ public class Helper {
 	}
 	static public void getGroups(String name,Context context )
 	{
-		
+		  
 		CommunityCaller c= new CommunityCaller();
 		c.user_id = name;
 		c.user_type="0";

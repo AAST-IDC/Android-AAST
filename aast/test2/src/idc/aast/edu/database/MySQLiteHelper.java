@@ -19,7 +19,7 @@ import android.util.Pair;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 12;
+	private static final int DATABASE_VERSION = 13;
 	// Database Name
 	private static final String DATABASE_NAME = "AAST_Notifications";
 
@@ -108,6 +108,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		database.execSQL("ALTER TABLE accounts ADD COLUMN name TEXT");
 		database.execSQL("ALTER TABLE accounts ADD COLUMN depname TEXT");
 		database.execSQL("ALTER TABLE accounts ADD COLUMN title TEXT");
+		database.execSQL("ALTER TABLE accounts ADD COLUMN jsondata TEXT");
 	}
 
 	public ArrayList<Pair<String, String>> getAccounts() {
@@ -280,7 +281,26 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return j;
 
 	}
+	public int setjsondata(String links, String name) {
 
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		// 2. create ContentValues to add key "column"/value
+		ContentValues values = new ContentValues();
+		values.put("jsondata", links); // get title
+		// get author
+
+		// 3. updating row
+		int i = db.update("accounts", // table
+				values, // column/value
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }); // selection args
+
+		// 4. close
+		db.close();
+
+		return i;
+	}
 	public int setLinks(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -587,7 +607,27 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "0^0^0^0";
 
 	}
+	public String getjsondata(String name) {
+		// ArrayList< String> msgs = new ArrayList< String>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query("accounts", // a. table
+				new String[] { "jsondata" }, // b. column names
+				"account = ? ", // selections
+				new String[] { String.valueOf(name) }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+		// 3. go over each row, build book and add it to list
 
+		if (cursor.moveToFirst()) {
+			db.close();
+			return cursor.getString(0);
+		}
+		db.close();
+		return "";
+
+	}
 	public String getlinks(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -773,6 +813,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		// 2. delete
 		db.delete("accounts", "account = ?",
 				new String[] { String.valueOf(account) });
+		
+		db.delete("messages", "user_name = ?",
+				new String[] { String.valueOf(account) });
+		
+		db.delete("results", "user_id = ?",
+				new String[] { String.valueOf(account) });
+		
+		db.delete("scheduele", "user_id = ?",
+				new String[] { String.valueOf(account) });
+		
+
 
 		// 3. close
 		db.close();
@@ -1267,7 +1318,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		// onCreate(db);
 		// db.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
-		if (oldVersion == 11) {
+if (oldVersion == 12) {
+			
+			db.execSQL("ALTER TABLE accounts ADD COLUMN jsondata TEXT");
+		}
+else if (oldVersion == 11) {
 			
 			db.execSQL("ALTER TABLE accounts ADD COLUMN title TEXT");
 		} else if (oldVersion == 9) {

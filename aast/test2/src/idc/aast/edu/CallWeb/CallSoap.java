@@ -23,10 +23,10 @@ import android.annotation.TargetApi;
 public class CallSoap {
 
 	/** The soap action. */
-	public final String SOAP_ACTION = "http://tempuri.org/auth";
+	public final String SOAP_ACTION = "http://tempuri.org/auth_new";
 
 	/** The operation name. */
-	public final String OPERATION_NAME = "auth";
+	public final String OPERATION_NAME = "auth_new";
 	
 	/** The SOA p_ actio n2. */
 	public final String SOAP_ACTION2 = "http://tempuri.org/CheckVersion";

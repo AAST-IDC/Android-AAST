@@ -21,8 +21,8 @@
     <string name="item5">Settings</string>
     <string name="title_activity_managertabs">MainActivity</string>
     <string name="app_message">"Bonjour PAUG "</string>
-<string name="icon_heart">&#xf0da;</string>
-    
+    <string name="icon_heart">&#xf0da;</string>
+
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>
@@ -69,5 +69,6 @@
     <string name="title_activity_ticketing">Ticketing</string>
     <string name="title_activity_group_post_fragment">GroupPostFragment</string>
     <string name="title_activity_home_page">HomePage</string>
+    <string name="title_activity_test">Test</string>
 
 </resources>

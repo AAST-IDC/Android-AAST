@@ -11,19 +11,25 @@ import idc.aast.edu.webservice.STDWEBOperationResult;
 import idc.aast.edu.webservice.STDWEBService1Soap;
 import idc.aast.test2.HomePage;
 import idc.aast.test2.R;
+import idc.aast.test2.RoundedImageView;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
 import idc.aast.test2.R.menu;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.bugsense.trace.BugSenseHandler;
 
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -34,18 +40,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import android.transition.Fade;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
+
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.GoogleAnalytics;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -94,7 +115,7 @@ public class Login extends Activity {
 		int nacc = db.getAccountsCount();
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 
-		Editor edit = preferences1.edit(); 
+		Editor edit = preferences1.edit();
 		if (nacc == 0) {
 
 		} else if (preferences1.getString("nine", "yes").equals("no")) {
@@ -107,7 +128,7 @@ public class Login extends Activity {
 			edit.commit();
 			String name = preferences1.getString("username", "noone");
 			String type = preferences1.getString("type", "noone");
-		
+
 			edit.putString("login", "ok");
 			ArrayList<String> accarr = db.getAccountscon();
 			if (!accarr.contains(type + name)) {
@@ -144,7 +165,6 @@ public class Login extends Activity {
 			// open the list activity activity
 
 			Intent i = new Intent(getApplicationContext(), HomePage.class);
-		
 
 			startActivity(i);
 
@@ -234,8 +254,14 @@ public class Login extends Activity {
 								"AAST", 0);
 
 						Editor edit = preferences.edit();
+
 						// if the user lgged in
 						if (!rslt.equals("0")) {
+
+							final JSONObject reader = new JSONObject(rslt);
+							final String image = reader.getString("image");
+
+							rslt = reader.getString("ans");
 
 							edit.putString("login", "ok"); // set the login to
 															// true
@@ -264,6 +290,8 @@ public class Login extends Activity {
 							;
 							db.addAccount(rslt.substring(1),
 									rslt.substring(0, 1));
+							db.setImage(image, rslt.substring(1));
+							db.setjsondata(reader.toString(),rslt.substring(1));
 							edit.commit(); // save the changes
 
 							AlertDialog.Builder builder = new AlertDialog.Builder(
@@ -273,20 +301,115 @@ public class Login extends Activity {
 											"Do You want to retrieve all data")
 									.setNegativeButton(
 											"No",
-											new DialogInterface.OnClickListener()// no
-																					// retrieve
-																					// data
-																					// listener
-											{
+											new DialogInterface.OnClickListener() {
 												public void onClick(
 														DialogInterface dialog,
 														int which) {
 													Intent i = new Intent(
 															getApplicationContext(),
 															HomePage.class);
+													byte[] decodedString = Base64
+															.decode(image,
+																	Base64.DEFAULT);
+													Bitmap decodedByte = BitmapFactory
+															.decodeByteArray(
+																	decodedString,
+																	0,
+																	decodedString.length);
+													RoundedImageView image;
+													image = (RoundedImageView) findViewById(R.id.userimage);
+													image.setImageBitmap(decodedByte);
+													
+													TextView txtOne = (TextView) findViewById(R.id.name);
 
-													finish();
-													startActivity(i);
+													// txtTwo.getLocationInWindow(fromLoc);
+													try {
+														String us_name = reader
+																.getString("name");
+														String names[] = us_name.split(" ");
+														if(names[0].length() >3)
+														{
+															us_name = capitalizeWord(names[0]);
+															
+														}
+														else
+														{
+															us_name = capitalizeWord(names[0]) + " " + capitalizeWord(names[1])   ;
+														}
+														
+														txtOne.setText("Welcome " + us_name);
+													} catch (JSONException e) {
+														// TODO Auto-generated
+														// catch block
+														e.printStackTrace();
+													}
+													TranslateAnimation t = new TranslateAnimation(
+															(float) 0.0,
+															(float) 0.0,
+															(float) 1000.0,
+															(float) 0.0);
+													t.setDuration(2000);
+													AnimationSet animationSet = new AnimationSet(
+															true);
+
+													AlphaAnimation animation1 = new AlphaAnimation(
+															0, 1);
+													animation1
+															.setDuration(2000);
+
+													animationSet
+															.addAnimation(t);
+													animationSet
+															.addAnimation(animation1);
+													txtOne.startAnimation(animationSet);
+													// txtOne.startAnimation(t);
+													// txtOne.animate().alphaBy(1).setDuration(5000).translationYBy(-1000).start();
+													// image.animate().setStartDelay(2000).alphaBy(1).setDuration(3000).start();
+													ScaleAnimation animation = new ScaleAnimation(
+															1,
+															3,
+															1,
+															3,
+															Animation.RELATIVE_TO_SELF,
+															(float) 0.5,
+															Animation.RELATIVE_TO_SELF,
+															(float) 0.5);
+													ViewAnimator viewAnimator;
+													animation.setDuration(1500);
+													animation
+															.setFillAfter(true);
+
+													AlphaAnimation alphanim = new AlphaAnimation(
+															0, 1);
+													alphanim.setDuration(1500);
+
+													AnimationSet imageset = new AnimationSet(
+															true);
+													imageset.addAnimation(animation);
+													imageset.addAnimation(alphanim);
+													imageset.setStartOffset(2000);
+													imageset.setFillAfter(true);
+													image.startAnimation(imageset);
+													Animation slide_in_left, slide_out_right;
+													viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
+
+													slide_in_left = AnimationUtils
+															.loadAnimation(
+																	getApplicationContext(),
+																	android.R.anim.slide_in_left);
+													slide_out_right = AnimationUtils
+															.loadAnimation(
+																	getApplicationContext(),
+																	android.R.anim.slide_out_right);
+
+													viewAnimator
+															.setInAnimation(slide_in_left);
+													viewAnimator
+															.setOutAnimation(slide_out_right);
+													viewAnimator.showNext();
+
+													// finish();
+													// startActivity(i);
 													//
 												}
 											}
@@ -392,6 +515,16 @@ public class Login extends Activity {
 
 			}
 		});
+		
+	}
+	private static String capitalizeWord(String word) {
+		if (word.length() > 0) {
+			char[] lowered = word.toLowerCase().toCharArray();
+			lowered[0] = Character.toUpperCase(lowered[0]);
+			word = new String(lowered);
+		}
+		
+		return word;
 	}
 
 	/*

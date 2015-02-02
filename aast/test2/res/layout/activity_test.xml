@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:divider="#000000"
+    android:dividerPadding="2dp"
+    android:orientation="horizontal" >
+
+    <TextView
+            android:id="@+id/textView44"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+             android:background="#D5D5D5"
+            android:text="" />	
+
+   <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView45"
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" 
+            android:background="#D5D5D5"
+            android:text="" />
+        
+        <TextView
+            android:id="@+id/time"
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"
+            android:background="#780001"
+            android:text="شس" />
+         <LinearLayout
+            
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:orientation="horizontal" >
+	           <TextView
+	          
+            android:id="@+id/year"
+            android:lineSpacingExtra="-5dp"
+            android:gravity="center|top"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+               android:background="#313131"
+            android:text="شس" />	
+             
+	        <TextView
+            android:id="@+id/Date"
+            android:layout_width="60dp"
+            android:gravity="center"
+            android:background="#C20000"
+            android:layout_height="50dp"
+         
+            />
+	     
+              
+          </LinearLayout>
+           <TextView
+            android:id="@+id/textView46"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+             android:background="#D5D5D5"
+            android:text="شس" />	
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+           android:paddingRight="10dp"
+           android:paddingLeft="10dp"
+           android:gravity="right"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+          />
+
+        <TextView
+            android:id="@+id/desc"
+           android:gravity="right"
+           android:visibility="gone"
+              android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="22222222" />
+    </LinearLayout>
+
+ 
+        <idc.aast.Other.VerticalTextView
+        android:id="@+id/cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:padding="4dip"
+        android:background="#C30000"
+        android:visibility="gone"
+        android:text="3arertrrrref" />
+  
+</LinearLayout>

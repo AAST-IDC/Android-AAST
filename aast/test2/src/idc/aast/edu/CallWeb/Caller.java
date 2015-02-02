@@ -251,7 +251,7 @@ public class Caller extends Thread {
 
 			} catch (Exception ex) {
 				// rslt= preferences1.getString("settlinks",
-				// "@name^http://www.aast.edu@name2^http://www.aast.edu@");
+				// "@name^http://www.aast.edu@name2^http://www.aast.edu@"); 
 
 			}
 			// List_detail.rslt2 = rslt;
@@ -268,6 +268,10 @@ public class Caller extends Thread {
 						// "@name^http://www.aast.edu@name2^http://www.aast.edu@");
 					} else {
 						MySQLiteHelper db = new MySQLiteHelper(con);
+						JSONObject reader = new JSONObject(rslt);
+						rslt = reader.getString("image");
+						
+						
 						db.setImage(rslt, a);
 					}
 

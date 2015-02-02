@@ -3,6 +3,7 @@ package idc.aast.test2;
 import idc.aast.edu.activities.Community;
 import idc.aast.edu.activities.TabMain;
 import idc.aast.edu.database.MySQLiteHelper;
+import idc.aast.edu.database.helper;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,8 +27,8 @@ public class HomePage extends Activity {
 		SharedPreferences preferences1 = getSharedPreferences(
 				"AAST", 0);
 		String	name = preferences1.getString("username", "noone");
-		 
-		MySQLiteHelper db = new MySQLiteHelper(getApplicationContext());
+		String	type = preferences1.getString("type", "noone");
+		MySQLiteHelper db = new MySQLiteHelper(getApplicationContext()); 
 		String image2 = db.getImage(name);
 		if(image2== null)
 		{
@@ -46,7 +47,7 @@ public class HomePage extends Activity {
 		image = (ImageView) findViewById(R.id.test_image);
 		image.setImageBitmap(decodedByte);
 		
-		
+		helper.getall(getApplicationContext(), name, type, preferences1);
 	}
 
 	@Override

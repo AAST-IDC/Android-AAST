@@ -1,98 +1,145 @@
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:context=".Login" >
 
-    <ImageView
-        android:id="@+id/imageView_chronometerBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
-        android:src="@drawable/bg" >
-    </ImageView>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" 
-         android:layout_centerHorizontal="true">
+    <ViewAnimator
+        android:id="@+id/viewanimator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-  <idc.aast.Other.ResizableImageView
-    android:id="@+id/banner"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/logo"
-    android:layout_gravity="center"
-    android:padding="10dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+            <ImageView
+                android:id="@+id/imageView_chronometerBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/bg" >
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical" >
+
+                <idc.aast.Other.ResizableImageView
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:src="@drawable/logo" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="0.4"
+                            android:text="@string/viewusername"
+                            android:textColor="#fff" />
+
+                        <EditText
+                            android:id="@+id/editText1"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:background="#fff"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" >
+                        </EditText>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/TextView02"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="0.12"
+                            android:text="@string/viewpassword"
+                            android:textColor="#fff" />
+
+                        <EditText
+                            android:id="@+id/editText2"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:background="#fff"
+                            android:ems="10"
+                            android:inputType="textPassword"
+                            android:singleLine="true" >
+                        </EditText>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="270dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:text="@string/viewsubmit" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:background="#364C62"
+            android:gravity="top"
+            
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
-                android:layout_width="70dp"
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                android:text="@string/viewusername"
-                android:textColor="#fff"
-                android:layout_margin="5dp" />
+                android:layout_gravity="center"
+                android:layout_marginBottom="100dp"
+                android:alpha="1"
+                android:text="Welcome Amr"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="25dp" />
 
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="#fff"
-                 android:singleLine="true"
-                 android:imeOptions="actionNext"
-                android:ems="10" >
+            <idc.aast.test2.RoundedImageView
+                android:id="@+id/userimage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:alpha="1"
+                android:contentDescription="img"
+                android:scaleType="centerCrop" />
 
-            </EditText>
+            <com.glomadrian.button.MaterialButton
+                android:id="@+id/materialButton"
+                custom:transitionTime="1200"
+                custom:color="#c3c3c3" />
         </LinearLayout>
+    </ViewAnimator>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="0.12"
-                android:text="@string/viewpassword"
-                android:textColor="#fff" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="#fff"
-                android:ems="10"
-          android:singleLine="true"
-             
-                android:inputType="textPassword" >
-
-                </EditText>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="270dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:text="@string/viewsubmit" />
-
-    </LinearLayout>
-</LinearLayout>
 </RelativeLayout>

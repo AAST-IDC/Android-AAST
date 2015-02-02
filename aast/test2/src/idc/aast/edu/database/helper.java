@@ -62,7 +62,7 @@ public class helper {
 			}
 		});
 		
-		 c = new Caller();
+    		 c = new Caller();
 		c.a = name;
 		c.b=type;
 	
@@ -80,7 +80,7 @@ public class helper {
 		}
 		c.start();
 		
-		
+		      
 		
 		
 		 c = new Caller();
@@ -129,7 +129,7 @@ public class helper {
 	{
 		
 		Caller c= new Caller();
-		c.a = name;
+    		c.a = name;
 		c.b="all";
 		c.con=context;
 		// get the links of the inbox , outbox .....
