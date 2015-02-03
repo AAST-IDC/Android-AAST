@@ -62,7 +62,7 @@ public class CallSoap {
 	public final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";
 
 	/** The soap address. */
-	public final String SOAP_ADDRESS = "https://aastmtic.aast.edu/notification/";
+	public final String SOAP_ADDRESS = "https://community.aast.edu/notification/service1.asmx";
 
 	/** The SOA p_ actio n7. */
 	public final String SOAP_ACTION7 = "http://tempuri.org/getall";
