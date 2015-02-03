@@ -97,6 +97,12 @@ public class MainLinksFragment extends Fragment {
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
 		SharedPreferences preferences1 = getActivity().getSharedPreferences(
 				"AAST", 0);
 		name = preferences1.getString("username", "noone");
@@ -114,8 +120,16 @@ public class MainLinksFragment extends Fragment {
 		arr3.clear();
 		int prev = 0;
 		int nw = 0;
-		arr2.addAll( Arrays.asList( new String[] { "Notification", "Schedule", "News" ,"Results","Links"}));
-		arr3.addAll( Arrays.asList( new String[] { "nots", "sch", "news" ,"results","links"}));
+		if (type.equals("1")) {
+			arr2.addAll(Arrays.asList(new String[] { "Notifications",
+					"Schedule", "News", "Results", "Links", "Accounts" }));
+			arr3.addAll(Arrays.asList(new String[] { "nots", "sch", "news",
+					"results", "links", "acc" }));
+		} else if (type.equals("0")) {
+			arr2.addAll(Arrays.asList(new String[] { "Notifications",
+					 "Links", "Accounts" }));
+			arr3.addAll(Arrays.asList(new String[] { "nots", "links", "acc" }));
+		}
 		LinksAdapter adap = new LinksAdapter(getActivity(), arr2, arr2);
 
 		myList.setAdapter(adap);
@@ -127,26 +141,23 @@ public class MainLinksFragment extends Fragment {
 					long arg3) {
 				String url = "https://payslip.aast.edu/online_payroll/Emp_Salary.aspx";
 				url = arr3.get(arg2);
-				if(url.equals("results")){
-					
+				if (url.equals("results")) {
+
 					TabMain.nw = 3;
-				}
-				else if (url.equals("nots"))
-				{
+				} else if (url.equals("nots")) {
 					TabMain.nw = 0;
-				}
-				else if (url.equals("sch"))
-				{
+				} else if (url.equals("sch")) {
 					TabMain.nw = 1;
-				}
-				else if (url.equals("news"))
-				{
+				} else if (url.equals("news")) {
 					TabMain.nw = 2;
-				}
-				else if (url.equals("links"))
-				{
+				} else if (url.equals("links")) {
 					TabMain.nw = 4;
-				
+
+				} else if (url.equals("acc")) {
+					Intent i = new Intent(getActivity(), Accounts.class);
+					startActivity(i);
+					return;
+
 				}
 				Intent i = new Intent(getActivity(), TabMain.class);
 				startActivity(i);
@@ -158,75 +169,6 @@ public class MainLinksFragment extends Fragment {
 		// TableLayout c = (TableLayout)findViewById(R.id.lay);
 
 		super.onStart();
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		if (itemId == android.R.id.home) {
-			// ProjectsActivity is my 'home' activity
-			// if
-			// (getResources().getString(R.string.app_config).equals("small")) {
-			// if (!mDrawerLayout.isDrawerOpen(mDrawerList))
-			// mDrawerLayout.openDrawer(mDrawerList);
-			// else
-			// mDrawerLayout.closeDrawer(mDrawerList);
-			// }
-			return true;
-		} else if (itemId == R.id.item1) {
-			MySQLiteHelper db = new MySQLiteHelper(getActivity()
-					.getApplicationContext());
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-					.permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-
-			return true;
-		} else if (itemId == R.id.item2) {
-			SharedPreferences preferences2 = getActivity()
-					.getSharedPreferences("AAST", 0);
-			String acc = preferences2.getString("naccount", "");
-			String type = preferences2.getString("type", "");
-			acc = acc.replace(type + name + "^", "");
-
-			Editor edit = preferences2.edit();
-			if (acc.equals("^")) {
-				edit.putString("login", "no");
-				edit.commit();
-				// finish();
-
-			}
-			if (!acc.equals("^"))
-				edit.putString("username",
-						acc.substring(2, acc.indexOf("^", 1)));
-			edit.putString("type", acc.substring(1, 2));
-			edit.putString("login", "no");
-			edit.putString("naccount", acc);
-			edit.commit();
-
-			Intent i = new Intent(getActivity().getApplicationContext(),
-					Accounts.class);
-			// finish();
-			startActivity(i);
-
-			// edit.putString("login", "no");
-
-			return true;
-		} else if (itemId == R.id.item4) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle("About")
-					.setMessage("Build number is" + Login.version)
-					.setNegativeButton("Ok", null);
-			AlertDialog alert = builder.create();
-			alert.show();
-			return true;
-		} else if (itemId == R.id.item6) {
-			Intent i = new Intent(getActivity(), Accounts.class);
-			i.putExtra("id", "ok");
-			// finish();
-			startActivity(i);
-			return true;
-		}
-		return true;
 	}
 
 	@Override

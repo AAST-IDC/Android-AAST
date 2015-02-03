@@ -7,6 +7,7 @@ import idc.aast.edu.activities.ListActivity;
 import idc.aast.edu.activities.LinksList;
 import idc.aast.edu.activities.Login;
 import idc.aast.edu.activities.Morasalat;
+import idc.aast.edu.classes.Message;
 import idc.aast.edu.classes.news_item;
 import idc.aast.edu.classes.result_item;
 import idc.aast.edu.classes.scheduele_slot;
@@ -23,6 +24,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -126,7 +128,15 @@ public class Caller extends Thread {
 			// get all th e previous notification webservice
 			try {
 				cs = new CallSoap();
-				cs.getall(a, b);
+				String result = cs.getall(a, b);
+				String[] arr = result.split("@");
+				for(int i=1 ; i <arr.length;i++)
+				{
+					Message ms= new Message(arr[i],a,b);
+					MySQLiteHelper db = new MySQLiteHelper(con);
+					db.addMessage(ms);
+					
+				}
 				Login.rslt = "ssa";
 			} catch (Exception ex) {
 				Login.rslt = "ssa";

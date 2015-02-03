@@ -99,8 +99,13 @@
                         android:id="@+id/button1"
                         android:layout_width="270dp"
                         android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:text="@string/viewsubmit" />
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/buttonshape"
+                        android:gravity="center"
+                        android:text="@string/viewsubmit"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
@@ -123,17 +128,57 @@
                 android:text="Welcome Amr"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
             <idc.aast.test2.RoundedImageView
                 android:id="@+id/userimage"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
                 android:alpha="1"
                 android:contentDescription="img"
                 android:scaleType="centerCrop" />
 
+            <TextView
+                android:id="@+id/enjoy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:alpha="0"
+                android:text="Enjoy The Application"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="29dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/your"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:alpha="0"
+                android:text="Your Opinion Is Appreciated"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/continu"
+                android:layout_width="270dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:alpha="0"
+                android:background="@drawable/buttonshape"
+                android:gravity="center"
+                android:text="Continue"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
         </LinearLayout>
     </ViewAnimator>
 

@@ -1,20 +1,30 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4D6378"
     android:orientation="vertical" >
- 
-         <ListView
-              android:id="@+id/listacc" 
-              android:layout_height="wrap_content"
-              android:layout_width="match_parent">
-         </ListView>
-     <Button
-            android:id="@+id/buttonacc"
-            android:layout_width="270dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:text="@string/viewsubmit" 
-            />
+
+    <ListView
+        android:id="@+id/listacc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4D6378"
+        android:divider="#4D6378"
+        android:dividerHeight="3dp"
+        android:minHeight="200dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/buttonacc"
+        android:text="Add Account"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:background="@drawable/buttonshape"
+        
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
 </LinearLayout>

@@ -44,6 +44,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
 
         <receiver
@@ -61,22 +62,30 @@
         <activity
             android:name="idc.aast.edu.activities.ListActivity"
             android:label="@string/title_activity_list"
-            android:theme="@style/Theme.Example" >
+            android:theme="@style/Theme.Example"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Accounts"
-            android:label="@string/title_activity_accounts" >
+            android:label="@string/title_activity_accounts" 
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Morasalat"
-            android:label="@string/title_activity_morasalat" >
+            android:label="@string/title_activity_morasalat" 
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Results"
-            android:label="@string/title_activity_results" >
+            android:label="@string/title_activity_results" 
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
 
         <service android:name="com.parse.PushService" />
@@ -113,7 +122,8 @@
         </activity>
         <activity
             android:name="idc.aast.edu.activities.CourseDetails"
-            android:label="@string/title_activity_course_details" android:configChanges="orientation"
+            android:label="@string/title_activity_course_details" 
+            android:configChanges="orientation"
             android:screenOrientation="portrait" >
         </activity>
         <activity

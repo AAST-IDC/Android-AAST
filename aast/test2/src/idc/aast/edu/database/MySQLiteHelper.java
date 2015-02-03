@@ -19,17 +19,17 @@ import android.util.Pair;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 13;
+	private static final int DATABASE_VERSION = 16;
 	// Database Name
 	private static final String DATABASE_NAME = "AAST_Notifications";
-
+	public Context context;
 	private static final String KEY_message = "message";
-	private static final String KEY_message_title = "message_title"; 
+	private static final String KEY_message_title = "message_title";
 	private static final String KEY_message_desc = "message_desc";
 	private static final String KEY_Serial = "Serial";
-	private static final String KEY_Read = "Read"; 
+	private static final String KEY_Read = "Read";
 	private static final String KEY_DateTime = "DateTime";
-	private static final String KEY_link = "link"; 
+	private static final String KEY_link = "link";
 	private static final String KEY_sys_code = "sys_code";
 	private static final String KEY_sys_name = "sys_name";
 	private static final String KEY_user_name = "user_name";
@@ -61,11 +61,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	};
 
 	public MySQLiteHelper(Context context) {
+	
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.context=context;
+		
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase database) {
+		
+		
 		String Create_message_table = "CREATE TABLE messages ( "
 				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "message TEXT, "
 				+ "message_title TEXT, " + "message_desc TEXT, "
@@ -94,7 +99,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 				+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
 				+ "link TEXT )";
-
+		  database.execSQL("DROP TABLE IF EXISTS messages");
+		  database.execSQL("DROP TABLE IF EXISTS accounts");
+		  database.execSQL("DROP TABLE IF EXISTS results");
+		  database.execSQL("DROP TABLE IF EXISTS scheduele");
+		  database.execSQL("DROP TABLE IF EXISTS news");
 		// create books table
 		database.execSQL(Create_message_table);
 		database.execSQL(Create_result_table);
@@ -281,6 +290,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return j;
 
 	}
+
 	public int setjsondata(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -301,6 +311,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
+
 	public int setLinks(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -321,6 +332,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
+
 	public int setname(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -341,6 +353,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
+
 	public int setdepname(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -361,6 +374,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
+
 	public int settitle(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -381,6 +395,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
+
 	public int setImage(String links, String name) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -607,6 +622,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "0^0^0^0";
 
 	}
+
 	public String getjsondata(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -628,6 +644,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "";
 
 	}
+
 	public String getlinks(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -649,6 +666,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "";
 
 	}
+
 	public String getname(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -670,6 +688,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "";
 
 	}
+
 	public String gettitle(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -691,6 +710,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "";
 
 	}
+
 	public String getdepname(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -712,6 +732,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return "";
 
 	}
+
 	public String getImage(String name) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -813,17 +834,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		// 2. delete
 		db.delete("accounts", "account = ?",
 				new String[] { String.valueOf(account) });
-		
+
 		db.delete("messages", "user_name = ?",
 				new String[] { String.valueOf(account) });
-		
+
 		db.delete("results", "user_id = ?",
 				new String[] { String.valueOf(account) });
-		
+
 		db.delete("scheduele", "user_id = ?",
 				new String[] { String.valueOf(account) });
-		
-
 
 		// 3. close
 		db.close();
@@ -1316,105 +1335,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+		onCreate(db);
+//		context.deleteDatabase(DATABASE_NAME);
 		// onCreate(db);
 		// db.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
-if (oldVersion == 12) {
-			
-			db.execSQL("ALTER TABLE accounts ADD COLUMN jsondata TEXT");
-		}
-else if (oldVersion == 11) {
-			
-			db.execSQL("ALTER TABLE accounts ADD COLUMN title TEXT");
-		} else if (oldVersion == 9) {
-
-			String create_news_table = "DROP table news";
-			db.execSQL(create_news_table);
-			create_news_table = "CREATE TABLE news ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-
-					+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
-					+ "link TEXT )";
-			db.execSQL(create_news_table);
-		} else if (oldVersion == 7) {
-
-			String create_news_table = "ALTER TABLE accounts ADD COLUMN us_image TEXT";
-			db.execSQL(create_news_table);
-		} else if (oldVersion == 6) {
-
-			String create_news_table = "CREATE TABLE news ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-
-					+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
-					+ "link TEXT )";
-			db.execSQL(create_news_table);
-		} else if (oldVersion == 5) {
-			String create_scheduele_table = "CREATE TABLE scheduele ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ "user_id TEXT, " + "serial_key TEXT, "
-					+ "course_code TEXT, " + "course TEXT, "
-					+ "day_code TEXT, " + "from_code TEXT, " + "to_code TEXT, "
-					+ "kind TEXT, " + "lec_name TEXT, " + "room_num TEXT, "
-					+ "fac_code TEXT, " + "room_symbol TEXT, "
-					+ "room_desc TEXT )";
-			db.execSQL(create_scheduele_table);
-			String create_news_table = "CREATE TABLE news ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-
-					+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
-					+ "link TEXT )";
-			db.execSQL(create_news_table);
-
-		} else if (oldVersion == 4) {
-
-			String Create_result_table = "CREATE TABLE results ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ "user_id TEXT, " + "term_id TEXT, " + "term_desc TEXT, "
-					+ "course_code TEXT, " + "course_name TEXT, "
-					+ "seventh_degree TEXT, " + "twelves TEXT, "
-					+ "semi_degree TEXT, " + "grade_text TEXT, "
-					+ "hours TEXT )";
-			// create books table
-			// database.execSQL(Create_message_table);
-			db.execSQL(Create_result_table);
-			String create_scheduele_table = "CREATE TABLE scheduele ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ "user_id TEXT, " + "serial_key TEXT, "
-					+ "course_code TEXT, " + "course TEXT, "
-					+ "day_code TEXT, " + "from_code TEXT, " + "to_code TEXT, "
-					+ "kind TEXT, " + "lec_name TEXT, " + "room_num TEXT, "
-					+ "fac_code TEXT, " + "room_symbol TEXT, "
-					+ "room_desc TEXT )";
-			db.execSQL(create_scheduele_table);
-		} else {
-			db.execSQL("ALTER TABLE accounts ADD COLUMN results TEXT");
-
-			String Create_result_table = "CREATE TABLE results ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ "user_id TEXT, " + "term_id TEXT, " + "term_desc TEXT, "
-					+ "course_code TEXT, " + "course_name TEXT, "
-					+ "seventh_degree TEXT, " + "twelves TEXT, "
-					+ "semi_degree TEXT, " + "grade_text TEXT, "
-					+ "hours TEXT )";
-			// create books table
-			// database.execSQL(Create_message_table);
-			db.execSQL(Create_result_table);
-			String create_scheduele_table = "CREATE TABLE scheduele ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ "user_id TEXT, " + "serial_key TEXT, "
-					+ "course_code TEXT, " + "course TEXT, "
-					+ "day_code TEXT, " + "from_code TEXT, " + "to_code TEXT, "
-					+ "kind TEXT, " + "lec_name TEXT, " + "room_num TEXT, "
-					+ "fac_code TEXT, " + "room_symbol TEXT, "
-					+ "room_desc TEXT )";
-			db.execSQL(create_scheduele_table);
-			String create_news_table = "CREATE TABLE news ( "
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-
-					+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
-					+ "link TEXT )";
-			db.execSQL(create_news_table);
-		}
-
+	
 	}
 
 }

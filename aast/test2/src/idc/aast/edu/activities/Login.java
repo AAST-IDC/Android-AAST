@@ -331,6 +331,21 @@ public class Login extends Activity {
 								// catch block
 								e.printStackTrace();
 							}
+							Animation slide_in_left, slide_out_right;
+							ViewAnimator viewAnimator;
+							viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
+
+							slide_in_left = AnimationUtils.loadAnimation(
+									getApplicationContext(),
+									android.R.anim.slide_in_left);
+							slide_out_right = AnimationUtils.loadAnimation(
+									getApplicationContext(),
+									android.R.anim.slide_out_right);
+
+							viewAnimator.setInAnimation(slide_in_left);
+							viewAnimator.setOutAnimation(slide_out_right);
+							viewAnimator.showNext();
+							
 							TranslateAnimation t1 = new TranslateAnimation(
 									(float) 0.0, (float) 0.0, (float) 1000.0,
 									(float) 0.0);
@@ -350,7 +365,8 @@ public class Login extends Activity {
 									1, 3, Animation.RELATIVE_TO_SELF,
 									(float) 0.5, Animation.RELATIVE_TO_SELF,
 									(float) 0.5);
-							ViewAnimator viewAnimator;
+						
+							
 							animation.setDuration(1500);
 							animation.setFillAfter(true);
 
@@ -363,19 +379,23 @@ public class Login extends Activity {
 							imageset.setStartOffset(2000);
 							imageset.setFillAfter(true);
 							image1.startAnimation(imageset);
-							Animation slide_in_left, slide_out_right;
-							viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
+							TextView enjoy = (TextView) findViewById(R.id.enjoy);
+							enjoy.animate().alpha(1).setStartDelay(3500).setDuration(1500).start();
+							TextView your = (TextView) findViewById(R.id.your);
+							your.animate().alpha(1).setStartDelay(5000).setDuration(1500).start();
+							Button continu = (Button) findViewById(R.id.continu);
+							continu.animate().alpha(1).setStartDelay(6500).setDuration(1500).start();
+							continu.setOnClickListener(new OnClickListener() {
+								
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent i = new Intent(getApplicationContext(), HomePage.class);
 
-							slide_in_left = AnimationUtils.loadAnimation(
-									getApplicationContext(),
-									android.R.anim.slide_in_left);
-							slide_out_right = AnimationUtils.loadAnimation(
-									getApplicationContext(),
-									android.R.anim.slide_out_right);
+									startActivity(i);
 
-							viewAnimator.setInAnimation(slide_in_left);
-							viewAnimator.setOutAnimation(slide_out_right);
-							viewAnimator.showNext();
+								}
+							});
 
 							// finish();
 							// startActivity(i);

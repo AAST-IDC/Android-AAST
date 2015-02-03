@@ -64,6 +64,24 @@ public class Message {
 		
 		
 	}
+	public Message(String message,String user_name,String user_type)
+	{
+		String[] arr = message.split("\\^");
+		this.message=message;
+		this.message_title=arr[2];
+		this.message_desc=arr[0];
+		this.Serial=arr[3];
+		this.Read=arr[6].substring(0,1);
+	
+		this.link=arr[1];
+		this.sys_code=arr[4];
+		this.sys_name=arr[5];
+		this.user_name=user_name;
+		this.user_type=user_type;
+		this.dateTime=arr[7];
+		
+		
+	}
 	public String getSerial() {
 		return Serial;
 	}

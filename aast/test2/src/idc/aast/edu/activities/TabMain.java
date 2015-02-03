@@ -58,7 +58,8 @@ import android.view.Menu;
 	        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 	 
 	        viewPager.setAdapter(mAdapter);
-	        viewPager.setCurrentItem(nw);
+	
+	        
 	        actionBar.setHomeButtonEnabled(false);
 	        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
 	 
@@ -88,6 +89,7 @@ import android.view.Menu;
 	            public void onPageScrollStateChanged(int arg0) {
 	            }
 	        });
+	        viewPager.setCurrentItem(nw,false);
 	    }
 	 
 
