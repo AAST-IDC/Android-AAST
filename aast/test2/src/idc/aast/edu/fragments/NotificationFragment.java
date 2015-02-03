@@ -221,7 +221,7 @@ public class NotificationFragment extends Fragment {
 		// height to the
 		// list adapter
 
-		context.setTitle("ãÊÇÈÚÇÊ");
+		context.setTitle("AASTMT Portal");
 
 		doubleBackToExitPressedOnce = false; // initialize the boolean to detect
 												// the double back button

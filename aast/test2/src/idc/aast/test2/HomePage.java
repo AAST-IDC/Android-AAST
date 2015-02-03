@@ -1,6 +1,10 @@
 package idc.aast.test2;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import idc.aast.edu.activities.Community;
+import idc.aast.edu.activities.Login;
 import idc.aast.edu.activities.TabMain;
 import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.edu.database.helper;
@@ -10,14 +14,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-public class HomePage extends Activity {
+public class HomePage extends FragmentActivity  {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +49,30 @@ public class HomePage extends Activity {
 			
 		byte[] decodedString = Base64.decode(image2, Base64.DEFAULT);
 		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-		ImageView image;
-		image = (ImageView) findViewById(R.id.test_image);
+		RoundedImageView image;
+		image = (RoundedImageView) findViewById(R.id.test_image);
 		image.setImageBitmap(decodedByte);
+		TextView txtOne = (TextView) findViewById(R.id.name);
 		
+		// txtTwo.getLocationInWindow(fromLoc);
+		try {
+			final JSONObject reader = new JSONObject(db.getjsondata(name));
+			String us_name = reader.getString("name");
+			String names[] = us_name.split(" ");
+			if (names[0].length() > 3) {
+				us_name = Login.capitalizeWord(names[0]);
+
+			} else {
+				us_name = Login.capitalizeWord(names[0]) + " "
+						+ Login.capitalizeWord(names[1]);
+			}
+
+			txtOne.setText("Welcome " + us_name);
+		} catch (JSONException e) {
+			// TODO Auto-generated
+			// catch block
+			e.printStackTrace();
+		}
 		helper.getall(getApplicationContext(), name, type, preferences1);
 	}
 
@@ -54,26 +80,26 @@ public class HomePage extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home_page, menu);
-		Button comm = (Button) findViewById(R.id.dir_community);
-		comm.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				Intent i = new Intent(getApplicationContext(), Community.class);
-				startActivity(i);
-				
-			}
-		});
-		Button other = (Button) findViewById(R.id.dir_other);
-		other.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				Intent i = new Intent(getApplicationContext(), TabMain.class);
-				startActivity(i);
-				
-			}
-		});
+//		Button comm = (Button) findViewById(R.id.dir_community);
+//		comm.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				Intent i = new Intent(getApplicationContext(), Community.class);
+//				startActivity(i);
+//				
+//			}
+//		});
+//		Button other = (Button) findViewById(R.id.dir_other);
+//		other.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				Intent i = new Intent(getApplicationContext(), TabMain.class);
+//				startActivity(i);
+//				
+//			}
+//		});
 		return true;
 	}
 

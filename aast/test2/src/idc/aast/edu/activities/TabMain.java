@@ -31,7 +31,7 @@ import android.view.Menu;
 	    private ActionBar actionBar;
 	    // Tab titles
 	    private String[] tabs;
-	
+	public static int nw =0;
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -58,6 +58,7 @@ import android.view.Menu;
 	        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 	 
 	        viewPager.setAdapter(mAdapter);
+	        viewPager.setCurrentItem(nw);
 	        actionBar.setHomeButtonEnabled(false);
 	        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
 	 

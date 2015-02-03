@@ -407,7 +407,7 @@ public class Login extends Activity {
 
 	}
 
-	private static String capitalizeWord(String word) {
+	public static String capitalizeWord(String word) {
 		if (word.length() > 0) {
 			char[] lowered = word.toLowerCase().toCharArray();
 			lowered[0] = Character.toUpperCase(lowered[0]);

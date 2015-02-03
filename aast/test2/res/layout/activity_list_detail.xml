@@ -9,11 +9,12 @@ android:orientation="vertical" >
 android:id="@+id/listView3"
     		android:drawSelectorOnTop="true"
     	android:layout_width="fill_parent"
-    
+    	          android:divider="#4D6378"
+        android:dividerHeight="3dp"
         	
 	    android:layout_height="0px"
 	    android:layout_weight="1"
 	    android:background="#364C62"
-	   android:listSelector="@drawable/list_selector"  ></ListView>
+	  ></ListView>
 </LinearLayout>
  

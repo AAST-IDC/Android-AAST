@@ -8,11 +8,12 @@
     
     <ImageView 
         android:id="@+id/textView111"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-   
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+   	android:layout_gravity="center"
         android:gravity="center"
         android:background="#364C62"
+        android:paddingLeft="15dp"
 
    
         
@@ -22,10 +23,12 @@
     <TextView
         android:id="@+id/text1"
         android:layout_width="fill_parent"
+        android:textColor="#FFFFFF"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:paddingLeft="6dip"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
         android:text="saas"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

@@ -2,35 +2,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#4D6378" >
+    android:background="#4D6378"
+    android:orientation="vertical" >
 
-    <ImageView
-        
-        android:layout_marginTop="50dp"
-        android:id="@+id/test_image"
-        android:layout_gravity="center"
-        
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-                style="@style/TestNew" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:background="#364C62"
+        android:gravity="top"
+        android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world"
-                style="@style/TestNew" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:alpha="1"
+            android:text="Welcome Amr"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/dir_community"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-                style="@style/TestNew"/>
+        <idc.aast.test2.RoundedImageView
+            android:id="@+id/test_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:alpha="1"
+            android:contentDescription="img"
+            android:scaleType="centerCrop" />
 
-    <Button
-        android:id="@+id/dir_other"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-                style="@style/TestNew" />
+        <fragment
+            android:id="@+id/static_fragment"
+            android:name="idc.aast.test2.MainLinksFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>
