@@ -16,6 +16,7 @@ import com.google.analytics.containertag.proto.MutableServing.Resource;
 
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,11 +123,14 @@ public class LinksAdapter extends BaseAdapter {
 
 		try { 
 	
-   //   String x = links.get(position);
-    //  x = x.replace(" ", "_").toLowerCase();
-    //    Drawable drawable = context.getResources().getDrawable(context.getResources()
-       //         .getIdentifier(x, "drawable", context.getPackageName()));
-			//holder.image.setImageDrawable(R.drawable.);
+      String x = links.get(position);
+      x = x.replace(" ", "_").toLowerCase();
+      Resources res =  context.getResources();
+      String mDrawableName = "logo_default";
+      
+      int resID = res.getIdentifier(x , "drawable", context.getPackageName());
+      Drawable drawable = res.getDrawable(resID );
+			holder.image.setImageDrawable(drawable);
 			
 		}catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
