@@ -132,7 +132,7 @@ public class LinksAdapter extends BaseAdapter {
 
 			
 			String x = links.get(position);
-			x = x.replace(" ", "_").toLowerCase();
+		
 			if (links.get(position).equals("„›—œ«  «·„— »")) {
 				x="salaries";
 			}
@@ -140,17 +140,18 @@ public class LinksAdapter extends BaseAdapter {
 				x="att";
 			}
 			if (links.get(position).equals("ÕÃ“ «·⁄Ì«œ…")) {
-				x="clinic_reservation";
+				x="clinic_reservation"; 
 			}
 			if (links.get(position).equals("«·ÊŸ«∆› «·‘«€—…")) {
 				x="jobs";
 			}
-			if (links.get(position).equals("««·„Êﬁ⁄ «·—”„Ï ··«ﬂ«œÌ„Ì…")) {
+			if (links.get(position).equals("«·„Êﬁ⁄ «·—”„Ï ··«ﬂ«œÌ„Ì…")) {
 				x="website";
 			}
 			if (links.get(position).equals("«·«·„—«”·« ")) {
 				x="questionnaire";
 			}
+			x = x.replace(" ", "_").toLowerCase();
 			Resources res = context.getResources();
 			String mDrawableName = "logo_default";
 
