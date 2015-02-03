@@ -54,6 +54,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -200,14 +201,18 @@ public class Login extends Activity {
 			@Override
 			// on login button click
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
+				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+				inputManager.hideSoftInputFromWindow(getCurrentFocus()
+						.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+				// TODO Auto-generated method stub
+				if (android.os.Build.VERSION.SDK_INT > 9) {
+					StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+							.permitAll().build();
+					StrictMode.setThreadPolicy(policy);
+				}
 				if (!helper.isInternetAvailable()) {
-					if (android.os.Build.VERSION.SDK_INT > 9) {
-						StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-								.permitAll().build();
-						StrictMode.setThreadPolicy(policy);
-					}
+
 					Toast.makeText(getApplicationContext(),
 							"No Internet Connection cannot login",
 							Toast.LENGTH_LONG).show();
@@ -291,206 +296,90 @@ public class Login extends Activity {
 							db.addAccount(rslt.substring(1),
 									rslt.substring(0, 1));
 							db.setImage(image, rslt.substring(1));
-							db.setjsondata(reader.toString(),rslt.substring(1));
+							db.setjsondata(reader.toString(), rslt.substring(1));
 							edit.commit(); // save the changes
 
 							AlertDialog.Builder builder = new AlertDialog.Builder(
 									Login.this);
-							builder.setTitle("Retrieve")
-									.setMessage(
-											"Do You want to retrieve all data")
-									.setNegativeButton(
-											"No",
-											new DialogInterface.OnClickListener() {
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													Intent i = new Intent(
-															getApplicationContext(),
-															HomePage.class);
-													byte[] decodedString = Base64
-															.decode(image,
-																	Base64.DEFAULT);
-													Bitmap decodedByte = BitmapFactory
-															.decodeByteArray(
-																	decodedString,
-																	0,
-																	decodedString.length);
-													RoundedImageView image;
-													image = (RoundedImageView) findViewById(R.id.userimage);
-													image.setImageBitmap(decodedByte);
-													
-													TextView txtOne = (TextView) findViewById(R.id.name);
+							Intent i = new Intent(getApplicationContext(),
+									HomePage.class);
+							byte[] decodedString = Base64.decode(image,
+									Base64.DEFAULT);
+							Bitmap decodedByte = BitmapFactory.decodeByteArray(
+									decodedString, 0, decodedString.length);
+							RoundedImageView image1;
+							image1 = (RoundedImageView) findViewById(R.id.userimage);
+							image1.setImageBitmap(decodedByte);
 
-													// txtTwo.getLocationInWindow(fromLoc);
-													try {
-														String us_name = reader
-																.getString("name");
-														String names[] = us_name.split(" ");
-														if(names[0].length() >3)
-														{
-															us_name = capitalizeWord(names[0]);
-															
-														}
-														else
-														{
-															us_name = capitalizeWord(names[0]) + " " + capitalizeWord(names[1])   ;
-														}
-														
-														txtOne.setText("Welcome " + us_name);
-													} catch (JSONException e) {
-														// TODO Auto-generated
-														// catch block
-														e.printStackTrace();
-													}
-													TranslateAnimation t = new TranslateAnimation(
-															(float) 0.0,
-															(float) 0.0,
-															(float) 1000.0,
-															(float) 0.0);
-													t.setDuration(2000);
-													AnimationSet animationSet = new AnimationSet(
-															true);
+							TextView txtOne = (TextView) findViewById(R.id.name);
 
-													AlphaAnimation animation1 = new AlphaAnimation(
-															0, 1);
-													animation1
-															.setDuration(2000);
+							// txtTwo.getLocationInWindow(fromLoc);
+							try {
+								String us_name = reader.getString("name");
+								String names[] = us_name.split(" ");
+								if (names[0].length() > 3) {
+									us_name = capitalizeWord(names[0]);
 
-													animationSet
-															.addAnimation(t);
-													animationSet
-															.addAnimation(animation1);
-													txtOne.startAnimation(animationSet);
-													// txtOne.startAnimation(t);
-													// txtOne.animate().alphaBy(1).setDuration(5000).translationYBy(-1000).start();
-													// image.animate().setStartDelay(2000).alphaBy(1).setDuration(3000).start();
-													ScaleAnimation animation = new ScaleAnimation(
-															1,
-															3,
-															1,
-															3,
-															Animation.RELATIVE_TO_SELF,
-															(float) 0.5,
-															Animation.RELATIVE_TO_SELF,
-															(float) 0.5);
-													ViewAnimator viewAnimator;
-													animation.setDuration(1500);
-													animation
-															.setFillAfter(true);
+								} else {
+									us_name = capitalizeWord(names[0]) + " "
+											+ capitalizeWord(names[1]);
+								}
 
-													AlphaAnimation alphanim = new AlphaAnimation(
-															0, 1);
-													alphanim.setDuration(1500);
+								txtOne.setText("Welcome " + us_name);
+							} catch (JSONException e) {
+								// TODO Auto-generated
+								// catch block
+								e.printStackTrace();
+							}
+							TranslateAnimation t1 = new TranslateAnimation(
+									(float) 0.0, (float) 0.0, (float) 1000.0,
+									(float) 0.0);
+							t1.setDuration(2000);
+							AnimationSet animationSet = new AnimationSet(true);
 
-													AnimationSet imageset = new AnimationSet(
-															true);
-													imageset.addAnimation(animation);
-													imageset.addAnimation(alphanim);
-													imageset.setStartOffset(2000);
-													imageset.setFillAfter(true);
-													image.startAnimation(imageset);
-													Animation slide_in_left, slide_out_right;
-													viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
+							AlphaAnimation animation1 = new AlphaAnimation(0, 1);
+							animation1.setDuration(2000);
 
-													slide_in_left = AnimationUtils
-															.loadAnimation(
-																	getApplicationContext(),
-																	android.R.anim.slide_in_left);
-													slide_out_right = AnimationUtils
-															.loadAnimation(
-																	getApplicationContext(),
-																	android.R.anim.slide_out_right);
+							animationSet.addAnimation(t1);
+							animationSet.addAnimation(animation1);
+							txtOne.startAnimation(animationSet);
+							// txtOne.startAnimation(t);
+							// txtOne.animate().alphaBy(1).setDuration(5000).translationYBy(-1000).start();
+							// image.animate().setStartDelay(2000).alphaBy(1).setDuration(3000).start();
+							ScaleAnimation animation = new ScaleAnimation(1, 3,
+									1, 3, Animation.RELATIVE_TO_SELF,
+									(float) 0.5, Animation.RELATIVE_TO_SELF,
+									(float) 0.5);
+							ViewAnimator viewAnimator;
+							animation.setDuration(1500);
+							animation.setFillAfter(true);
 
-													viewAnimator
-															.setInAnimation(slide_in_left);
-													viewAnimator
-															.setOutAnimation(slide_out_right);
-													viewAnimator.showNext();
+							AlphaAnimation alphanim = new AlphaAnimation(0, 1);
+							alphanim.setDuration(1500);
 
-													// finish();
-													// startActivity(i);
-													//
-												}
-											}
+							AnimationSet imageset = new AnimationSet(true);
+							imageset.addAnimation(animation);
+							imageset.addAnimation(alphanim);
+							imageset.setStartOffset(2000);
+							imageset.setFillAfter(true);
+							image1.startAnimation(imageset);
+							Animation slide_in_left, slide_out_right;
+							viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
 
-									)
+							slide_in_left = AnimationUtils.loadAnimation(
+									getApplicationContext(),
+									android.R.anim.slide_in_left);
+							slide_out_right = AnimationUtils.loadAnimation(
+									getApplicationContext(),
+									android.R.anim.slide_out_right);
 
-									.setIcon(android.R.drawable.ic_dialog_alert)
-									.setPositiveButton(
-											"Yes",
-											new DialogInterface.OnClickListener() // retrieved
-																					// data
-																					// approved
-																					// listiner
-											{
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													SharedPreferences pref = getSharedPreferences(
-															"AAST", 0);
-													Caller c = new Caller();
-													c.a = pref
-															.getString(
-																	"username",
-																	"noone");
-													c.b = pref.getString(
-															"type", "noone");
-													// call the webservice tht
-													// will
-													// get all the previeous
-													// data
-													c.c = "getall";
+							viewAnimator.setInAnimation(slide_in_left);
+							viewAnimator.setOutAnimation(slide_out_right);
+							viewAnimator.showNext();
 
-													Editor edit1 = pref.edit();
-													// String name =
-													// pref.getString(
-													// "username", "noone");//
-													// get
-													// the
-													// username
-													// the
-													MySQLiteHelper db = new MySQLiteHelper(
-															getApplicationContext());
-													db.deleteAllMessage(pref
-															.getString(
-																	"username",
-																	"noone")); // size
-													edit1.commit(); // save the
-																	// data;
-													c.con = getApplicationContext(); // pass
-																						// the
-																						// current
-																						// contect
-													try {
-														c.join();
-													} catch (InterruptedException e) {
-														// TODO Auto-generated
-														// catch
-														// block
-														e.printStackTrace();
-													}
-													c.start();
-													while (!rslt.equals("ssa")) {
-														try {
-															Thread.sleep(10);
-														} catch (Exception ex) {
-														}
-													}
-													Intent i = new Intent(
-															getApplicationContext(),
-															HomePage.class);
-													finish();
-													startActivity(i);
-													// do some thing here which
-													// you
-													// need
-												}
-											}
-
-									);
-							AlertDialog alert = builder.create();
-							alert.show();
+							// finish();
+							// startActivity(i);
+							//
 
 						} else// in case not logged in
 						{
@@ -515,15 +404,16 @@ public class Login extends Activity {
 
 			}
 		});
-		
+
 	}
+
 	private static String capitalizeWord(String word) {
 		if (word.length() > 0) {
 			char[] lowered = word.toLowerCase().toCharArray();
 			lowered[0] = Character.toUpperCase(lowered[0]);
 			word = new String(lowered);
 		}
-		
+
 		return word;
 	}
 

@@ -7,16 +7,21 @@ import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+
+import com.google.analytics.containertag.proto.MutableServing.Resource;
 
 
 
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import android.widget.TextView;
 
@@ -58,7 +63,7 @@ public class LinksAdapter extends BaseAdapter {
  		TextView linkT;
 		 
  		/** The Count t. */
- 		TextView CountT;
+ 		ImageView image;
 	 
 	 }
 	 
@@ -103,10 +108,10 @@ public class LinksAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.simple_list_item_1, null);
 			holder = new ViewHolder();
 			holder.linkT = (TextView) convertView.findViewById(R.id.text1);
-			holder.CountT = (TextView) convertView.findViewById(R.id.textView1);
+			holder.image = (ImageView) convertView.findViewById(R.id.textView111);
 		
 			convertView.setTag(holder);
-
+ 
 		}
 		else
 		{
@@ -114,7 +119,19 @@ public class LinksAdapter extends BaseAdapter {
 		}
 		
 		holder.linkT.setText(links.get(position));
-		holder.CountT.setText("");
+
+		try { 
+	
+   //   String x = links.get(position);
+    //  x = x.replace(" ", "_").toLowerCase();
+    //    Drawable drawable = context.getResources().getDrawable(context.getResources()
+       //         .getIdentifier(x, "drawable", context.getPackageName()));
+			//holder.image.setImageDrawable(R.drawable.);
+			
+		}catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		// TODO Auto-generated method stub
 		return convertView;
 	}

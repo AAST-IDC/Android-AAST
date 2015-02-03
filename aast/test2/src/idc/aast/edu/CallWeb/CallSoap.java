@@ -53,10 +53,10 @@ public class CallSoap {
 	public final String OPERATION_NAME5 = "remove";
 
 	/** The SOA p_ actio n6. */
-	public final String SOAP_ACTION6 = "http://tempuri.org/getall";
+	public final String SOAP_ACTION6 = "http://tempuri.org/get_latest_notifcations";
 
 	/** The OPERATIO n_ nam e6. */
-	public final String OPERATION_NAME6 = "getall";
+	public final String OPERATION_NAME6 = "get_latest_notifcations";
 
 	/** The wsdl target namespace. */
 	public final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";
@@ -402,14 +402,19 @@ public class CallSoap {
 				OPERATION_NAME6);
 		PropertyInfo pi = new PropertyInfo();
 		PropertyInfo p3 = new PropertyInfo();
-		pi.setName("empid");
+		PropertyInfo p2 = new PropertyInfo();
+		pi.setName("user_name");
 		pi.setValue(a);
 		pi.setType(Integer.class);
 		request.addProperty(pi);
-		p3.setName("type");
+		p3.setName("user_type");
 		p3.setValue(b);
 		p3.setType(Integer.class);
-		request.addProperty(p3);	
+		request.addProperty(p3);
+		p2.setName("serial");
+		p2.setValue(0);
+		p2.setType(Integer.class);
+		request.addProperty(p2);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		envelope.dotNet = true;

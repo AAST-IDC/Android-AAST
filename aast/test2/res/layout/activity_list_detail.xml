@@ -13,7 +13,7 @@ android:id="@+id/listView3"
         	
 	    android:layout_height="0px"
 	    android:layout_weight="1"
-	    android:background="#E9E9E9"
+	    android:background="#364C62"
 	   android:listSelector="@drawable/list_selector"  ></ListView>
 </LinearLayout>
  

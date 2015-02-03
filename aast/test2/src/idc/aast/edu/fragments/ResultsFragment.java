@@ -14,6 +14,8 @@ import idc.aast.test2.R.layout;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,7 +38,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class ResultsFragment extends Fragment implements OnItemSelectedListener {
 
-	private Spinner spinner;
+	private static Spinner spinner;
 
 	/** The double back to exit pressed once. */
 	// private boolean doubleBackToExitPressedOnce = false;
@@ -50,6 +52,7 @@ public static ProgressDialog  progress;
 	static String name;
 	static ArrayList<result_item> res;
 	static String[] all_terms;
+	static ArrayAdapter<String> adapter;
 	/** The rslt. */
 	static String rslt;
 	static ResultsAdapter adap;
@@ -74,19 +77,40 @@ public static ProgressDialog  progress;
 		ListView myList = (ListView) getActivity().findViewById(R.id.results1);
 
 		spinner = (Spinner) getActivity().findViewById(R.id.spinner1);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+		 adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_spinner_item, student.get_terms());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(this);
-
+		
 		res = student.get_results();
 		adap = new ResultsAdapter(getActivity(), res, res);
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
 		super.onStart();
 	}
+	public static void runOnUiThread(Runnable runnable){
+        final Handler UIHandler = new Handler(Looper.getMainLooper());
+        runnable = new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				res.clear();
+				
+				res.addAll(student.get_results(spinner.getSelectedItemPosition()));
 
+				adap.notifyDataSetChanged();
+				//spinner = (Spinner) getActivity().findViewById(R.id.spinner1);
+				 adapter = new ArrayAdapter<String>(student.con,
+						android.R.layout.simple_spinner_item, student.get_terms());
+				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				spinner.setAdapter(adapter);
+				
+			}
+		};
+        UIHandler .post(runnable);
+    } 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -142,9 +166,15 @@ public static ProgressDialog  progress;
 
 			}
 			res.clear();
+			
 			res.addAll(student.get_results(spinner.getSelectedItemPosition()));
 
 			adap.notifyDataSetChanged();
+			spinner = (Spinner) getActivity().findViewById(R.id.spinner1);
+			 adapter = new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_spinner_item, student.get_terms());
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner.setAdapter(adapter);
 			// context.findViewById(R.id.actionbar_notifcation_textview);
 			// v.setText(""+db.getmessagecount(name, type, filter));
 			// ContentValues cv = new ContentValues();

@@ -8,6 +8,7 @@ import idc.aast.edu.fragments.NotificationFragment;
 import idc.aast.edu.fragments.ResultsFragment;
 import idc.aast.edu.fragments.SchRootFragment;
 import idc.aast.edu.fragments.SchedueleFragment;
+import idc.aast.test2.LinksFragment;
 
 import java.util.ArrayList;
 
@@ -34,12 +35,12 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     	if(type.equals("0"))
 		{
 			
-			tabs = new String[] { "Notification", "News"};
+			tabs = new String[] { "Notification", "News","Links"};
 		}
 		else
 			
 		{
-			tabs = new String[] { "Notification", "Schedule", "News" ,"Results"};
+			tabs = new String[] { "Notification", "Schedule", "News" ,"Results","Links"};
 			
 		}
     }
@@ -73,6 +74,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
          else if(nw=="News")
       	   return new NewsFragment();
+         else if(nw=="Links")
+        	 return new LinksFragment();
          else 
       	   return new GamesFragment();
  

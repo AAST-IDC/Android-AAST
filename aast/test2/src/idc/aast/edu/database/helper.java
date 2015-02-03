@@ -62,6 +62,8 @@ public class helper {
 			}
 		});
 		
+		
+		
     		 c = new Caller();
 		c.a = name;
 		c.b=type;
@@ -120,6 +122,27 @@ public class helper {
 			e.printStackTrace();
 		}
 		c.start();
+		
+		if(db.getmessagecount(name, type, "")==0)
+		{
+			c= new Caller();
+			
+			
+			c.a =db.get_last_news_date();
+			c.b=type;
+			c.con=context;
+			// get the links of the inbox , outbox .....
+			c.c = "getall";
+
+			try {
+				c.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			c.start();
+			
+		}
 		
 		getScheduele(name,context);
 		getResults_all(name,context);

@@ -83,8 +83,16 @@ public class Student extends User {
 	}
 
 	public List<result_item> get_results(int term) {
-
-		return db.get_all_results(all_terms[term], user_id);
+		
+		try
+		{
+			return db.get_all_results(all_terms[term], user_id);
+		}
+		catch (Exception e)
+		{
+			return db.get_all_results("", user_id);	
+		
+		}
 
 	}
 

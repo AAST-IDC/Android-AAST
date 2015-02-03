@@ -70,5 +70,6 @@
     <string name="title_activity_group_post_fragment">GroupPostFragment</string>
     <string name="title_activity_home_page">HomePage</string>
     <string name="title_activity_test">Test</string>
+    <string name="title_activity_links_fragment">LinksFragment</string>
 
 </resources>

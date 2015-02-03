@@ -43,12 +43,12 @@ import android.view.Menu;
 			if(type.equals("0"))
 			{
 				
-				tabs = new String[] { "Notification", "News"};
+				tabs = new String[] { "Notification", "News","Links"};
 			}
 			else
 				
 			{
-				tabs = new String[] { "Notification", "Schedule", "News" ,"Results"};
+				tabs = new String[] { "Notification", "Schedule", "News" ,"Results","Links"};
 				
 			}
 			TabsPagerAdapter.type= type;

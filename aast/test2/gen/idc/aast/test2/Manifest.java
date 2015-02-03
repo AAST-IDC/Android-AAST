@@ -32,6 +32,7 @@ public final class Manifest {
 
 
 
+
     
          */
         public static final String C2D_MESSAGE="idc.aast.test2.permission.C2D_MESSAGE";

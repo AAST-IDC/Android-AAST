@@ -11,6 +11,7 @@ import idc.aast.edu.classes.news_item;
 import idc.aast.edu.classes.result_item;
 import idc.aast.edu.classes.scheduele_slot;
 import idc.aast.edu.database.MySQLiteHelper;
+import idc.aast.edu.fragments.NewsFragment;
 import idc.aast.edu.fragments.ResultsFragment;
 
 import org.json.JSONArray;
@@ -182,11 +183,21 @@ public class Caller extends Thread {
 						news_item news = new news_item(arr.getJSONObject(i));
 						db.insert_news(news);
 					}
+				
 					//db.setresults(resp, a);
+				}
+				if(NewsFragment.progress!= null)
+				{
+					NewsFragment.progress.dismiss();	
+					NewsFragment.runOnUiThread(null);
 				}
 
 			} catch (Exception ex) {
 				Morasalat.rslt = "error";
+				if(NewsFragment.progress!= null)
+				{
+					NewsFragment.progress.dismiss();	
+				}
 
 			}
 		} else if (c.equals("getresult")) {
@@ -204,11 +215,13 @@ public class Caller extends Thread {
 								a);
 						db.insert_result(res);
 					}
-					if(ResultsFragment.progress!= null)
-					{
-						ResultsFragment.progress.dismiss();	
-					}
+					
 			//		db.setresults(resp, a);
+				}
+				if(ResultsFragment.progress!= null)
+				{
+					ResultsFragment.progress.dismiss();	
+					ResultsFragment.runOnUiThread(null);
 				}
 
 			} catch (Exception ex) {
