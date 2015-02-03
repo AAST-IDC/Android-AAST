@@ -22,7 +22,7 @@
 
     <!--
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="idc.aast.test2.permission.C2D_MESSAGE"
@@ -44,7 +44,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
         </activity>
 
         <receiver
@@ -61,30 +60,30 @@
 
         <activity
             android:name="idc.aast.edu.activities.ListActivity"
-            android:label="@string/title_activity_list"
-            android:theme="@style/Theme.Example"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Example" >
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Accounts"
-            android:label="@string/title_activity_accounts" 
             android:configChanges="orientation"
+            android:label="@string/title_activity_accounts"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Morasalat"
-            android:label="@string/title_activity_morasalat" 
             android:configChanges="orientation"
+            android:label="@string/title_activity_morasalat"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Results"
-            android:label="@string/title_activity_results" 
             android:configChanges="orientation"
+            android:label="@string/title_activity_results"
             android:screenOrientation="portrait" >
         </activity>
 
@@ -108,6 +107,15 @@
             </intent-filter>
         </receiver>
         <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+        <receiver
             android:name="idc.aast.Other.ParseCustomReceiver"
             android:exported="false" >
             <intent-filter>
@@ -117,65 +125,74 @@
 
         <activity
             android:name="idc.aast.edu.activities.SchedueleDetails"
-            android:label="@string/title_activity_scheduele_details" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_scheduele_details"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.CourseDetails"
-            android:label="@string/title_activity_course_details" 
             android:configChanges="orientation"
+            android:label="@string/title_activity_course_details"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.NewsDetails"
-            android:label="@string/title_activity_news_details" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_news_details"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.TabMain"
-            android:label="@string/title_activity_tab_main" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_tab_main"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.fragments.NotificationFragment"
-            android:label="@string/title_activity_notification_fragment" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_notification_fragment"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.fragments.GamesFragment"
-            android:label="@string/title_activity_games_fragment" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_games_fragment"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.activities.Community"
-            android:label="@string/title_activity_community" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_community"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.test2.Ticketing"
-            android:label="@string/title_activity_ticketing" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_ticketing"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.edu.fragments.GroupPostFragment"
-            android:label="@string/title_activity_group_post_fragment" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_group_post_fragment"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.test2.HomePage"
-            android:label="@string/title_activity_home_page" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_home_page"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.test2.Test"
-            android:label="@string/title_activity_test" android:configChanges="orientation"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_test"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="idc.aast.test2.LinksFragment"
-            
-            android:label="@string/title_activity_links_fragment"
             android:configChanges="orientation"
+            android:label="@string/title_activity_links_fragment"
             android:screenOrientation="portrait" >
         </activity>
     </application>

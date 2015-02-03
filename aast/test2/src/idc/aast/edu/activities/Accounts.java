@@ -3,6 +3,7 @@ package idc.aast.edu.activities;
 import java.util.ArrayList;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.parse.ParsePush;
 import com.parse.PushService;
 
 import idc.aast.edu.adapters.AccountsAdapter;
@@ -79,7 +80,8 @@ public class Accounts extends Activity implements TabListener {
 		
 			MySQLiteHelper db = new MySQLiteHelper(this);
 			db.deleteAccount(arr2.get(pos).substring(1));
-			PushService.unsubscribe(getApplicationContext(), "a"+arr2.get(pos).substring(1));
+			ParsePush.unsubscribeInBackground("a"+arr2.get(pos).substring(1));
+			//PushService.unsubscribe(getApplicationContext(), "a"+arr2.get(pos).substring(1));
 			arr2.addAll(db.getAccountscon());
 			Editor edit = preferences2.edit();
 			Intent intent = getIntent();

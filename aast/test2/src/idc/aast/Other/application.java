@@ -3,6 +3,7 @@ package idc.aast.Other;
 import idc.aast.edu.activities.Login;
 
 import com.parse.Parse;
+import com.parse.ParseCrashReporting;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
 
@@ -13,9 +14,11 @@ public class application extends Application {
 	    @Override
 	    public void onCreate() {
 	        super.onCreate();
+	        ParseCrashReporting.enable(this);
 	        Parse.initialize(this, "F1bFVq1GTfOwmLMQ7MNJHDU1J8HaVRUXkqdaoa5e", "8mr6c1yrrfr8H44HnI3nyxwSuhAq8P1XZU3XFaox");
-	        PushService.setDefaultPushCallback(this, Login.class);
+	      //  PushService.setDefaultPushCallback(this, Login.class);
 	        ParseInstallation.getCurrentInstallation().saveInBackground();
+	      
 	    
 	}
 }

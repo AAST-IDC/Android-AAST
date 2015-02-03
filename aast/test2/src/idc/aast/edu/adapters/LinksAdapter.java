@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 import com.google.analytics.containertag.proto.MutableServing.Resource;
 
-
-
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -34,50 +31,57 @@ public class LinksAdapter extends BaseAdapter {
 
 	/** The context. */
 	Activity context;
-	 
- 	/** The links. */
- 	ArrayList<String> links; // contain the links of the inbox, outbox ....
 
-	 /** The count. */
- 	ArrayList<String> count; // contains of the counts of all
+	/** The links. */
+	ArrayList<String> links; // contain the links of the inbox, outbox ....
 
-	 /**
- 	 * Instantiates a new list details adapter.
- 	 *
- 	 * @param context the context
- 	 * @param links the links
- 	 * @param count the count
- 	 */
- 	public LinksAdapter(Activity context,ArrayList<String> links,ArrayList<String> count)
-	 {
-		 this.context=context;
-		 this.links=links;
-		 this.count=count;
-	 }
-	 
- 	/**
- 	 * The Class ViewHolder.
- 	 */
- 	private class ViewHolder {
-		 
- 		/** The link t. */
- 		TextView linkT;
-		 
- 		/** The Count t. */
- 		ImageView image;
-	 
-	 }
-	 
-	 /* (non-Javadoc)
- 	 * @see android.widget.Adapter#getCount()
- 	 */
- 	@Override
+	/** The count. */
+	ArrayList<String> count; // contains of the counts of all
+
+	/**
+	 * Instantiates a new list details adapter.
+	 * 
+	 * @param context
+	 *            the context
+	 * @param links
+	 *            the links
+	 * @param count
+	 *            the count
+	 */
+	public LinksAdapter(Activity context, ArrayList<String> links,
+			ArrayList<String> count) {
+		this.context = context;
+		this.links = links;
+		this.count = count;
+	}
+
+	/**
+	 * The Class ViewHolder.
+	 */
+	private class ViewHolder {
+
+		/** The link t. */
+		TextView linkT;
+
+		/** The Count t. */
+		ImageView image;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getCount()
+	 */
+	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return links.size();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.Adapter#getItem(int)
 	 */
 	@Override
@@ -86,7 +90,9 @@ public class LinksAdapter extends BaseAdapter {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.Adapter#getItemId(int)
 	 */
 	@Override
@@ -95,47 +101,68 @@ public class LinksAdapter extends BaseAdapter {
 		return 0;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getView(int, android.view.View,
+	 * android.view.ViewGroup)
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		
+
 		ViewHolder holder;
-		LayoutInflater inflater =  context.getLayoutInflater();
-	
-		if (convertView == null)
-		{
+		LayoutInflater inflater = context.getLayoutInflater();
+
+		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.simple_list_item_1, null);
 			holder = new ViewHolder();
 			holder.linkT = (TextView) convertView.findViewById(R.id.text1);
-			holder.image = (ImageView) convertView.findViewById(R.id.textView111);
-		
+			holder.image = (ImageView) convertView
+					.findViewById(R.id.textView111);
+
 			convertView.setTag(holder);
- 
-		}
-		else
-		{
+
+		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		
+
 		holder.linkT.setText(links.get(position));
 
-		try { 
-	
-      String x = links.get(position);
-      x = x.replace(" ", "_").toLowerCase();
-      Resources res =  context.getResources();
-      String mDrawableName = "logo_default";
-      
-      int resID = res.getIdentifier(x , "drawable", context.getPackageName());
-      Drawable drawable = res.getDrawable(resID );
-			holder.image.setImageDrawable(drawable);
+		try {
+
 			
-		}catch (IllegalArgumentException e) {
+			String x = links.get(position);
+			x = x.replace(" ", "_").toLowerCase();
+			if (links.get(position).equals("„›—œ«  «·„— »")) {
+				x="salaries";
+			}
+			if (links.get(position).equals("„ «»⁄… «·Õ÷Ê— Ê«·«‰’—«›")) {
+				x="att";
+			}
+			if (links.get(position).equals("ÕÃ“ «·⁄Ì«œ…")) {
+				x="clinic_reservation";
+			}
+			if (links.get(position).equals("«·ÊŸ«∆› «·‘«€—…")) {
+				x="jobs";
+			}
+			if (links.get(position).equals("««·„Êﬁ⁄ «·—”„Ï ··«ﬂ«œÌ„Ì…")) {
+				x="website";
+			}
+			if (links.get(position).equals("«·«·„—«”·« ")) {
+				x="questionnaire";
+			}
+			Resources res = context.getResources();
+			String mDrawableName = "logo_default";
+
+			int resID = res.getIdentifier(x, "drawable",
+					context.getPackageName());
+			Drawable drawable = res.getDrawable(resID);
+			holder.image.setImageDrawable(drawable);
+
+		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		// TODO Auto-generated method stub
 		return convertView;
 	}

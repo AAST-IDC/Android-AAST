@@ -68,6 +68,7 @@ import com.google.analytics.tracking.android.GoogleAnalytics;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.parse.ParseAnalytics;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -108,6 +109,7 @@ public class Login extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	//	ParseAnalytics.trackAppOpened(getIntent());
 		BugSenseHandler
 				.initAndStartSession(getApplicationContext(), "1fd17091");
 

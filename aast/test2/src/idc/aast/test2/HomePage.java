@@ -70,7 +70,7 @@ public class HomePage extends FragmentActivity {
 			}
 
 			txtOne.setText("Welcome " + us_name);
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated
 			// catch block
 			e.printStackTrace();

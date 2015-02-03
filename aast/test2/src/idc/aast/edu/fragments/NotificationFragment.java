@@ -25,6 +25,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.parse.ParsePush;
 import com.parse.PushService;
 
 import android.net.Uri;
@@ -155,9 +156,9 @@ public class NotificationFragment extends Fragment {
 		name = preferences1.getString("username", "noone");
 		type = preferences1.getString("type", "noone");
 
-		PushService.subscribe(context.getApplicationContext(), "a" + name,
-				Login.class);
 
+					//PushService.subscribe(context.getApplicationContext(), "a" + name,	Login.class);
+					ParsePush.subscribeInBackground("a" + name);
 		mDrawerList = (ListView) context.findViewById(R.id.left_drawer);
 
 		MySQLiteHelper db = new MySQLiteHelper(context.getApplicationContext());
