@@ -11,15 +11,15 @@ public final class R {
     public static final class attr {
     }
     public static final class string {
-        public static final int rate_dialog_cancel=0x7f020003;
-        public static final int rate_dialog_message=0x7f020001;
-        public static final int rate_dialog_no=0x7f020004;
-        public static final int rate_dialog_ok=0x7f020002;
-        public static final int rate_dialog_title=0x7f020000;
-        public static final int rta_dialog_cancel=0x7f020008;
-        public static final int rta_dialog_message=0x7f020006;
-        public static final int rta_dialog_no=0x7f020009;
-        public static final int rta_dialog_ok=0x7f020007;
-        public static final int rta_dialog_title=0x7f020005;
+        public static int rate_dialog_cancel=0x7f020003;
+        public static int rate_dialog_message=0x7f020001;
+        public static int rate_dialog_no=0x7f020004;
+        public static int rate_dialog_ok=0x7f020002;
+        public static int rate_dialog_title=0x7f020000;
+        public static int rta_dialog_cancel=0x7f020008;
+        public static int rta_dialog_message=0x7f020006;
+        public static int rta_dialog_no=0x7f020009;
+        public static int rta_dialog_ok=0x7f020007;
+        public static int rta_dialog_title=0x7f020005;
     }
 }
