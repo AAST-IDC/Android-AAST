@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="idc.aast.test2"
-    android:versionCode="27"
-    android:versionName="3.0" >
+    android:versionCode="32"
+    android:versionName="3.2" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -22,7 +22,7 @@
 
     <!--
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="idc.aast.test2.permission.C2D_MESSAGE"
@@ -36,6 +36,7 @@
         android:icon="@drawable/ic_launcher3"
         android:label="@string/app_name"
         android:theme="@style/Theme.Example" >
+        
         <activity
             android:name="idc.aast.edu.activities.Login"
             android:label="@string/app_name" >
@@ -194,6 +195,10 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_links_fragment"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="idc.aast.test2.EmailinboxActivity"
+            android:label="@string/title_activity_emailinbox" >
         </activity>
     </application>
 

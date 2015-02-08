@@ -13,6 +13,8 @@ import idc.aast.test2.R.layout;
 
 import java.util.ArrayList;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -64,10 +66,16 @@ public static ProgressDialog  progress;
 
 	/** The rslt2. */
 	static String count;
-
+@Override
+public void onStop() {
+	// TODO Auto-generated method stub
+	super.onStop();
+	EasyTracker.getInstance(getActivity()).activityStop(getActivity());
+}
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
+		EasyTracker.getInstance(getActivity()).activityStart(getActivity());
 		bb = false;
 
 		SharedPreferences preferences1 = getActivity().getSharedPreferences(
@@ -165,16 +173,13 @@ public static ProgressDialog  progress;
 						Toast.LENGTH_LONG).show();
 
 			}
-			res.clear();
-			
-			res.addAll(student.get_results(spinner.getSelectedItemPosition()));
-
-			adap.notifyDataSetChanged();
-			spinner = (Spinner) getActivity().findViewById(R.id.spinner1);
-			 adapter = new ArrayAdapter<String>(getActivity(),
-					android.R.layout.simple_spinner_item, student.get_terms());
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner.setAdapter(adapter);
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable(){
+			@Override
+			      public void run(){
+			      progress.dismiss();
+			   }
+			}, 3000);
 			// context.findViewById(R.id.actionbar_notifcation_textview);
 			// v.setText(""+db.getmessagecount(name, type, filter));
 			// ContentValues cv = new ContentValues();
@@ -187,7 +192,7 @@ public static ProgressDialog  progress;
 					.getSharedPreferences("AAST", 0);
 			String acc = preferences2.getString("naccount", "");
 			String type = preferences2.getString("type", "");
-			acc = acc.replace(type + name + "^", "");
+			acc = acc.replace(type + name + "^", ""); 
 
 			Editor edit = preferences2.edit();
 			if (acc.equals("^")) {
@@ -214,8 +219,8 @@ public static ProgressDialog  progress;
 			return true;
 		} else if (itemId == R.id.item4) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle("About")
-					.setMessage("Build number is" + Login.version)
+			builder.setTitle("About AAST Portal")
+					.setMessage("AAST Portal v." + Login.version + System.getProperty("line.separator") + "All Rights reserved to Arab Academy For Science And Technology" + System.getProperty("line.separator") + "Information And Documentation Center" + System.getProperty("line.separator") + "2015")
 					.setNegativeButton("Ok", null);
 			AlertDialog alert = builder.create();
 			alert.show();

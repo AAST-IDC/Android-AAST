@@ -12,6 +12,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import android.R.integer;
 import android.annotation.TargetApi;
 
 // TODO: Auto-generated Javadoc
@@ -53,10 +54,10 @@ public class CallSoap {
 	public final String OPERATION_NAME5 = "remove";
 
 	/** The SOA p_ actio n6. */
-	public final String SOAP_ACTION6 = "http://tempuri.org/get_latest_notifcations";
+	public final String SOAP_ACTION6 = "http://tempuri.org/get_latest_notifcations2";
 
 	/** The OPERATIO n_ nam e6. */
-	public final String OPERATION_NAME6 = "get_latest_notifcations";
+	public final String OPERATION_NAME6 = "get_latest_notifcations2";
 
 	/** The wsdl target namespace. */
 	public final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";
@@ -109,10 +110,10 @@ public class CallSoap {
 	/** The OPERATIO n_ nam e11. */
 	public final String OPERATION_NAME94 = "get_student_scheduele";
 	
-	public final String SOAP_ACTION95 = "http://tempuri.org/get_news";
+	public final String SOAP_ACTION95 = "http://tempuri.org/get_news2";
 
 	/** The OPERATIO n_ nam e11. */
-	public final String OPERATION_NAME95 = "get_news";
+	public final String OPERATION_NAME95 = "get_news2";
 	
 	public final String SOAP_ACTION96 = "http://tempuri.org/get_std_photo";
 
@@ -192,11 +193,15 @@ public class CallSoap {
 		SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,
 				OPERATION_NAME95);
 		PropertyInfo pi = new PropertyInfo();
-	//	PropertyInfo p2 = new PropertyInfo();
+		PropertyInfo p2 = new PropertyInfo();
 		pi.setName("last_date");
 		pi.setValue(a);
 		pi.setType(Integer.class);
 		request.addProperty(pi);
+		p2.setName("lang");
+		p2.setValue(Integer.parseInt(b));
+		p2.setType(Integer.class);
+		request.addProperty(p2);
 
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);

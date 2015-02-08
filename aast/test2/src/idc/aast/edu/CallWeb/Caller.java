@@ -191,7 +191,7 @@ public class Caller extends Thread {
 					JSONArray arr = reader.getJSONArray("news");
 					for (int i = 0; i < arr.length(); i++) {
 						news_item news = new news_item(arr.getJSONObject(i));
-						db.insert_news(news);
+						db.insert_news(news,b);
 					}
 				
 					//db.setresults(resp, a);

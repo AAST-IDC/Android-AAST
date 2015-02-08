@@ -25,6 +25,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.parse.ParsePush;
 import com.parse.PushService;
 
@@ -43,6 +44,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -54,10 +56,12 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class NotificationFragment extends Fragment {
+public class NotificationFragment extends Fragment implements OnItemSelectedListener {
 
 	private boolean doubleBackToExitPressedOnce = false; // boolean for exiting
 	private static Activity context;
@@ -101,8 +105,7 @@ public class NotificationFragment extends Fragment {
 	static Set<String> set;
 
 	// private String[] mPlanetTitles;
-	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
+
 
 	private class ViewHolder {
 
@@ -112,19 +115,6 @@ public class NotificationFragment extends Fragment {
 		/** The txt view description. */
 		TextView txtViewDescription;
 
-		/** The time. */
-		// TextView time;
-
-		/** The year. */
-		// TextView year;
-
-		// /** The dumm. */
-		// TextView dumm;
-
-		/** The dumm1. */
-		// TextView dumm1;
-
-		/** The dumm2. */
 		TextView col;
 
 		/** The cat. */
@@ -137,30 +127,49 @@ public class NotificationFragment extends Fragment {
 		// LinearLayout lLayout;
 
 	}
+	@Override
+	public void onItemSelected(AdapterView<?>arg0, View arg1, int arg2,
+			long arg3) {
 
+		filter = arr4.get(arg2);
+		Log.d("not", arr4.get(arg2));
+		if (arr4.get(arg2).equals("All"))
+			filter = "";
+	
+
+		MySQLiteHelper db = new MySQLiteHelper(context
+				.getApplicationContext());
+		msgs.clear();
+		arr4.clear();
+		arr5.clear();
+		arr4.addAll(db.getSysNames(name, type));
+		arr5.addAll(db.getSysNamesCounts(name, type));
+		msgs.addAll(db.getall(name, type, filter));
+		// TextView v=(TextView)
+		// context.findViewById(R.id.actionbar_notifcation_textview);
+		// v.setText(""+db.getmessagecount(name, type, filter));
+		s.notifyDataSetChanged();
+		lviewAdapter.notifyDataSetChanged();
+		s.notifyDataSetChanged();
+	
+
+	}
 	@Override
 	public void onStart() {
-
+		EasyTracker.getInstance(getActivity()).activityStart(getActivity());
 		context = getActivity();
 		bb = false;
 
-		if (getResources().getString(R.string.app_config).equals("small")) {
-			// mPlanetTitles = getResources()
-			// .getStringArray(R.array. planets_array);
-			mDrawerLayout = (DrawerLayout) getView().findViewById(
-					R.id.drawer_layout);
-
-		}
+		Spinner sp = (Spinner) getActivity().findViewById(R.id.spinner2);
 		SharedPreferences preferences1 = context
 				.getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
 		type = preferences1.getString("type", "noone");
 
-
-					//PushService.subscribe(context.getApplicationContext(), "a" + name,	Login.class);
-					ParsePush.subscribeInBackground("a" + name);
-		mDrawerList = (ListView) context.findViewById(R.id.left_drawer);
-
+		// PushService.subscribe(context.getApplicationContext(), "a" + name,
+		// Login.class);
+		ParsePush.subscribeInBackground("a" + name);
+	
 		MySQLiteHelper db = new MySQLiteHelper(context.getApplicationContext());
 
 		arr4 = db.getSysNames(name, type);
@@ -169,43 +178,10 @@ public class NotificationFragment extends Fragment {
 		// Set the adapter for the list view
 		s = new DrawerAdapter(context, arr4, arr5);
 
-		mDrawerList.setAdapter(s);
+		sp.setAdapter(s);
 		// Set the list's click listener
 
-		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				ListActivity.setFilter(arr4.get(arg2));
-				if (arr4.get(arg2).equals("All"))
-					filter = "";
-				if (getResources().getString(R.string.app_config).equals(
-						"small")) {
-					if (!mDrawerLayout.isDrawerOpen(mDrawerList))
-						mDrawerLayout.openDrawer(mDrawerList);
-					else
-						mDrawerLayout.closeDrawer(mDrawerList);
-				}
-
-				MySQLiteHelper db = new MySQLiteHelper(context
-						.getApplicationContext());
-				msgs.clear();
-				arr4.clear();
-				arr5.clear();
-				arr4.addAll(db.getSysNames(name, type));
-				arr5.addAll(db.getSysNamesCounts(name, type));
-				msgs.addAll(db.getall(name, type, filter));
-				// TextView v=(TextView)
-				// context.findViewById(R.id.actionbar_notifcation_textview);
-				// v.setText(""+db.getmessagecount(name, type, filter));
-				s.notifyDataSetChanged();
-				lviewAdapter.notifyDataSetChanged();
-				s.notifyDataSetChanged();
-
-			}
-
-		});
+		sp.setOnItemSelectedListener(this);
 
 		// box
 		// appContext = getApplicationContext();
@@ -415,7 +391,12 @@ public class NotificationFragment extends Fragment {
 						lviewAdapter.notifyDataSetChanged();
 						TextView v2 = (TextView) context
 								.findViewById(R.id.actionbar_notifcation_textview);
-						v2.setText("" + db.getmessagecount(name, type, filter));
+						try {
+							v2.setText("" + db.getmessagecount(name, type, filter));
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						
 
 						lviewAdapter.notifyDataSetChanged();
 						dialog.dismiss();
@@ -572,7 +553,12 @@ public class NotificationFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 	}
-
+@Override
+public void onStop() {
+	// TODO Auto-generated method stub
+	super.onStop();
+	EasyTracker.getInstance(getActivity()).activityStop(getActivity());
+}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -647,8 +633,8 @@ public class NotificationFragment extends Fragment {
 			return true;
 		} else if (itemId == R.id.item4) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle("About")
-					.setMessage("Build number is" + Login.version)
+			builder.setTitle("About AAST Portal")
+			.setMessage("AAST Portal v." + Login.version + System.getProperty("line.separator") + "All Rights reserved to Arab Academy For Science And Technology" + System.getProperty("line.separator") + "Information And Documentation Center" + System.getProperty("line.separator") + "2015")
 					.setNegativeButton("Ok", null);
 			AlertDialog alert = builder.create();
 			alert.show();
@@ -823,6 +809,11 @@ public class NotificationFragment extends Fragment {
 		// String[] menuItems = arr.clone();
 
 		return true;
+	}
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

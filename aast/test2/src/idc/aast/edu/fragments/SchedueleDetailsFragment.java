@@ -1,22 +1,30 @@
 package idc.aast.edu.fragments;
 
+import idc.aast.edu.activities.Accounts;
 import idc.aast.edu.activities.CourseDetails;
+import idc.aast.edu.activities.Login;
 import idc.aast.edu.adapters.SchedueleDetailAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.scheduele_slot;
+import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
 
 import java.util.ArrayList;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,8 +48,15 @@ public class SchedueleDetailsFragment extends Fragment {
 
 	public static String day;
 	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		EasyTracker.getInstance(getActivity()).activityStop(getActivity());
+	}
+	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
+		EasyTracker.getInstance(getActivity()).activityStart(getActivity());
 		bb = false;
 		
 		SharedPreferences preferences1 = getActivity(). getSharedPreferences("AAST", 0);
@@ -50,7 +65,7 @@ public class SchedueleDetailsFragment extends Fragment {
 		student = new Student(name, getActivity());
 		sch = student.get_day_sch(day);
 
-		ListView myList = (ListView) getActivity().findViewById(R.id.scheduele_sub_list);
+		ListView myList = (ListView) getView().findViewById(R.id.scheduele_sub_list);
 
 		myList.setOnItemClickListener(new OnItemClickListener(
 
@@ -81,7 +96,45 @@ public class SchedueleDetailsFragment extends Fragment {
 		adap.notifyDataSetChanged();
 		super.onStart();
 	}
-	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == android.R.id.home) {
+			// ProjectsActivity is my 'home' activity
+			// if
+			// (getResources().getString(R.string.app_config).equals("small")) {
+			// if (!mDrawerLayout.isDrawerOpen(mDrawerList))
+			// mDrawerLayout.openDrawer(mDrawerList);
+			// else
+			// mDrawerLayout.closeDrawer(mDrawerList);
+			// }
+			return true;
+		} else if (itemId == R.id.item1) {
+;
+			// TextView v=(TextView)
+			// context.findViewById(R.id.actionbar_notifcation_textview);
+			// v.setText(""+db.getmessagecount(name, type, filter));
+			// ContentValues cv = new ContentValues();
+			// cv.put("badgecount", db.getmessagecount(name, type, ""));
+			// getContentResolver().update(Uri.parse("content://com.sec.badge/apps"),
+			// cv, "package=?", new String[] {getPackageName()});
+			return true;
+		}else if (itemId == R.id.item4) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle("About AAST Portal")
+			.setMessage("AAST Portal v." + Login.version + System.getProperty("line.separator") + "All Rights reserved to Arab Academy For Science And Technology" + System.getProperty("line.separator") + "Information And Documentation Center" + System.getProperty("line.separator") + "2015")
+					.setNegativeButton("Ok", null);
+			AlertDialog alert = builder.create();
+			alert.show();
+			return true;
+		} else if (itemId == R.id.item6) {
+			Intent i = new Intent(getActivity(), Accounts.class);
+			i.putExtra("id", "ok");
+			// finish();
+			startActivity(i);
+			return true;
+		}
+		return true;
+	}
 	/** The rslt2. */
 	static String count;
 	  @Override

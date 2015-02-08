@@ -1,20 +1,28 @@
 package idc.aast.edu.fragments;
 
+import idc.aast.edu.activities.Accounts;
+import idc.aast.edu.activities.Login;
 import idc.aast.edu.activities.SchedueleDetails;
 import idc.aast.edu.adapters.SchedueleAdapters;
 import idc.aast.edu.adapters.TabsPagerAdapter;
 import idc.aast.edu.classes.Student;
 import idc.aast.edu.classes.scheduele_slot;
+import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
+import idc.aast.test2.TrackedFragment;
 
 import java.util.ArrayList;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,13 +30,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-
-public class SchedueleFragment extends Fragment {
+ 
+public class SchedueleFragment extends TrackedFragment {
 
 	static Boolean bb = false;
 	static String name;
@@ -41,12 +50,13 @@ public class SchedueleFragment extends Fragment {
 	static Student student;
 	/** The arr3. */
 	static ArrayList<String> arr3; // used to have the counts of the links
-static ListView myList;
+	static ListView myList;
 	/** The rslt2. */
 	static String count;
 
 	@Override
 	public void onStart() {
+	
 		// TODO Auto-generated method stub
 		bb = false;
 
@@ -56,10 +66,8 @@ static ListView myList;
 
 		student = new Student(name, getActivity());
 		ArrayList<String> sch = student.get_days();
-	
-			
-		 myList = (ListView) getView().findViewById(
-				R.id.scheduele_main_list);
+
+		myList = (ListView) getView().findViewById(R.id.scheduele_main_list);
 		myList.setOnItemClickListener(new OnItemClickListener(
 
 		) {
@@ -67,7 +75,7 @@ static ListView myList;
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int postition, long arg3) {
-				//Intent i = new Intent(getActivity(), SchedueleDetails.class);
+				// Intent i = new Intent(getActivity(), SchedueleDetails.class);
 				postition += 1;
 				// i.putExtra("day_code",postition + "");
 				// startActivity(i);
@@ -78,7 +86,8 @@ static ListView myList;
 				 * IMPORTANT: We use the "root frame" defined in
 				 * "root_fragment.xml" as the reference to replace fragment
 				 */
-				trans.replace(R.id.sch_root_frame,
+				
+				trans.replace (R.id.sch_root_frame,
 						new SchedueleDetailsFragment());
 
 				/*
@@ -101,7 +110,38 @@ static ListView myList;
 		adap.notifyDataSetChanged();
 		super.onStart();
 	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == android.R.id.home) {
+			// ProjectsActivity is my 'home' activity
+			// if
+			// (getResources().getString(R.string.app_config).equals("small")) {
+			// if (!mDrawerLayout.isDrawerOpen(mDrawerList))
+			// mDrawerLayout.openDrawer(mDrawerList);
+			// else
+			// mDrawerLayout.closeDrawer(mDrawerList);
+			// }
+			return true;
+		} else if (itemId == R.id.item1) {
 
+			return true;
+		} else if (itemId == R.id.item4) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle("About AAST Portal")
+			.setMessage("AAST Portal v." + Login.version + System.getProperty("line.separator") + "All Rights reserved to Arab Academy For Science And Technology" + System.getProperty("line.separator") + "Information And Documentation Center" + System.getProperty("line.separator") + "2015")
+					.setNegativeButton("Ok", null);
+			AlertDialog alert = builder.create();
+			alert.show();
+			return true;
+		} else if (itemId == R.id.item6) {
+			Intent i = new Intent(getActivity(), Accounts.class);
+			i.putExtra("id", "ok");
+			// finish();
+			startActivity(i);
+			return true;
+		}
+		return true;
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

@@ -295,12 +295,6 @@ public class LinksFragment extends Fragment {
 			AlertDialog alert = builder.create();
 			alert.show();
 			return true;
-		} else if (itemId == R.id.item6) {
-			Intent i = new Intent(getActivity(), Accounts.class);
-			i.putExtra("id", "ok");
-			// finish();
-			startActivity(i);
-			return true;
 		}
 		return true;
 	}

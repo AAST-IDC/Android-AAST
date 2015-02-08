@@ -203,11 +203,24 @@ public class Login extends Activity {
 			@Override
 			// on login button click
 			public void onClick(View arg0) {
+				try
+				{
 				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 				inputManager.hideSoftInputFromWindow(getCurrentFocus()
 						.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-				// TODO Auto-generated method stub
+				  View focusedView = getCurrentFocus();
+				 if (focusedView != null) {
+				        inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
+				                InputMethodManager.HIDE_NOT_ALWAYS);
+				    }
+				}
+				catch(Exception e)
+				{
+					
+					
+				}
+				// TODO Autouto-generated method stub
 				if (android.os.Build.VERSION.SDK_INT > 9) {
 					StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 							.permitAll().build();

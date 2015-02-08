@@ -10,4 +10,19 @@ tools:ignore="TypographyDashes">
 
   <!--Enable automatic exception tracking-->
   <bool name="ga_reportUncaughtExceptions">true</bool>
+  
+
+    <!-- Enable debug -->
+    <bool name="ga_debug">true</bool>
+
+    <!-- The screen names that will appear in your reporting -->
+    <string name="idc.aast.edu.fragments.NewsFragment">News activity</string>
+	
+	<string name="idc.aast.edu.fragments.SchedueleFragment">sch activity</string>
+
+    <!--
+        The inverval of time after all the collected data
+        should be sent to the server, in seconds.
+    -->
+    <integer name="ga_dispatchPeriod">10</integer>
 </resources>

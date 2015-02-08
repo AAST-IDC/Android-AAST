@@ -109,7 +109,7 @@ public class helper {
 		c= new Caller();
 		MySQLiteHelper db = new MySQLiteHelper(context);
 		
-		c.a =db.get_last_news_date();
+		c.a =db.get_last_news_date(type);
 		c.b=type;
 		c.con=context;
 		// get the links of the inbox , outbox .....

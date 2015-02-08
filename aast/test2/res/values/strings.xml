@@ -71,5 +71,6 @@
     <string name="title_activity_home_page">AASTMT Portal</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_links_fragment">LinksFragment</string>
+    <string name="title_activity_emailinbox">EmailinboxActivity</string>
 
 </resources>

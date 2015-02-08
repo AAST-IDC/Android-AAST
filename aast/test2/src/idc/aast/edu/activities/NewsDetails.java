@@ -1,6 +1,8 @@
 package idc.aast.edu.activities;
 
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import idc.aast.edu.classes.news_item;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
@@ -35,8 +37,18 @@ public class NewsDetails extends Activity {
 		return true;
 	}
 	
-	
-
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	    EasyTracker.getInstance(this).activityStart(this);
+	}
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this);
+	}
 }
 class ViewHolder {
 	 

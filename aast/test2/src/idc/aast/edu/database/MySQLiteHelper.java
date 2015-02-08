@@ -19,7 +19,7 @@ import android.util.Pair;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 16;
+	private static final int DATABASE_VERSION = 17;
 	// Database Name
 	private static final String DATABASE_NAME = "AAST_Notifications";
 	public Context context;
@@ -97,8 +97,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		String create_news_table = "CREATE TABLE news ( "
 				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
 
-				+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, "
-				+ "link TEXT )";
+				+ "title TEXT, " + "desc TEXT, " + "pub_date TEXT, " + " type TEXT, "
+				+ "link TEXT  )";
 		  database.execSQL("DROP TABLE IF EXISTS messages");
 		  database.execSQL("DROP TABLE IF EXISTS accounts");
 		  database.execSQL("DROP TABLE IF EXISTS results");
@@ -271,7 +271,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return 0;
 	}
 
-	public int insert_news(news_item news) {
+	public int insert_news(news_item news,String type) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -279,7 +279,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		values.put("desc", news.desc);
 		values.put("pub_date", news.date); // get title
 		values.put("link", news.link);
-
+		values.put("type", type);
 		int j = (int) db.insert("news", // table
 				null, // nullColumnHack
 				values); // key/value -> keys = column names/ values =
@@ -755,14 +755,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	}
 
-	public String get_last_news_date() {
+	public String get_last_news_date(String type) {
 		// ArrayList< String> msgs = new ArrayList< String>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query("news", // a. table
 				new String[] { "max(  datetime ( pub_date )	)" }, // b. column
 																	// names
-				null, // selections
-				null, // d. selections args
+				" type = ?", // c. selections
+				new String[] { String.valueOf(type)}, // d. selections args
 				null, // e. group by
 				null, // f. having
 				null, // g. order by
@@ -1115,14 +1115,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	}
 
-	public ArrayList<news_item> get_all_news() {
+	public ArrayList<news_item> get_all_news(String type) {
 		ArrayList<news_item> list_news = new ArrayList<news_item>();
 		Cursor cursor;
 		SQLiteDatabase db = this.getReadableDatabase();
 		cursor = db.query("news", // a. table
 				news_columns, // b. column names
-				null, // c. selections
-				null, // d. selections args
+				" type = ?", // c. selections
+				new String[] { String.valueOf(type)}, // d. selections args
 				null, // e. group by
 				null, // f. having
 				"datetime(pub_date) DESC", // g. order by
@@ -1167,6 +1167,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 					"DateTime   DESC", // g. order by
 					null); // h. limit
 		} else {
+			Log.d("not_db",filter);
 			cursor = db.query(
 					"messages", // a. table
 					COLUMNS, // b. column names

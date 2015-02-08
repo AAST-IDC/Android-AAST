@@ -64,9 +64,9 @@ public class Student extends User {
 
 	}
 
-	public ArrayList<news_item> get_news() {
+	public ArrayList<news_item> get_news(String type) {
 
-		return db.get_all_news();
+		return db.get_all_news(type);
 
 	}
 

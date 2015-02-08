@@ -9,10 +9,17 @@ import idc.aast.edu.classes.news_item;
 import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.edu.database.helper;
 import idc.aast.test2.R;
+import idc.aast.test2.TrackedFragment;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
+
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +31,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.renderscript.Type;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,9 +45,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class NewsFragment extends Fragment {
+public class NewsFragment extends TrackedFragment {
 	static Boolean bb = false;
 	static String name;
+	static String type;
 	static ArrayList<news_item> news;
 	static String[] alldays;
 	/** The rslt. */
@@ -50,34 +59,54 @@ public class NewsFragment extends Fragment {
 	static Student student;
 	/** The arr3. */
 	static ArrayList<String> arr3; // used to have the counts of the links
-
+	private Tracker tracker;
 	/** The rslt2. */
 	static String count;
-	public static void runOnUiThread(Runnable runnable){
-        final Handler UIHandler = new Handler(Looper.getMainLooper());
-        runnable = new Runnable() {
-			
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+		super.onActivityCreated(savedInstanceState);
+	}
+
+	public static void runOnUiThread(Runnable runnable) {
+		final Handler UIHandler = new Handler(Looper.getMainLooper());
+		runnable = new Runnable() {
+
 			@Override
 			public void run() {
-				
+
 				news.clear();
-				news.addAll(student.get_news());
+				news.addAll(student.get_news(type));
 
 				adap.notifyDataSetChanged();
-				
+
 			}
 		};
-        UIHandler .post(runnable);
-    } 
+		UIHandler.post(runnable);
+	}
+
+	@Override
+	public void onStop() {
+		EasyTracker.getInstance(getActivity()).activityStop(getActivity());
+		super.onStop();
+	}
+
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
+
+		EasyTracker.getInstance(getActivity()).activityStart(getActivity());
+		this.tracker = EasyTracker.getInstance(getActivity());
+		this.tracker.set(Fields.SCREEN_NAME, "News");
+		this.tracker.send(MapBuilder.createAppView().build());
 		SharedPreferences preferences1 = getActivity().getSharedPreferences(
 				"AAST", 0);
 		name = preferences1.getString("username", "noone");
-
+		type = preferences1.getString("type", "noone");
 		student = new Student(name, getActivity());
-		news = student.get_news();
+		news = student.get_news(type);
 
 		ListView myList = (ListView) getActivity().findViewById(
 				R.id.news_main_list);
@@ -102,6 +131,7 @@ public class NewsFragment extends Fragment {
 		adap.notifyDataSetChanged();
 		super.onStart();
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
@@ -119,26 +149,36 @@ public class NewsFragment extends Fragment {
 			MySQLiteHelper db = new MySQLiteHelper(getActivity()
 					.getApplicationContext());
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-			.permitAll().build();
+					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 			if (helper.isInternetAvailable()) {
 				helper.getResults_all(name, getActivity());
-				 progress = new ProgressDialog(getActivity());
+				progress = new ProgressDialog(getActivity());
 				progress.setTitle("Loading");
 				progress.setMessage("Wait while loading...");
 				progress.setCancelable(false);
 				progress.show();
 			} else {
 				Toast.makeText(getActivity().getApplicationContext(),
-						"No Internet Connection",
-						Toast.LENGTH_LONG).show();
+						"No Internet Connection", Toast.LENGTH_LONG).show();
 
 			}
-			
-			news.clear();
-			news.addAll(student.get_news());
-
-			adap.notifyDataSetChanged();
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					progress.dismiss();
+				}
+			}, 3000);
+			// TimerTask t = new TimerTask() {
+			//
+			// @Override
+			// public void run() {
+			// progress.dismiss();
+			// }
+			// };
+			//
+			// t.scheduledExecutionTime();
 			// context.findViewById(R.id.actionbar_notifcation_textview);
 			// v.setText(""+db.getmessagecount(name, type, filter));
 			// ContentValues cv = new ContentValues();
@@ -178,9 +218,16 @@ public class NewsFragment extends Fragment {
 			return true;
 		} else if (itemId == R.id.item4) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle("About")
-					.setMessage("Build number is" + Login.version)
-					.setNegativeButton("Ok", null);
+			builder.setTitle("About AAST Portal")
+					.setMessage(
+							"AAST Portal v."
+									+ Login.version
+									+ System.getProperty("line.separator")
+									+ "All Rights reserved to Arab Academy For Science And Technology"
+									+ System.getProperty("line.separator")
+									+ "Information And Documentation Center"
+									+ System.getProperty("line.separator")
+									+ "2015").setNegativeButton("Ok", null);
 			AlertDialog alert = builder.create();
 			alert.show();
 			return true;
@@ -201,6 +248,7 @@ public class NewsFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.activity_news, container,
 				false);
 		setHasOptionsMenu(true);
+		
 		return rootView;
 	}
 
