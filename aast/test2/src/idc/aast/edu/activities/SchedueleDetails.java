@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.R.integer;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -38,17 +40,15 @@ public class SchedueleDetails extends Activity {
 
 	/** The rslt2. */
 	static String count;
+	public static String day;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scheduele_details);
 		bb = false;
-		Bundle extras = getIntent().getExtras();
-		String day = "";
-		if (extras != null) {
-			day = extras.getString("day_code");
-		}
+		
+	
 
 		SharedPreferences preferences1 = getSharedPreferences("AAST", 0);
 		name = preferences1.getString("username", "noone");
@@ -58,36 +58,44 @@ public class SchedueleDetails extends Activity {
 
 		ListView myList = (ListView) findViewById(R.id.scheduele_sub_list);
 
-		myList.setOnItemClickListener(new OnItemClickListener(
-
-		) {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int postition, long arg3) {
-				Intent in = new Intent(SchedueleDetails.this,
-						CourseDetails.class);
-				postition+=1;
-				for (int i = 0; i < sch.size(); i++) {
-					scheduele_slot curr = sch.get(i);
-					int start = Integer.parseInt(curr.getFrom());
-					if (start == (postition * 2) || start == (postition*2 - 1)) {
-						in.putExtra("course_code", curr.getCourse_code());
-						startActivity(in);
-					}
-				}
-
-				// TODO Auto-generated method stub
-
-			}
-		});
-
+		
 		adap = new SchedueleDetailAdapter(this, sch);
 		myList.setAdapter(adap);
 		adap.notifyDataSetChanged();
 
 	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == android.R.id.home) {
+			// ProjectsActivity is my 'home' activity
+			// if
+			// (getResources().getString(R.string.app_config).equals("small")) {
+			// if (!mDrawerLayout.isDrawerOpen(mDrawerList))
+			// mDrawerLayout.openDrawer(mDrawerList);
+			// else
+			// mDrawerLayout.closeDrawer(mDrawerList);
+			// }
+			return true;
+		} else if (itemId == R.id.item1) {
 
+			return true;
+		} else if (itemId == R.id.item4) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("About AAST Portal")
+			.setMessage("AAST Portal v." + Login.version + System.getProperty("line.separator") + "All Rights reserved to Arab Academy For Science And Technology" + System.getProperty("line.separator") + "Information And Documentation Center" + System.getProperty("line.separator") + "2015")
+					.setNegativeButton("Ok", null);
+			AlertDialog alert = builder.create();
+			alert.show();
+			return true;
+		} else if (itemId == R.id.item6) {
+			Intent i = new Intent(this, Accounts.class);
+			i.putExtra("id", "ok");
+			// finish();
+			startActivity(i);
+			return true;
+		}
+		return true;
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

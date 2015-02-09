@@ -81,7 +81,7 @@ public class NotificationFragment extends Fragment implements OnItemSelectedList
 
 	/** The arr. */
 	static ArrayList<String> arr; // contains list items
-	static ArrayList<Message> msgs;
+	static ArrayList<Message> msgs = null;
 	/** The name. */
 	static String name; // username
 	static String type; // username
@@ -99,8 +99,8 @@ public class NotificationFragment extends Fragment implements OnItemSelectedList
 	/** The ivb. */
 	static Boolean ivb = false;
 
-	static ArrayList<String> arr4;
-	static ArrayList<String> arr5;
+	static ArrayList<String> arr4= null;
+	static ArrayList<String> arr5= null;
 	/** The rslt2. */
 	static Set<String> set;
 
@@ -171,8 +171,9 @@ public class NotificationFragment extends Fragment implements OnItemSelectedList
 		ParsePush.subscribeInBackground("a" + name);
 	
 		MySQLiteHelper db = new MySQLiteHelper(context.getApplicationContext());
-
+		if(arr4  == null)
 		arr4 = db.getSysNames(name, type);
+		if(arr5  == null)
 		arr5 = db.getSysNamesCounts(name, type);
 		// mPlanetTitles = arr4.toArray(new String[0]);
 		// Set the adapter for the list view
@@ -213,6 +214,7 @@ public class NotificationFragment extends Fragment implements OnItemSelectedList
 		// R.layout.listitem, Countries);
 		list.requestFocus();
 		db = new MySQLiteHelper(context.getApplicationContext());
+		if(msgs == null)
 		msgs = db.getall(name, type, filter);
 		lviewAdapter = new NotificationAdapter(context, msgs); // initialize the
 																// list adater

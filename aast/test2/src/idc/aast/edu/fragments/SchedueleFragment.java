@@ -11,7 +11,7 @@ import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.test2.R;
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
-import idc.aast.test2.TrackedFragment;
+
 
 import java.util.ArrayList;
 
@@ -37,11 +37,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
  
-public class SchedueleFragment extends TrackedFragment {
+public class SchedueleFragment extends Fragment {
 
 	static Boolean bb = false;
 	static String name;
-	static ArrayList<scheduele_slot> sch;
+	ArrayList<String> sch =  null;
 	static String[] alldays;
 	/** The rslt. */
 	static SchedueleAdapters adap;
@@ -53,7 +53,7 @@ public class SchedueleFragment extends TrackedFragment {
 	static ListView myList;
 	/** The rslt2. */
 	static String count;
-
+	static private ViewGroup container;
 	@Override
 	public void onStart() {
 	
@@ -65,7 +65,8 @@ public class SchedueleFragment extends TrackedFragment {
 		name = preferences1.getString("username", "noone");
 
 		student = new Student(name, getActivity());
-		ArrayList<String> sch = student.get_days();
+		if(sch==null)
+	 sch = student.get_days();
 
 		myList = (ListView) getView().findViewById(R.id.scheduele_main_list);
 		myList.setOnItemClickListener(new OnItemClickListener(
@@ -75,29 +76,32 @@ public class SchedueleFragment extends TrackedFragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int postition, long arg3) {
-				// Intent i = new Intent(getActivity(), SchedueleDetails.class);
+			
+				Intent i = new Intent(getActivity(), SchedueleDetails.class);
 				postition += 1;
+				SchedueleDetails.day = postition + "";
 				// i.putExtra("day_code",postition + "");
-				// startActivity(i);
-				SchedueleDetailsFragment.day = postition + "";
-				FragmentTransaction trans = getFragmentManager()
-						.beginTransaction();
-				/*
-				 * IMPORTANT: We use the "root frame" defined in
-				 * "root_fragment.xml" as the reference to replace fragment
-				 */
+				 startActivity(i);
 				
-				trans.replace (R.id.sch_root_frame,
-						new SchedueleDetailsFragment());
-
-				/*
-				 * IMPORTANT: The following lines allow us to add the fragment
-				 * to the stack and return to it later, by pressing back
-				 */
-				trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				trans.addToBackStack(null);
-
-				trans.commit();
+				
+//				FragmentTransaction trans = getFragmentManager()
+//						.beginTransaction();
+//				/*
+//				 * IMPORTANT: We use the "root frame" defined in
+//				 * "root_fragment.xml" as the reference to replace fragment
+//				 */
+//				
+//				  trans.replace (container.getId(),
+//						new SchedueleDetailsFragment());
+//
+//				/*
+//				 * IMPORTANT: The following lines allow us to add the fragment
+//				 * to the stack and return to it later, by pressing back
+//				 */
+//				trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//				trans.addToBackStack(null);
+//
+//				trans.commit();
 
 				// getFragmentManager().beginTransaction().replace(R.id.fragment_mainLayout,
 				// new GamesFragment()).commit();
@@ -145,9 +149,10 @@ public class SchedueleFragment extends TrackedFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		
 		View rootView = inflater.inflate(R.layout.activity_sch_days, container,
 				false);
+		this.container=container;
 		setHasOptionsMenu(true);
 		return rootView;
 	}

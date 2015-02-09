@@ -70,7 +70,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
       	   return new NotificationFragment();
          else if(nw=="Schedule")
    
-        	 return new SchRootFragment();
+        	 return new SchedueleFragment();
 
          else if(nw=="News")
       	   return new NewsFragment();

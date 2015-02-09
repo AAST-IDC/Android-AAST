@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +31,22 @@ public class HomePage extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_home_page);
+		AppRate.with(this)
+	      .setInstallDays(0) // default 10, 0 means install day.
+	      .setLaunchTimes(2) // default 10
+	      .setRemindInterval(1) // default 1
+	      .setShowNeutralButton(true) // default true
+	      .setDebug(false) // default false
+	      .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
+	          @Override
+	          public void onClickButton(int which) {
+	              Log.d("home", Integer.toString(which));
+	          }
+	      })
+	      .monitor();
+
+	  // Show a dialog if meets conditions
+	  AppRate.showRateDialogIfMeetsConditions(this);
 
 	}
 

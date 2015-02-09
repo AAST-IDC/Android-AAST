@@ -92,9 +92,11 @@ public class SchedueleDetailAdapter extends BaseAdapter {
 			}
 		
 		}
+		position += 1;
 		holder.lect_no.setText(position + "");
 		holder.lect_no_split_top.setText((position * 2 - 1) + "");
 		holder.lect_no_split_bot.setText((position * 2) + "");
+		position -= 1;
 		int temd = dpi / 7;
 		if (temd < 110)
 			temd = 120;
@@ -107,7 +109,7 @@ public class SchedueleDetailAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 7;
+		return 5;
 	}
 
 	@Override

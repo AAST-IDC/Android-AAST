@@ -34,8 +34,7 @@ public class TabMain extends FragmentActivity implements TabListener {
 	public static int nw = 0;
 @Override
 protected void onStart() {
-    EasyTracker.getInstance(this.getBaseContext());
-    EasyTracker.getInstance(this.getBaseContext());
+	EasyTracker.getInstance(this).activityStart(this);
 	super.onStart();
 }
 @Override

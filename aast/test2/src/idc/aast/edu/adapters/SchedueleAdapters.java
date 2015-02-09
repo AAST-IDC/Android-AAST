@@ -41,20 +41,13 @@ public class SchedueleAdapters extends BaseAdapter {
 		ViewHolder holder;
 		LayoutInflater inflater =  context.getLayoutInflater();
 	
-		if (convertView == null)
-		{
+	
 			convertView = inflater.inflate(R.layout.scheduele_day_item, null);
 			holder = new ViewHolder();
 			holder.Day = (TextView) convertView.findViewById(R.id.day_name);
 	
 
-		}
-		else
-		{
-			holder = (ViewHolder)convertView.getTag();
-		
-			
-		}
+	
 		
 		if(days.get(position) == "none")
 		{

@@ -9,7 +9,7 @@ import idc.aast.edu.classes.news_item;
 import idc.aast.edu.database.MySQLiteHelper;
 import idc.aast.edu.database.helper;
 import idc.aast.test2.R;
-import idc.aast.test2.TrackedFragment;
+
 import idc.aast.test2.R.id;
 import idc.aast.test2.R.layout;
 
@@ -45,7 +45,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class NewsFragment extends TrackedFragment {
+public class NewsFragment extends Fragment {
 	static Boolean bb = false;
 	static String name;
 	static String type;

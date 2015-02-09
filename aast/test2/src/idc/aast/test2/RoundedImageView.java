@@ -42,6 +42,8 @@ protected void onDraw(Canvas canvas) {
     if (getWidth() == 0 || getHeight() == 0) {
         return; 
     }
+    try
+    {
     Bitmap b =  ((BitmapDrawable)drawable).getBitmap() ;
     Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -50,6 +52,12 @@ protected void onDraw(Canvas canvas) {
 
     Bitmap roundBitmap =  getCroppedBitmap(bitmap, w);
     canvas.drawBitmap(roundBitmap, 0,0, null);
+    }
+    catch (  Exception e)
+    {
+    	
+    }
+    
 
 }
 
